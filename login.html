@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" dir="ltr">
+<head>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIGNUM - Login</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ==========================================
+       1. THEME VARIABLES
+       ========================================== */
+    :root {
+      --font-sans: 'Outfit', sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Light Mode Palette */
+      --bg-body: #fafaf9;        /* Stone 50 */
+      --bg-surface: #ffffff;     /* White */
+      --bg-input: #f5f5f4;       /* Stone 100 */
+      
+      --text-main: #1c1917;      /* Stone 900 */
+      --text-muted: #44403c;     /* Stone 500 */
+      --text-inverse: #ffffff;
+      
+      --border: #e7e5e4;         /* Stone 200 */
+      --border-focus: #a8a29e;   /* Stone 400 */
+      
+      --primary: #ab5c3c;        /* Terracotta */
+      --primary-hover: #8e4a2f;
+      --primary-glow: rgba(171, 92, 60, 0.15);
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Dark Mode Palette (Default) */
+    .dark {
+      --bg-body: #12100f;        /* Deep Walnut 950 */
+      --bg-surface: #1c1917;     /* Stone 900 */
+      --bg-input: #292524;       /* Stone 800 */
+      
+      --text-main: #f5f5f4;      /* Stone 100 */
+      --text-muted: #a8a29e;     /* Stone 400 */
+      --text-inverse: #12100f;
+      
+      --border: #292524;
+      --border-focus: #44403c;
+      
+      --primary: #f59e0b;        /* Amber Gold Glow */
+      --primary-hover: #d97706;
+      --primary-glow: rgba(245, 158, 11, 0.15);
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* RTL Font Override */
+    [dir="rtl"] {
+      --font-sans: 'Tajawal', sans-serif;
+    }
+
+    /* ==========================================
+       2. RESET & LAYOUT (NO SCROLL / STABLE)
+       ========================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden; /* Lock viewport and prevent scrolling */
+      font-family: var(--font-sans);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      transition: var(--transition);
+    }
+
+    /* ==========================================
+       3. LOGIN PANEL (FULL SCREEN LOCK)
+       ========================================== */
+    .login-form-panel {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background-color: var(--bg-body);
+    }
+
+    /* Top Control Bar */
+    .control-header {
+      width: 100%;
+      padding: 30px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      box-sizing: border-box;
+    }
+
+    /* Exact Brand Logo matching index.html */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--text-main);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .logo-icon {
+      color: var(--primary);
+      width: 26px;
+      height: 26px;
+      transition: var(--transition);
+    }
+
+    /* Controls: Only Dark/Light Toggle & RTL Toggle */
+    .control-buttons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .control-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-main);
+      background-color: var(--bg-surface);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .control-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .control-btn svg, .control-btn i {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Center Card Container */
+    .login-card-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 40px 100px;
+      box-sizing: border-box;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 500px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px 30px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: -60px;
+    }
+
+    .login-heading-group {
+      text-align: center;
+    }
+
+    .login-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .login-subtitle {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    /* Three Social Icons Row */
+    .social-login-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .social-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      background-color: var(--bg-input);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-btn:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .social-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Divider */
+    .form-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-divider::before, .form-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-divider:not(:empty)::before {
+      margin-inline-end: .5em;
+    }
+
+    .form-divider:not(:empty)::after {
+      margin-inline-start: .5em;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: start;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      color: var(--text-main);
+      font-size: 14px;
+      transition: var(--transition);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .form-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13.5px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .remember-me input {
+      accent-color: var(--primary);
+      width: 15px;
+      height: 15px;
+    }
+
+    .forgot-pass {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .forgot-pass:hover {
+      text-decoration: underline;
+    }
+
+    .submit-btn {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      padding: 13px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px var(--primary-glow);
+      transition: var(--transition);
+      text-align: center;
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px var(--primary-glow);
+    }
+
+    .login-footer-text {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .login-footer-text a {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* RTL Alignment Adjustments */
+    [dir="rtl"] .logo {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .control-header {
+      flex-direction: row-reverse;
+    }
+
+    /* ==========================================
+       5. RESPONSIVE DESIGN
+       ========================================== */
+    @media (max-width: 576px) {
+      .control-header {
+        padding: 20px 24px;
+      }
+
+      .login-card-container {
+        padding: 10px 16px 40px;
+      }
+
+      .login-card {
+        padding: 24px 20px;
+      }
+    }
+
+    /* Dynamic height scaling for compact viewport fits */
+    @media (max-height: 800px) {
+      .login-card {
+        transform: scale(0.9) translateY(-15px);
+        transform-origin: center center;
+      }
+    }
+    @media (max-height: 700px) {
+      .login-card {
+        transform: scale(0.82) translateY(-25px);
+        transform-origin: center center;
+      }
+    }
+  
+    /* ==========================================
+       GLOBAL MOBILE RESPONSIVENESS OVERRIDES
+       ========================================== */
+    html, body {
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px !important;
+      }
+      .section-padding {
+        padding: 50px 0 !important;
+      }
+      .section-title, .hero-title {
+        font-size: 26px !important;
+      }
+      .section-desc, .hero-desc {
+        font-size: 14.5px !important;
+      }
+    }
+    @media (max-width: 320px) {
+      .container {
+        padding: 0 12px !important;
+      }
+      .section-padding {
+        padding: 40px 0 !important;
+      }
+      .section-title, .hero-title {
+        font-size: 22px !important;
+      }
+    }
+      @media (max-width: 1024px) {
+      .header-actions #darkModeToggle,
+      .header-actions #rtlToggleBtn,
+      .header-actions .login-btn {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen Login Layout -->
+  <div class="login-form-panel">
+      
+      <!-- Top Control Bar (Only Toggles) -->
+      <div class="control-header">
+        <!-- Controls: Theme Toggle & RTL Toggle -->
+        <div class="control-buttons">
+          <button class="control-btn icon-btn" id="darkModeToggle" title="Toggle Theme" aria-label="Toggle Theme">
+            <i class="fas fa-sun theme-icon-sun" style="font-size: 18px;"></i>
+            <i class="fas fa-moon theme-icon-moon" style="font-size: 18px; display: none;"></i>
+          </button>
+          <button class="control-btn icon-btn" id="rtlToggleBtn" title="Toggle RTL/LTR" aria-label="Toggle RTL/LTR">
+            <i class="fas fa-exchange-alt" style="font-size: 18px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Centered Card Container -->
+      <div class="login-card-container">
+        <div class="login-card">
+          
+          <!-- Brand Logo Centered Inside Card -->
+          <a href="index.html" class="logo" style="justify-content: center; margin-bottom: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="logo-icon" style="width: 28px; height: 28px;">
+              <path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3" />
+              <path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1h-8v-1a2 2 0 0 0-4 0z" />
+              <path d="M4 18v2" />
+              <path d="M20 20v-2" />
+            </svg>
+            <span style="font-size: 24px; font-weight: 800; letter-spacing: 2px;">LIGNUM</span>
+          </a>
+          
+          <div class="login-heading-group" style="margin-top: 4px;">
+            <h1 class="login-title">Welcome Back</h1>
+            <p class="login-subtitle">Sign in to your premium workspace</p>
+          </div>
+
+          <!-- Social Login: Three 3 Branded Outline Icons -->
+          <div class="social-login-row">
+            <!-- Google Button (Branded SVG) -->
+            <button class="social-btn" title="Sign in with Google" aria-label="Sign in with Google">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="#EA4335" d="M12 5.04c1.66 0 3.2.57 4.38 1.69l3.27-3.27C17.67 1.63 14.98 1 12 1 7.35 1 3.39 3.67 1.41 7.56l3.89 3.01c.96-2.87 3.66-4.93 6.7-4.93z"/>
+                <path fill="#4285F4" d="M23.49 12.27c0-.81-.07-1.59-.2-2.34H12v4.47h6.47c-.28 1.48-1.12 2.74-2.38 3.59l3.69 2.87c2.16-1.99 3.41-4.92 3.41-8.59z"/>
+                <path fill="#FBBC05" d="M5.3 14.97c-.24-.73-.38-1.5-.38-2.3s.14-1.57.38-2.3L1.41 7.36C.51 9.17 0 11.02 0 13c0 1.98.51 3.83 1.41 5.64l3.89-3.67z"/>
+                <path fill="#34A853" d="M12 23c3.24 0 5.97-1.07 7.96-2.91l-3.69-2.87c-1.02.68-2.33 1.09-3.96 1.09-3.04 0-5.74-2.06-6.7-4.93L1.41 16.4C3.39 20.33 7.35 23 12 23z"/>
+              </svg>
+            </button>
+            <!-- Apple Button (Black/White SVG) -->
+            <button class="social-btn" title="Sign in with Apple" aria-label="Sign in with Apple">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M17.05 20.28c-.98.95-2.05 1.88-3.08 1.88-1.07 0-1.42-.64-2.65-.64-1.22 0-1.6.62-2.64.64-1.06.02-2.22-.97-3.21-1.93-2.03-1.96-3.58-5.54-3.58-8.86 0-5.26 3.41-8.05 6.77-8.05 1.06 0 2.06.66 2.72.66.66 0 1.9-.8 3.19-.8 1.35 0 2.58.49 3.39 1.44-3.27 1.97-2.73 6.94.52 8.27-1.2 2.87-2.74 5.74-4.44 7.39zM12.03 4.31c.58-.72.98-1.72.87-2.71-.85.03-1.89.57-2.5 1.29-.53.61-.99 1.63-.87 2.6.95.07 1.92-.46 2.5-1.18z"/>
+              </svg>
+            </button>
+            <!-- Facebook Button (Branded SVG) -->
+            <button class="social-btn" title="Sign in with Facebook" aria-label="Sign in with Facebook">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#1877F2">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Divider -->
+          <div class="form-divider">or sign in with email</div>
+
+          <!-- Email Login Form -->
+          <form class="login-form" onsubmit="event.preventDefault(); alert('Signed in successfully (Mock)!');">
+            <div class="form-group">
+              <label class="form-label" for="login-email">Email Address</label>
+              <input type="email" id="login-email" class="form-input" placeholder="name@domain.com" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="login-pass">Password</label>
+              <input type="password" id="login-pass" class="form-input" placeholder="••••••••" required>
+            </div>
+
+            <div class="form-options">
+              <label class="remember-me">
+                <input type="checkbox" checked>
+                <span>Remember me</span>
+              </label>
+              <a href="#" class="forgot-pass">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="submit-btn">Sign In</button>
+          </form>
+
+          <p class="login-footer-text">
+            Don't have an account? <a href="register.html">Sign Up</a>
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Highlight Active Navbar Link
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Clean up any hardcoded active classes
+    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    
+    let matched = false;
+    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPath) {
+        link.classList.add('active');
+        matched = true;
+      }
+    });
+    
+    if (!matched || currentPath === 'index.html' || currentPath === 'home2.html') {
+      document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === '#' || href === 'index.html' || href === 'home2.html') {
+          if (link.textContent.trim().startsWith('Home') || href === 'index.html' || href === 'home2.html') {
+            link.classList.add('active');
+          }
+        }
+      });
+    }
+
+    // ==========================================
+    // THEME TOGGLE (Locked to Dark default, switches to Light)
+    // ==========================================
+    const themeToggleBtn = document.getElementById('darkModeToggle');
+    const sunIcon = themeToggleBtn.querySelector('.theme-icon-sun');
+    const moonIcon = themeToggleBtn.querySelector('.theme-icon-moon');
+
+    // Function to update theme icon display
+    function updateThemeIcons(isDark) {
+      if (isDark) {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+
+    // Set initial icon state based on HTML class
+    updateThemeIcons(document.documentElement.classList.contains('dark'));
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      updateThemeIcons(isDark);
+      
+      // Save state to localStorage to sync across other pages
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Sync theme toggle with localStorage if present
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      updateThemeIcons(false);
+    } else {
+      document.documentElement.classList.add('dark');
+      updateThemeIcons(true);
+    }
+
+    // ==========================================
+    // RTL TOGGLE (Switches reading direction)
+    // ==========================================
+    const rtlToggleBtn = document.getElementById('rtlToggleBtn');
+    
+    rtlToggleBtn.addEventListener('click', () => {
+      const currentDir = document.documentElement.getAttribute('dir');
+      const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+      document.documentElement.setAttribute('dir', newDir);
+      document.documentElement.setAttribute('lang', newDir === 'rtl' ? 'ar' : 'en');
+      
+      // Save RTL preference to localStorage
+      localStorage.setItem('rtl', newDir);
+    });
+
+    // Sync RTL with localStorage if present
+    const savedRTL = localStorage.getItem('rtl');
+    if (savedRTL) {
+      document.documentElement.setAttribute('dir', savedRTL);
+      document.documentElement.setAttribute('lang', savedRTL === 'rtl' ? 'ar' : 'en');
+    }
+  </script>
+</body>
+</html>

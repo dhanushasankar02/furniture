@@ -1,0 +1,3386 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIGNUM - Schedule a Visit</title>
+  
+  <!-- Google Fonts: Outfit (English) & Tajawal (Arabic/RTL) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ==========================================
+       1. DESIGN SYSTEM & VARIABLES
+       ========================================== */
+    :root {
+      /* Terracotta & Teak Wood Light Theme Palette */
+      --primary: #ab5c3c;       /* Warm Terracotta */
+      --primary-hover: #944d30;
+      --primary-glow: rgba(171, 92, 60, 0.15);
+      
+      --bg-body: #fafaf9;        /* Warm Linen 50 */
+      --bg-surface: #ffffff;
+      --bg-navbar: rgba(250, 250, 249, 0.85);
+      --bg-card: #ffffff;
+      --bg-input: #f5f5f4;       /* Stone 100 */
+      --bg-hover: #f5f5f4;
+      
+      --text-main: #1c1917;      /* Stone 900 */
+      --text-muted: #44403c;     /* Stone 500 */
+      --text-inverse: #ffffff;
+      
+      --border: #e7e5e4;         /* Stone 200 */
+      --border-focus: #d6d3d1;   /* Stone 300 */
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 15px -3px rgba(171, 92, 60, 0.04), 0 4px 6px -4px rgba(171, 92, 60, 0.04);
+      --shadow-lg: 0 20px 25px -5px rgba(171, 92, 60, 0.06), 0 8px 10px -6px rgba(171, 92, 60, 0.06);
+      
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      
+      --font-sans: 'Outfit', sans-serif;
+      --backdrop-blur: 16px;
+      --nav-height: 80px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Mode Theme Palette (Walnut & Amber Glow) */
+    .dark {
+      --bg-body: #12100f;        /* Deep Walnut 950 */
+      --bg-surface: #1c1917;     /* Stone 900 */
+      --bg-navbar: rgba(18, 16, 15, 0.85);
+      --bg-card: #292524;        /* Stone 800 */
+      --bg-input: #292524;
+      --bg-hover: #292524;
+      
+      --text-main: #f5f5f4;      /* Stone 100 */
+      --text-muted: #a8a29e;     /* Stone 400 */
+      --text-inverse: #12100f;
+      
+      --border: #292524;
+      --border-focus: #44403c;
+      
+      --primary: #f59e0b;        /* Amber Gold Glow */
+      --primary-hover: #d97706;
+      --primary-glow: rgba(245, 158, 11, 0.15);
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* RTL Font Override */
+    [dir="rtl"] {
+      --font-sans: 'Tajawal', sans-serif;
+    }
+
+    /* ==========================================
+       2. GENERAL STYLES & RESET
+       ========================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    *::-webkit-scrollbar {
+      width: 6px;
+    }
+    *::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    *::-webkit-scrollbar-thumb {
+      background-color: var(--border);
+      border-radius: var(--radius-full);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      overflow-x: hidden;
+      transition: var(--transition);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      border: none;
+      background: none;
+      outline: none;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-padding {
+      padding: 100px 0;
+    }
+
+    @media (max-width: 768px) {
+      .section-padding {
+        padding: 60px 0;
+      }
+    }
+
+    /* ==========================================
+       3. NAVIGATION BAR (ONE-LINE LAYOUT)
+       ========================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      z-index: 1000;
+      background-color: var(--bg-navbar);
+      backdrop-filter: blur(var(--backdrop-blur));
+      -webkit-backdrop-filter: blur(var(--backdrop-blur));
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .header.scrolled {
+      height: 70px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      color: var(--primary);
+      width: 26px;
+      height: 26px;
+      transition: var(--transition);
+    }
+
+    /* Desktop Navigation Links */
+    .desktop-nav {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      gap: 4px;
+    }
+
+    .nav-links > li {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .nav-link {
+      padding: 0 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+    }
+
+    .nav-link:hover, 
+    .nav-links > li:hover > .nav-link,
+    .nav-link.active {
+      color: var(--primary);
+    }
+
+    /* Bottom hover indicator line */
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 12px;
+      right: 12px;
+      height: 2.5px;
+      background-color: var(--primary);
+      border-radius: var(--radius-full) var(--radius-full) 0 0;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-links > li:hover > .nav-link::after,
+    .nav-link.active::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    [dir="rtl"] .nav-link:hover::after,
+    [dir="rtl"] .nav-links > li:hover > .nav-link::after,
+    [dir="rtl"] .nav-link.active::after {
+      transform-origin: bottom right;
+    }
+
+    /* Chevron rotation */
+    .dropdown-chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-links > li:hover .dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown submenu */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      width: 180px;
+      padding: 6px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 1010;
+    }
+
+    [dir="rtl"] .dropdown-menu {
+      left: auto;
+      right: 50%;
+      transform: translateX(50%) translateY(10px);
+    }
+
+    .nav-links > li:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    [dir="rtl"] .nav-links > li:hover .dropdown-menu {
+      transform: translateX(50%) translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 12px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      text-align: start;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+      padding-inline-start: 16px;
+    }
+
+    /* Header Actions Container */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .action-btn, .icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .action-btn:hover, .icon-btn:hover {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+      border-color: var(--border);
+    }
+
+    .action-btn svg, .action-btn i, .icon-btn i {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* RTL icon button custom spacing */
+    .rtl-toggle {
+      width: auto;
+      padding: 0 10px;
+      gap: 4px;
+    }
+
+    .rtl-text {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Active theme toggling icon visibility via CSS class */
+    .theme-toggle .icon-sun {
+      display: none;
+    }
+    .theme-toggle .icon-moon {
+      display: block;
+    }
+    .dark .theme-toggle .icon-sun {
+      display: block;
+    }
+    .dark .theme-toggle .icon-moon {
+      display: none;
+    }
+
+    /* Login CTA Button */
+    .login-btn {
+      background-color: var(--text-main);
+      color: var(--bg-surface);
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      padding: 9px 18px;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .login-btn:hover {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    /* Hamburger menu for responsive */
+    .hamburger-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 16px;
+      cursor: pointer;
+      z-index: 1050;
+      position: relative;
+    }
+
+    .hamburger-btn span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text-main);
+      border-radius: var(--radius-full);
+      transition: var(--transition);
+    }
+
+    .hamburger-btn.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger-btn.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ==========================================
+       4. MOBILE NAVIGATION DRAWER
+       ========================================== */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 300px;
+      max-width: 85%;
+      background-color: var(--bg-surface);
+      border-inline-start: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      z-index: 1040;
+      padding: 90px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      overflow-y: auto;
+      
+      inset-inline-end: 0;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [dir="rtl"] .mobile-drawer {
+      transform: translateX(-100%);
+    }
+
+    .mobile-drawer.open {
+      transform: translateX(0) !important;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(28, 25, 23, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1030;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: start;
+    }
+
+    .mobile-link {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-link:hover,
+    .mobile-link.active {
+      color: var(--primary);
+    }
+
+    .mobile-dropdown-parent {
+      flex-direction: column;
+      align-items: stretch;
+      display: flex;
+    }
+
+    .mobile-dropdown-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .mobile-dropdown-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding-inline-start: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 0;
+    }
+
+    .mobile-dropdown-parent.active .mobile-dropdown-menu {
+      max-height: 120px;
+      margin-top: 8px;
+    }
+
+    .mobile-dropdown-parent.active .dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    .mobile-dropdown-menu a {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding: 6px 0;
+      text-align: start;
+    }
+
+    .mobile-dropdown-menu a:hover {
+      color: var(--primary);
+    }
+
+    .mobile-drawer-bottom {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ==========================================
+       5. LOGIN MODAL OVERLAY
+       ========================================== */
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(28, 25, 23, 0.5);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .login-modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .login-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 400px;
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .login-modal.open .login-card {
+      transform: scale(1);
+    }
+
+    .login-card-close {
+      position: absolute;
+      top: 20px;
+      inset-inline-end: 20px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .login-card-close:hover {
+      color: var(--text-main);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .login-header h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 13.5px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: start;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .form-input {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 14.5px;
+      color: var(--text-main);
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .form-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13.5px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--text-muted);
+      user-select: none;
+    }
+
+    .forgot-pass {
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .forgot-pass:hover {
+      text-decoration: underline;
+    }
+
+    .submit-btn {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      padding: 12px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 14.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--primary-glow);
+      transition: var(--transition);
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Common Typography / Headers */
+    .section-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-main);
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 550px;
+      margin-top: 12px;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    @media (max-width: 992px) {
+      .split-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    .split-image-wrapper {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      aspect-ratio: 4/3;
+      width: 100%;
+    }
+
+    .split-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+
+    /* ==========================================
+       SECTION 1: HERO BANNER (WIDESCREEN COVER)
+       ========================================== */
+    .schedule-hero {
+      position: relative;
+      height: 60vh;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(rgba(28, 25, 23, 0.45), rgba(28, 25, 23, 0.6)), url('images/schedule_visit_hero.jpg') no-repeat center center/cover;
+      color: white;
+      padding-top: var(--nav-height);
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-tagline {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-title {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      color: #e7e5e4;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, -10px); }
+      60% { transform: translate(-50%, -5px); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 36px;
+      }
+      .hero-desc {
+        font-size: 15px;
+      }
+    }
+
+
+    /* ==========================================
+       SECTION 2: SHOWROOM HIGHLIGHTS
+       ========================================== */
+    .highlights-section {
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .highlights-header {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .highlights-header .section-subtitle {
+      margin-inline: auto;
+    }
+
+    .highlight-card {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .highlight-image-side {
+      height: 100%;
+      min-height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .highlight-image-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .highlight-card:hover .highlight-image-side img {
+      transform: scale(1.05);
+    }
+
+    .highlight-text-side {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+      text-align: start;
+    }
+
+    .highlight-card-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+    }
+
+    .highlight-card-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .highlight-card-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .highlight-features {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .highlight-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .highlight-feature-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--primary);
+    }
+
+    .grid-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .highlight-card.reverse {
+      grid-template-columns: 1fr 1.2fr;
+    }
+
+    .highlight-card.reverse .highlight-image-side {
+      order: 2;
+    }
+
+    @media (max-width: 992px) {
+      .highlight-card {
+        grid-template-columns: 1fr !important;
+      }
+      .highlight-image-side {
+        order: 1 !important;
+        height: 250px;
+      }
+      .highlight-text-side {
+        order: 2 !important;
+        padding: 30px 24px;
+      }
+    }
+
+
+    /* ==========================================
+       SECTION 3: STORE LOCATIONS (INTERACTIVE CARDS)
+       ========================================== */
+    .locations-section {
+      background-color: var(--bg-body);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .locations-header {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .locations-header .section-subtitle {
+      margin-inline: auto;
+    }
+
+    .grid-locations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .location-store-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      text-align: start;
+    }
+
+    .location-store-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-hover);
+    }
+
+    .location-store-card.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary), var(--shadow-lg);
+    }
+
+    .store-img-wrapper {
+      position: relative;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+    }
+
+    .store-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .location-store-card:hover .store-img-wrapper img {
+      transform: scale(1.04);
+    }
+
+    .store-badge {
+      position: absolute;
+      top: 16px;
+      inset-inline-start: 16px;
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .store-badge span::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: #22c55e;
+      border-radius: 50%;
+      margin-inline-end: 6px;
+    }
+
+    .store-card-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .store-card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .select-indicator {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .location-store-card.active .select-indicator {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .location-store-card.active .select-indicator::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .store-card-details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .store-detail-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .store-detail-row svg {
+      width: 16px;
+      height: 16px;
+      color: var(--primary);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* Interactive Map placeholder card */
+    .location-details-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 40px;
+      align-items: center;
+      text-align: start;
+    }
+
+    .active-info-panel h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .active-info-panel p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .active-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .active-info-item {
+      display: flex;
+      gap: 12px;
+      font-size: 14.5px;
+    }
+
+    .active-info-item svg {
+      color: var(--primary);
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+    }
+
+    .map-embed-placeholder {
+      background-color: var(--bg-input);
+      height: 250px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      position: relative;
+    }
+
+    .map-embed-placeholder svg {
+      width: 48px;
+      height: 48px;
+      color: var(--primary);
+      opacity: 0.7;
+      margin-bottom: 12px;
+    }
+
+    .map-bg-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(var(--border) 1px, transparent 0);
+      background-size: 16px 16px;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      .location-details-box {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+
+    /* ==========================================
+       SECTION 4: APPOINTMENT BOOKING FORM
+       ========================================== */
+    .booking-section {
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .booking-wrapper {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+    }
+
+    .booking-info-panel {
+      padding: 60px;
+      background-color: var(--bg-input);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      text-align: start;
+    }
+
+    .booking-info-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .booking-info-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(28, 25, 23, 0.8), rgba(28, 25, 23, 0.45)), url('images/consultation_form.jpg') no-repeat center center/cover;
+      z-index: 1;
+    }
+
+    .booking-info-panel .section-tag {
+      color: #ffffff;
+      background: var(--primary);
+      align-self: flex-start;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .booking-info-panel h2 {
+      color: #ffffff;
+      font-size: 32px;
+      line-height: 1.25;
+    }
+
+    .booking-info-panel p {
+      color: #e7e5e4;
+      font-size: 16px;
+    }
+
+    .booking-perks {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .booking-perk-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    .booking-perk-item svg {
+      color: var(--primary);
+      width: 20px;
+      height: 20px;
+    }
+
+    .booking-form-panel {
+      padding: 60px;
+      text-align: start;
+    }
+
+    .booking-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .span-full {
+      grid-column: span 2;
+    }
+
+    .form-select {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 14.5px;
+      color: var(--text-main);
+      transition: var(--transition);
+      width: 100%;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+      padding-inline-end: 40px;
+    }
+
+    [dir="rtl"] .form-select {
+      background-position: left 14px center;
+      padding-inline-end: 14px;
+      padding-inline-start: 40px;
+    }
+
+    .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .form-textarea {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 14.5px;
+      color: var(--text-main);
+      transition: var(--transition);
+      width: 100%;
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    @media (max-width: 992px) {
+      .booking-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .booking-info-panel {
+        padding: 40px 24px;
+        min-height: 350px;
+      }
+      .booking-form-panel {
+        padding: 40px 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .booking-form-grid {
+        grid-template-columns: 1fr;
+      }
+      .span-full {
+        grid-column: span 1;
+      }
+    }
+
+
+    /* ==========================================
+       SECTION 5: AVAILABLE TIME SLOTS (CALENDAR)
+       ========================================== */
+    .calendar-section {
+      background-color: var(--bg-body);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .calendar-header {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .calendar-header .section-subtitle {
+      margin-inline: auto;
+    }
+
+    .calendar-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      text-align: start;
+    }
+
+    /* Left Side: Calendar UI */
+    .calendar-ui-wrapper {
+      padding: 40px;
+      border-inline-end: 1px solid var(--border);
+    }
+
+    .calendar-control-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .calendar-month-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .calendar-nav-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .calendar-nav-btn:hover {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .calendar-nav-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .calendar-weekday {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding: 8px 0;
+      text-transform: uppercase;
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14.5px;
+      font-weight: 500;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      color: var(--text-main);
+    }
+
+    .calendar-day:hover:not(.disabled):not(.active) {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+    }
+
+    .calendar-day.disabled {
+      color: var(--border-focus);
+      cursor: not-allowed;
+      font-weight: 300;
+      text-decoration: line-through;
+      opacity: 0.4;
+    }
+
+    .calendar-day.active {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      font-weight: 700;
+      box-shadow: 0 4px 10px var(--primary-glow);
+    }
+
+    .calendar-day.today {
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .calendar-day.today.active {
+      color: var(--text-inverse);
+    }
+
+    /* Right Side: Time slots */
+    .slots-ui-wrapper {
+      padding: 40px;
+      background-color: var(--bg-input);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .slots-header-box h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .slots-header-box p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .slot-period-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .slot-group {
+      margin-bottom: 24px;
+    }
+
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 12px;
+    }
+
+    .slot-capsule {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px;
+      text-align: center;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--text-main);
+    }
+
+    .slot-capsule:hover:not(.disabled):not(.active) {
+      border-color: var(--primary);
+      color: var(--primary);
+      background-color: var(--bg-hover);
+    }
+
+    .slot-capsule.disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      background-color: transparent;
+      color: var(--text-muted);
+      border-style: dashed;
+    }
+
+    .slot-capsule.active {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px var(--primary-glow);
+    }
+
+    /* Summary display in slots side */
+    .booking-summary-box {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: auto;
+    }
+
+    .summary-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .summary-details-badge {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .summary-details-badge svg {
+      width: 22px;
+      height: 22px;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .summary-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .summary-text-main {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .summary-text-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 992px) {
+      .calendar-card {
+        grid-template-columns: 1fr;
+      }
+      .calendar-ui-wrapper {
+        border-inline-end: none;
+        border-bottom: 1px solid var(--border);
+        padding: 30px 20px;
+      }
+      .slots-ui-wrapper {
+        padding: 30px 20px;
+      }
+    }
+
+
+    /* ==========================================
+       SECTION 6: CUSTOMER EXPERIENCE (TESTIMONIALS)
+       ========================================== */
+    .experience-section {
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .experience-header {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .experience-header .section-subtitle {
+      margin-inline: auto;
+    }
+
+    .grid-experience {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 30px;
+    }
+
+    .testimonial-visit-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: var(--transition);
+      text-align: start;
+    }
+
+    .testimonial-visit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .testimonial-rating {
+      display: flex;
+      gap: 4px;
+      color: #f59e0b; /* Golden star */
+    }
+
+    .testimonial-rating svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .testimonial-quote {
+      font-size: 15px;
+      color: var(--text-main);
+      font-style: italic;
+      line-height: 1.7;
+      flex-grow: 1;
+    }
+
+    .testimonial-user-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial-user-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testimonial-user-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .testimonial-user-tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+
+    /* ==========================================
+       SECTION 7: VISIT CONFIRMATION CTA
+       ========================================== */
+    .confirmation-section {
+      background-color: var(--bg-body);
+    }
+
+    .confirmation-banner {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 450px;
+      color: white;
+    }
+
+    .confirmation-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(rgba(28, 25, 23, 0.6), rgba(28, 25, 23, 0.8)), url('images/cta_living.jpg') no-repeat center center/cover;
+      z-index: 1;
+    }
+
+    .confirmation-content-box {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+      padding: 48px;
+      text-align: center;
+      background-color: rgba(28, 25, 23, 0.45);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      margin: 24px;
+    }
+
+    .confirmation-content-box h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    .confirmation-content-box p {
+      font-size: 15px;
+      color: #d6d3d1;
+      margin-bottom: 24px;
+    }
+
+    /* Checklist */
+    .prep-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 30px;
+      text-align: start;
+      max-width: 480px;
+      margin-inline: auto;
+    }
+
+    .prep-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14.5px;
+      color: #e7e5e4;
+    }
+
+    .prep-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .final-cta-btn {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 36px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      box-shadow: 0 4px 14px var(--primary-glow);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .final-cta-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--primary-glow);
+    }
+
+    .final-cta-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Confirmation Modal overlay styling */
+    .success-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(28, 25, 23, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .success-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .success-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 480px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .success-overlay.open .success-card {
+      transform: scale(1);
+    }
+
+    .success-icon-badge {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    .success-icon-badge svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .success-card h3 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .success-card p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .success-details-summary {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 24px;
+      text-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .success-details-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .success-details-row svg {
+      color: var(--primary);
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .success-card-close-btn {
+      background-color: var(--text-main);
+      color: var(--bg-surface);
+      padding: 10px 24px;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .success-card-close-btn:hover {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+    }
+
+
+    /* ==========================================
+       8. PREMIUM MULTI-COLUMN FOOTER
+       ========================================== */
+    .main-footer {
+      background-color: #1c1917; /* Stone 900 */
+      color: #e7e5e4;            /* Stone 200 */
+      padding: 80px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 14.5px;
+      transition: var(--transition);
+      text-align: start;
+    }
+
+    .dark .main-footer {
+      background-color: #0b0909; /* Walnut black */
+      border-top-color: rgba(255,255,255,0.03);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .footer-brand .logo-icon {
+      color: var(--primary);
+    }
+
+    .footer-desc {
+      color: #a8a29e; /* Stone 400 */
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      background-color: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d6d3d1;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .social-icon:hover {
+      background-color: var(--primary);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .footer-title {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #a8a29e;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+      padding-inline-start: 6px;
+    }
+
+    .footer-link-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--primary);
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover .footer-link-icon {
+      transform: translateX(4px);
+    }
+
+    [dir="rtl"] .footer-links a:hover .footer-link-icon {
+      transform: translateX(-4px) rotate(180deg);
+    }
+
+    [dir="rtl"] .footer-link-icon {
+      transform: rotate(180deg);
+    }
+
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #a8a29e;
+      line-height: 1.5;
+    }
+
+    .footer-contact-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #a8a29e;
+      font-size: 13.5px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a:hover {
+      color: #ffffff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1120px) {
+      .nav-link {
+        padding: 0 8px;
+        font-size: 13.5px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .desktop-nav {
+        display: none;
+      }
+      .hamburger-btn {
+        display: flex;
+      }
+      .logo {
+        font-size: 20px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+      .header-actions .rtl-toggle,
+      .header-actions .login-btn {
+        display: none; /* Hide RTL and login on standard mobile bar */
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    /* ==========================================
+       GLOBAL MOBILE RESPONSIVENESS OVERRIDES
+       ========================================== */
+    html, body {
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px !important;
+      }
+      .section-padding {
+        padding: 50px 0 !important;
+      }
+      .section-title, .hero-title {
+        font-size: 26px !important;
+      }
+      .section-desc, .hero-desc {
+        font-size: 14.5px !important;
+      }
+    }
+    @media (max-width: 320px) {
+      .container {
+        padding: 0 12px !important;
+      }
+      .section-padding {
+        padding: 40px 0 !important;
+      }
+      .section-title, .hero-title {
+        font-size: 22px !important;
+      }
+    }
+      @media (max-width: 1024px) {
+      .header-actions #darkModeToggle,
+      .header-actions #rtlToggleBtn,
+      .header-actions .login-btn {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+     NAVBAR HEADER (ONE-LINE LAYOUT)
+     ========================================== -->
+  <header class="header" id="navbar-header">
+    <div class="container nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="logo">
+        <i data-lucide="sofa" class="logo-icon"></i>
+        <span>LIGNUM</span>
+      </a>
+      
+      <!-- Desktop Navigation Menu -->
+      <nav class="desktop-nav">
+        <ul class="nav-links">
+          <li class="dropdown-parent">
+            <a href="#" class="nav-link">
+              Home <i data-lucide="chevron-down" class="dropdown-chevron"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="index.html">Home 1 - Studio Living</a></li>
+              <li><a href="home2.html">Home 2 - Scandi Gallery</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="furniture.html" class="nav-link">Furniture</a></li>
+          <li><a href="room-lookbook.html" class="nav-link">Room Lookbook</a></li>
+          <li><a href="room-ideas.html" class="nav-link">Room Ideas</a></li>
+          <li><a href="customization.html" class="nav-link">Customization</a></li>
+          <li><a href="collections.html" class="nav-link">Collections</a></li>
+          <li><a href="schedule.html" class="nav-link active">Schedule Visit</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Desktop Header Actions -->
+      <div class="header-actions">
+        <button class="action-btn icon-btn theme-toggle" id="darkModeToggle" aria-label="Dark Mode">
+          <i class="fas fa-moon icon-moon"></i>
+          <i class="fas fa-sun icon-sun" style="display: none;"></i>
+        </button>
+
+        <button class="action-btn icon-btn rtl-toggle" id="rtlToggleBtn" aria-label="Toggle Layout Direction" title="Toggle Layout Direction">
+          <i class="fas fa-exchange-alt"></i>
+        </button>
+
+        <a href="login.html" class="login-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Login</a>
+
+        <button class="hamburger-btn" id="hamburger-menu-btn" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+     MOBILE DRAWER
+     ========================================== -->
+  <div class="drawer-overlay" id="drawer-backdrop"></div>
+  <div class="mobile-drawer" id="mobile-sidebar-drawer">
+    <nav class="mobile-links">
+      <div class="mobile-dropdown-parent" id="mobile-home-dropdown">
+        <div class="mobile-dropdown-header mobile-link">
+          <span>Home</span>
+          <i data-lucide="chevron-down" class="dropdown-chevron"></i>
+        </div>
+        <div class="mobile-dropdown-menu">
+          <a href="index.html" class="mobile-drawer-close-trigger">Home 1 - Studio Living</a>
+          <a href="home2.html" class="mobile-drawer-close-trigger">Home 2 - Scandi Gallery</a>
+        </div>
+      </div>
+      
+      <a href="about.html" class="mobile-link mobile-drawer-close-trigger">About</a>
+      <a href="furniture.html" class="mobile-link mobile-drawer-close-trigger">Furniture</a>
+      <a href="room-lookbook.html" class="mobile-link mobile-drawer-close-trigger">Room Lookbook</a>
+      <a href="room-ideas.html" class="mobile-link mobile-drawer-close-trigger">Room Ideas</a>
+      <a href="customization.html" class="mobile-link mobile-drawer-close-trigger">Customization</a>
+      <a href="collections.html" class="mobile-link mobile-drawer-close-trigger">Collections</a>
+      <a href="schedule.html" class="mobile-link mobile-drawer-close-trigger active">Schedule Visit</a>
+      <a href="contact.html" class="mobile-link mobile-drawer-close-trigger">Contact</a>
+    </nav>
+
+    <div class="mobile-drawer-bottom">
+      <button class="action-btn theme-toggle" id="mobile-theme-toggle" style="width: 100%; justify-content: center; height: 44px; margin-bottom: 8px; border: 1px solid var(--border)">
+        <i class="fas fa-moon icon-moon" style="margin-inline-end: 8px;"></i>
+        <i class="fas fa-sun icon-sun" style="margin-inline-end: 8px; display: none;"></i>
+        <span>Toggle Theme</span>
+      </button>
+
+      <button class="action-btn rtl-toggle" id="mobile-rtl-toggle" style="width: 100%; justify-content: center; height: 44px; margin-bottom: 12px; border: 1px solid var(--border)">
+        <i class="fas fa-exchange-alt" style="margin-inline-end: 8px;"></i>
+        <span>Toggle RTL / LTR</span>
+      </button>
+      
+      <a href="login.html" class="login-btn" style="width: 100%; justify-content: center; height: 48px; text-decoration: none; display: inline-flex; align-items: center;">Login</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+     LOGIN MODAL (Clean popup)
+     ========================================== -->
+  <div class="login-modal" id="login-modal-overlay">
+    <div class="login-card">
+      <button class="login-card-close" id="login-modal-close-btn">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="login-header">
+        <h3>Welcome back</h3>
+        <p>Login to your premium designer account</p>
+      </div>
+      <form class="login-form" onsubmit="event.preventDefault(); alert('Logged in successfully (Mock)!'); document.getElementById('login-modal-overlay').classList.remove('open');">
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input type="email" placeholder="name@domain.com" required class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" placeholder="••••••••" required class="form-input">
+        </div>
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" style="accent-color: var(--primary)">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-pass">Forgot Password?</a>
+        </div>
+        <button type="submit" class="submit-btn">Login</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+     SECTION 1: HERO BANNER (WIDESCREEN COVER)
+     ========================================== -->
+  <section class="schedule-hero" id="hero">
+    <div class="hero-content">
+      <span class="hero-tagline">Premium Design Experience</span>
+      <h1 class="hero-title">Experience the Texture of Pure Craftsmanship</h1>
+      <p class="hero-desc">Reserve an exclusive consultation at our flagship galleries. touch our sustainably sourced hardwoods, sample linen upholstery, and co-create your spaces with our architects.</p>
+      <div class="scroll-indicator" onclick="document.getElementById('highlights').scrollIntoView();">
+        <i data-lucide="chevron-down" style="width: 32px; height: 32px;"></i>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 2: SHOWROOM HIGHLIGHTS
+     ========================================== -->
+  <section class="highlights-section section-padding" id="highlights">
+    <div class="container">
+      <div class="highlights-header">
+        <span class="section-tag">Showroom Features</span>
+        <h2 class="section-title">Designed to Inspire Harmony</h2>
+        <p class="section-subtitle">Our design spaces are carefully structured showcase environments designed to let you evaluate textures, pathway flow, and material finishes under clean lighting.</p>
+      </div>
+
+      <div class="grid-highlights">
+        <!-- Highlight 1: The Spatial Gallery -->
+        <article class="highlight-card">
+          <div class="highlight-image-side">
+            <img src="images/showroom_gallery.jpg" alt="Minimalist wood partitions and premium lighting in LIGNUM gallery">
+          </div>
+          <div class="highlight-text-side">
+            <span class="highlight-card-tag">Exhibition space</span>
+            <h3 class="highlight-card-title">The Spatial Gallery</h3>
+            <p class="highlight-card-desc">Walk through real-size architectural room mockups (living, dining, study) to explore how our low-profile furniture balances space pathing and window lighting.</p>
+            <div class="highlight-features">
+              <div class="highlight-feature-item">
+                <i data-lucide="sun"></i>
+                <span>Calibrated natural-spectrum daylight fixtures</span>
+              </div>
+              <div class="highlight-feature-item">
+                <i data-lucide="move"></i>
+                <span>Accurate spatial room dimension mockups</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Highlight 2: The Materials Lounge (Reversed layout) -->
+        <article class="highlight-card reverse">
+          <div class="highlight-image-side">
+            <img src="images/materials_lounge.jpg" alt="Architectural wood samples and swatches arrayed on design desk">
+          </div>
+          <div class="highlight-text-side">
+            <span class="highlight-card-tag">Design workspace</span>
+            <h3 class="highlight-card-title">The Materials Lounge</h3>
+            <p class="highlight-card-desc">Touch and feel our hand-sealed solid hardwoods, select customizable metal accents, and pair them with high-durability boucle and organic flax linen fabric swatches.</p>
+            <div class="highlight-features">
+              <div class="highlight-feature-item">
+                <i data-lucide="palette"></i>
+                <span>Over 40 timber and upholstery finishes</span>
+              </div>
+              <div class="highlight-feature-item">
+                <i data-lucide="drafting-compass"></i>
+                <span>Architectural blueprint co-design desks</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 3: STORE LOCATIONS (INTERACTIVE CARDS)
+     ========================================== -->
+  <section class="locations-section section-padding" id="locations">
+    <div class="container">
+      <div class="locations-header">
+        <span class="section-tag">Flagship Galleries</span>
+        <h2 class="section-title">Our Physical Design Spaces</h2>
+        <p class="section-subtitle">Select a location to explore its local operating hours and view contact details.</p>
+      </div>
+
+      <div class="grid-locations">
+        <!-- New York Studio -->
+        <div class="location-store-card active" id="store-ny" onclick="selectStore('ny')">
+          <div class="store-img-wrapper">
+            <img src="images/store_ny.jpg" alt="LIGNUM New York Studio gallery facade">
+            <div class="store-badge"><span>Open Today</span></div>
+          </div>
+          <div class="store-card-content">
+            <h3 class="store-card-title">
+              <span>New York Studio</span>
+              <div class="select-indicator"></div>
+            </h3>
+            <div class="store-card-details">
+              <div class="store-detail-row">
+                <i data-lucide="map-pin"></i>
+                <span>5th Avenue, Design District, NY 10011</span>
+              </div>
+              <div class="store-detail-row">
+                <i data-lucide="phone"></i>
+                <span>+1 (212) 555-0190</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- London Showroom -->
+        <div class="location-store-card" id="store-london" onclick="selectStore('london')">
+          <div class="store-img-wrapper">
+            <img src="images/store_london.jpg" alt="LIGNUM London showroom entrance facade">
+            <div class="store-badge"><span>Open Today</span></div>
+          </div>
+          <div class="store-card-content">
+            <h3 class="store-card-title">
+              <span>London Design District</span>
+              <div class="select-indicator"></div>
+            </h3>
+            <div class="store-card-details">
+              <div class="store-detail-row">
+                <i data-lucide="map-pin"></i>
+                <span>Kensington High Street, London W8 4SG</span>
+              </div>
+              <div class="store-detail-row">
+                <i data-lucide="phone"></i>
+                <span>+44 (20) 7946 0958</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tokyo Gallery -->
+        <div class="location-store-card" id="store-tokyo" onclick="selectStore('tokyo')">
+          <div class="store-img-wrapper">
+            <img src="images/store_tokyo.jpg" alt="LIGNUM Tokyo gallery facade">
+            <div class="store-badge"><span>Open Today</span></div>
+          </div>
+          <div class="store-card-content">
+            <h3 class="store-card-title">
+              <span>Tokyo Minimal Gallery</span>
+              <div class="select-indicator"></div>
+            </h3>
+            <div class="store-card-details">
+              <div class="store-detail-row">
+                <i data-lucide="map-pin"></i>
+                <span>Minami-Aoyama, Minato City, Tokyo 107-0062</span>
+              </div>
+              <div class="store-detail-row">
+                <i data-lucide="phone"></i>
+                <span>+81 (3) 5555-0143</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detail Interactive Box & Map Placeholder -->
+      <div class="location-details-box" id="details-box">
+        <div class="active-info-panel">
+          <span class="section-tag" style="font-size: 11px;">Selected Gallery</span>
+          <h3 id="panel-title">New York Studio</h3>
+          <p id="panel-desc">Located in the heart of Manhattan's design corridor, this flagship features our complete range of living room furniture and material swatches.</p>
+          <div class="active-info-list">
+            <div class="active-info-item">
+              <i data-lucide="clock"></i>
+              <div>
+                <strong>Operating Hours</strong>
+                <div id="panel-hours">Mon - Sun: 9:00 AM - 8:00 PM</div>
+              </div>
+            </div>
+            <div class="active-info-item">
+              <i data-lucide="award"></i>
+              <div>
+                <strong>Services Available</strong>
+                <div id="panel-services">Spatial Planning, Custom Fabric Swatches, Architects On-site</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="map-embed-placeholder">
+          <div class="map-bg-grid"></div>
+          <i data-lucide="map"></i>
+          <span style="font-weight: 700; z-index: 10;" id="panel-map-label">Interactive Map: New York, 5th Avenue</span>
+          <span style="font-size: 12px; opacity: 0.8; z-index: 10; margin-top: 4px;">Click details to open route navigator</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 4: APPOINTMENT BOOKING FORM
+     ========================================== -->
+  <section class="booking-section section-padding" id="booking">
+    <div class="container">
+      <div class="booking-wrapper">
+        <div class="booking-info-panel">
+          <div class="booking-info-content">
+            <span class="section-tag">Guided Showroom visits</span>
+            <h2>Co-create Your Interior Vision</h2>
+            <p>Share your contact details, select your preferred LIGNUM gallery, and state your primary visit goals to ensure our consultants prepare matching wood blocks, fabric rolls, and layouts.</p>
+            <div class="booking-perks">
+              <div class="booking-perk-item">
+                <i data-lucide="check-circle"></i>
+                <span>60 minutes of uninterrupted designer support</span>
+              </div>
+              <div class="booking-perk-item">
+                <i data-lucide="check-circle"></i>
+                <span>Free take-home organic sample kit</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-form-panel">
+          <form class="booking-form-grid" id="main-booking-form" onsubmit="event.preventDefault();">
+            <div class="form-group">
+              <label class="form-label" for="book-name">Full Name *</label>
+              <input type="text" id="book-name" required placeholder="John Doe" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-email">Email Address *</label>
+              <input type="email" id="book-email" required placeholder="john@example.com" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-phone">Phone Number *</label>
+              <input type="tel" id="book-phone" required placeholder="+1 (555) 012-3456" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="book-location">Preferred Location *</label>
+              <select id="book-location" class="form-select" onchange="syncLocationFromDropdown(this.value)">
+                <option value="ny">New York Studio</option>
+                <option value="london">London Design District</option>
+                <option value="tokyo">Tokyo Minimal Gallery</option>
+              </select>
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label" for="book-purpose">Primary Focus of Visit</label>
+              <select id="book-purpose" class="form-select">
+                <option value="spatial">Spatial Layout Consultation (Blueprint assessment)</option>
+                <option value="materials">Material Finish & Upholstery Selection</option>
+                <option value="browse">General Showroom Tour & Catalog Browsing</option>
+                <option value="custom">Bespoke / Custom Order Inquiries</option>
+              </select>
+            </div>
+
+            <div class="form-group span-full">
+              <label class="form-label" for="book-notes">Additional Spatial Details (Optional)</label>
+              <textarea id="book-notes" placeholder="Tell us about your room size, interior design themes, or pieces you are interested in..." class="form-textarea"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 5: AVAILABLE TIME SLOTS (CALENDAR LAYOUT)
+     ========================================== -->
+  <section class="calendar-section section-padding" id="calendar">
+    <div class="container">
+      <div class="calendar-header">
+        <span class="section-tag">Calendar Reservation</span>
+        <h2 class="section-title">Select a Date & Available Time</h2>
+        <p class="section-subtitle">Book your visit slot below. Dates with bold borders represent open booking slots, while greyed dates are reserved or closed.</p>
+      </div>
+
+      <div class="calendar-card">
+        <!-- Left Side: Interactive Calendar -->
+        <div class="calendar-ui-wrapper">
+          <div class="calendar-control-bar">
+            <span class="calendar-month-title" id="month-title">July 2026</span>
+            <div style="display: flex; gap: 8px;">
+              <button class="calendar-nav-btn" onclick="changeMonth(-1)" aria-label="Previous Month">
+                <i data-lucide="chevron-left"></i>
+              </button>
+              <button class="calendar-nav-btn" onclick="changeMonth(1)" aria-label="Next Month">
+                <i data-lucide="chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="calendar-grid">
+            <div class="calendar-weekday">Su</div>
+            <div class="calendar-weekday">Mo</div>
+            <div class="calendar-weekday">Tu</div>
+            <div class="calendar-weekday">We</div>
+            <div class="calendar-weekday">Th</div>
+            <div class="calendar-weekday">Fr</div>
+            <div class="calendar-weekday">Sa</div>
+          </div>
+          <div class="calendar-grid" id="calendar-days-grid">
+            <!-- Dynamically populated days -->
+          </div>
+        </div>
+
+        <!-- Right Side: Available Slots -->
+        <div class="slots-ui-wrapper">
+          <div class="slots-header-box">
+            <h3>Available Sessions</h3>
+            <p>Please select a highlighted date to display its matching morning, afternoon, or evening consulting slots.</p>
+            
+            <div class="slot-group">
+              <span class="slot-period-title">Morning Sessions</span>
+              <div class="slots-grid">
+                <button class="slot-capsule" onclick="selectSlot(this, '09:30 AM')">09:30 AM</button>
+                <button class="slot-capsule" onclick="selectSlot(this, '11:00 AM')">11:00 AM</button>
+              </div>
+            </div>
+
+            <div class="slot-group">
+              <span class="slot-period-title">Afternoon Sessions</span>
+              <div class="slots-grid">
+                <button class="slot-capsule" onclick="selectSlot(this, '01:30 PM')">01:30 PM</button>
+                <button class="slot-capsule" onclick="selectSlot(this, '03:00 PM')">03:00 PM</button>
+                <button class="slot-capsule" onclick="selectSlot(this, '04:30 PM')">04:30 PM</button>
+              </div>
+            </div>
+
+            <div class="slot-group" style="margin-bottom: 0;">
+              <span class="slot-period-title">Evening Sessions</span>
+              <div class="slots-grid">
+                <button class="slot-capsule" onclick="selectSlot(this, '06:00 PM')">06:00 PM</button>
+                <button class="slot-capsule" onclick="selectSlot(this, '07:00 PM')">07:00 PM</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Selected Visit Summary Badge -->
+          <div class="booking-summary-box">
+            <h4 class="summary-title">Reservation Summary</h4>
+            <div class="summary-details-badge">
+              <i data-lucide="calendar-check"></i>
+              <div class="summary-text-block">
+                <span class="summary-text-main" id="summary-badge-date">Please select a date</span>
+                <span class="summary-text-sub" id="summary-badge-details">New York Studio Gallery</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 6: CUSTOMER EXPERIENCE (TESTIMONIALS)
+     ========================================== -->
+  <section class="experience-section section-padding">
+    <div class="container">
+      <div class="experience-header">
+        <span class="section-tag">Guest Experiences</span>
+        <h2 class="section-title">Client Styling Feedback</h2>
+        <p class="section-subtitle">Read reflections from design enthusiasts who co-created their layouts inside LIGNUM flagship locations.</p>
+      </div>
+
+      <div class="grid-experience">
+        <!-- Testimonial 1 -->
+        <article class="testimonial-visit-card">
+          <div class="testimonial-rating">
+            <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+          </div>
+          <p class="testimonial-quote">"The 60-minute spatial planning session in New York completely transformed how we envisioned our loft. Sitting with the architect and wood blocks helped us select a walnut dining table that fits our pathing perfectly."</p>
+          <div class="testimonial-user-row">
+            <div class="testimonial-avatar">
+              <img src="images/avatar_sophia.jpg" alt="Sophia Chen - Portrait">
+            </div>
+            <div class="testimonial-user-info">
+              <span class="testimonial-user-name">Sophia Chen</span>
+              <span class="testimonial-user-tag">Loft Owner • NYC</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Testimonial 2 -->
+        <article class="testimonial-visit-card">
+          <div class="testimonial-rating">
+            <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+          </div>
+          <p class="testimonial-quote">"Visiting the Kensington gallery was an aesthetic experience in itself. Feeling the elasticity of their Baltic Oak and comparing fabric textures alongside custom moodboards made buying our lounge chairs seamless."</p>
+          <div class="testimonial-user-row">
+            <div class="testimonial-avatar">
+              <img src="images/avatar_marcus.jpg" alt="Marcus Sterling - Portrait">
+            </div>
+            <div class="testimonial-user-info">
+              <span class="testimonial-user-name">Marcus Sterling</span>
+              <span class="testimonial-user-tag">Interior Decorator • London</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Testimonial 3 -->
+        <article class="testimonial-visit-card">
+          <div class="testimonial-rating">
+            <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+          </div>
+          <p class="testimonial-quote">"I highly recommend selecting a dedicated consultation. The architectural blueprint co-design in Tokyo helped us size a custom low-profile bedframe that respects our layout's exact spatial pathing."</p>
+          <div class="testimonial-user-row">
+            <div class="testimonial-avatar">
+              <img src="images/avatar_elena.jpg" alt="Elena Rostova - Portrait">
+            </div>
+            <div class="testimonial-user-info">
+              <span class="testimonial-user-name">Elena Rostova</span>
+              <span class="testimonial-user-tag">Design Blogger • Tokyo</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 7: VISIT CONFIRMATION CTA
+     ========================================== -->
+  <section class="confirmation-section section-padding" id="confirm-cta">
+    <div class="container">
+      <div class="confirmation-banner">
+        <div class="confirmation-content-box">
+          <h2>Ready to Harmonize Your Space?</h2>
+          <p>Complete your appointment parameters below to secure a private design guide walkthrough at your chosen LIGNUM studio gallery.</p>
+          
+          <div class="prep-checklist">
+            <div class="prep-item">
+              <i data-lucide="check-square"></i>
+              <span>Bring your apartment blueprint layout or simple room dimensions.</span>
+            </div>
+            <div class="prep-item">
+              <i data-lucide="check-square"></i>
+              <span>Take pictures of your current flooring tones and paint values.</span>
+            </div>
+            <div class="prep-item">
+              <i data-lucide="check-square"></i>
+              <span>Appointments are confirmed instantly; allow 60-90 minutes for the tour.</span>
+            </div>
+          </div>
+
+          <button class="final-cta-btn" onclick="validateAndBook()">
+            <span>Complete Showroom Reservation</span>
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Booking Success Overlay modal -->
+  <div class="success-overlay" id="success-overlay-modal">
+    <div class="success-card">
+      <div class="success-icon-badge">
+        <i data-lucide="shield-check"></i>
+      </div>
+      <h3>Reservation Confirmed</h3>
+      <p>Thank you. Your private showroom visit has been locked in. A custom VIP entry pass and pre-visit architectural checklist have been dispatched to your email address.</p>
+      
+      <div class="success-details-summary">
+        <div class="success-details-row">
+          <i data-lucide="user"></i>
+          <span id="succ-name">John Doe</span>
+        </div>
+        <div class="success-details-row">
+          <i data-lucide="map-pin"></i>
+          <span id="succ-loc">New York Studio</span>
+        </div>
+        <div class="success-details-row">
+          <i data-lucide="calendar"></i>
+          <span id="succ-datetime">July 15, 2026 at 11:00 AM</span>
+        </div>
+      </div>
+
+      <button class="success-card-close-btn" onclick="closeSuccessModal()">Return to Showroom Page</button>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+     PREMIUM MULTI-COLUMN FOOTER
+     ========================================== -->
+  <footer class="main-footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Column 1: Brand & Socials -->
+        <div class="footer-col">
+          <div class="footer-brand">
+            <i data-lucide="sofa" class="logo-icon"></i>
+            <span>LIGNUM</span>
+          </div>
+          <p class="footer-desc">Crafting premium Scandinavian and minimalist designer furniture. Elevate your living room, study, or bedroom spaces with tailored woodwork.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-icon" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" class="social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a href="#" class="social-icon" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="footer-col">
+          <h4 class="footer-title">Shop Collection</h4>
+          <ul class="footer-links">
+            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Living Room</span></a></li>
+            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Lounge Chairs</span></a></li>
+            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Dining Room</span></a></li>
+            <li><a href="customization.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Custom Projects</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Company info -->
+        <div class="footer-col">
+          <h4 class="footer-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>About LIGNUM</span></a></li>
+            <li><a href="schedule.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Private Showrooms</span></a></li>
+            <li><a href="schedule.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Book Designer Consult</span></a></li>
+            <li><a href="about.html#sustainability"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Sustainability</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Detailed Contact Info -->
+        <div class="footer-col">
+          <h4 class="footer-title">Contact Us</h4>
+          <div class="footer-links" style="gap: 16px;">
+            <div class="footer-contact-item">
+              <i data-lucide="map-pin"></i>
+              <span>5th Avenue, Design District,<br>New York, NY 10011</span>
+            </div>
+            <div class="footer-contact-item">
+              <i data-lucide="mail"></i>
+              <span>concierge@lignum.design</span>
+            </div>
+            <div class="footer-contact-item">
+              <i data-lucide="phone"></i>
+              <span>+1 (212) 555-0190</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Row -->
+      <div class="footer-bottom">
+        <p>© 2026 LIGNUM Luxury Furniture Co. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Help Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ==========================================
+     JAVASCRIPT LOGIC
+     ========================================== -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Highlight Active Navbar Link
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Clean up any hardcoded active classes
+    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    
+    let matched = false;
+    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPath) {
+        link.classList.add('active');
+        matched = true;
+      }
+    });
+    
+    if (!matched || currentPath === 'index.html' || currentPath === 'home2.html') {
+      document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === '#' || href === 'index.html' || href === 'home2.html') {
+          if (link.textContent.trim().startsWith('Home') || href === 'index.html' || href === 'home2.html') {
+            link.classList.add('active');
+          }
+        }
+      });
+    }
+
+    // Elements Selectors
+    const header = document.getElementById('navbar-header');
+    
+    // Theme Toggles
+    const themeBtn = document.getElementById('darkModeToggle');
+    const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+    
+    // RTL Toggles
+    const rtlBtn = document.getElementById('rtlToggleBtn');
+    const mobileRtlBtn = document.getElementById('mobile-rtl-toggle');
+    
+    // Mobile Drawer
+    const hamburgerBtn = document.getElementById('hamburger-menu-btn');
+    const mobileDrawer = document.getElementById('mobile-sidebar-drawer');
+    const drawerBackdrop = document.getElementById('drawer-backdrop');
+    const mobileCloseTriggers = document.querySelectorAll('.mobile-drawer-close-trigger');
+    const mobileHomeDropdown = document.getElementById('mobile-home-dropdown');
+    
+    // Login Modal
+    const navLoginBtn = document.getElementById('nav-login-btn');
+    const mobileLoginBtn = document.getElementById('mobile-login-btn');
+    const loginModalOverlay = document.getElementById('login-modal-overlay');
+    const loginModalCloseBtn = document.getElementById('login-modal-close-btn');
+
+    /* ==========================================
+       SCROLL NAVBAR ANIMATION
+       ========================================== */
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    /* ==========================================
+       DARK MODE IMPLEMENTATION
+       ========================================== */
+    const initTheme = () => {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+    initTheme();
+
+    const toggleTheme = () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    };
+
+    themeBtn.addEventListener('click', toggleTheme);
+    mobileThemeBtn.addEventListener('click', () => {
+      toggleTheme();
+      toggleMobileDrawer();
+    });
+
+    /* ==========================================
+       RTL (RIGHT-TO-LEFT) IMPLEMENTATION
+       ========================================== */
+    const applyRtl = (isRtl) => {
+      if (isRtl) {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+        localStorage.setItem('rtl', 'true');
+        const badge = document.querySelector('.rtl-text');
+        if (badge) badge.textContent = 'LTR';
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', 'en');
+        localStorage.setItem('rtl', 'false');
+        const badge = document.querySelector('.rtl-text');
+        if (badge) badge.textContent = 'RTL';
+      }
+      lucide.createIcons();
+    };
+
+    const initRtl = () => {
+      const savedRtl = localStorage.getItem('rtl') === 'true';
+      applyRtl(savedRtl);
+    };
+    initRtl();
+
+    rtlBtn.addEventListener('click', () => {
+      const currentRtl = document.documentElement.getAttribute('dir') === 'rtl';
+      applyRtl(!currentRtl);
+    });
+
+    mobileRtlBtn.addEventListener('click', () => {
+      const currentRtl = document.documentElement.getAttribute('dir') === 'rtl';
+      applyRtl(!currentRtl);
+      toggleMobileDrawer();
+    });
+
+    /* ==========================================
+       MOBILE DRAWER IMPLEMENTATION
+       ========================================== */
+    const toggleMobileDrawer = () => {
+      const isOpen = mobileDrawer.classList.toggle('open');
+      drawerBackdrop.classList.toggle('open');
+      hamburgerBtn.classList.toggle('active');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
+
+    hamburgerBtn.addEventListener('click', toggleMobileDrawer);
+    drawerBackdrop.addEventListener('click', toggleMobileDrawer);
+
+    // Mobile home accordion click
+    mobileHomeDropdown.querySelector('.mobile-dropdown-header').addEventListener('click', () => {
+      mobileHomeDropdown.classList.toggle('active');
+    });
+
+    // Close mobile drawer when clicking anchors
+    mobileCloseTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        if (mobileDrawer.classList.contains('open')) {
+          toggleMobileDrawer();
+        }
+      });
+    });
+
+    /* ==========================================
+       LOGIN MODAL IMPLEMENTATION
+       ========================================== */
+    const openLogin = () => {
+      loginModalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeLogin = () => {
+      loginModalOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    if (navLoginBtn) navLoginBtn.addEventListener('click', openLogin);
+    if (mobileLoginBtn) {
+      mobileLoginBtn.addEventListener('click', () => {
+        toggleMobileDrawer(); // Close mobile drawer
+        openLogin();
+      });
+    }
+    loginModalCloseBtn.addEventListener('click', closeLogin);
+
+    loginModalOverlay.addEventListener('click', (e) => {
+      if (e.target === loginModalOverlay) {
+        closeLogin();
+      }
+    });
+
+    // Close modal on ESC key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLogin();
+      }
+    });
+
+
+    /* ==========================================
+       INTERACTIVE GALLERY / STORE SELECTOR
+       ========================================== */
+    const storesData = {
+      ny: {
+        title: "New York Studio",
+        desc: "Located in the heart of Manhattan's design corridor, this flagship features our complete range of living room furniture and material swatches.",
+        address: "5th Avenue, Design District, NY 10011",
+        phone: "+1 (212) 555-0190",
+        hours: "Mon - Sun: 9:00 AM - 8:00 PM",
+        services: "Spatial Planning, Custom Fabric Swatches, Architects On-site",
+        mapLabel: "Interactive Map: New York, 5th Avenue"
+      },
+      london: {
+        title: "London Design District",
+        desc: "Set in Kensington, our British gallery showcases elegant Japandi Japandi furniture lines and offers dedicated spatial consultations.",
+        address: "Kensington High Street, London W8 4SG",
+        phone: "+44 (20) 7946 0958",
+        hours: "Mon - Sat: 10:00 AM - 7:00 PM (Closed Sun)",
+        services: "Textile Harmonization, Custom Wardrobes, Home Deliveries",
+        mapLabel: "Interactive Map: London, Kensington High Street"
+      },
+      tokyo: {
+        title: "Tokyo Minimal Gallery",
+        desc: "Our Tokyo studio blends clean Japanese-architectural spacing with raw solid oak. Located in peaceful Minami-Aoyama.",
+        address: "Minami-Aoyama, Minato City, Tokyo 107-0062",
+        phone: "+81 (3) 5555-0143",
+        hours: "Mon - Sat: 11:00 AM - 8:00 PM (Closed Sun)",
+        services: "Japandi Layout Mockups, FSC Wood Certifications, Local Curators",
+        mapLabel: "Interactive Map: Tokyo, Minami-Aoyama"
+      }
+    };
+
+    let selectedLocationKey = 'ny';
+
+    function selectStore(key) {
+      selectedLocationKey = key;
+      const data = storesData[key];
+
+      // Update Active Classes
+      document.querySelectorAll('.location-store-card').forEach(card => card.classList.remove('active'));
+      document.getElementById(`store-${key}`).classList.add('active');
+
+      // Update Panel Text content
+      document.getElementById('panel-title').textContent = data.title;
+      document.getElementById('panel-desc').textContent = data.desc;
+      document.getElementById('panel-hours').textContent = data.hours;
+      document.getElementById('panel-services').textContent = data.services;
+      document.getElementById('panel-map-label').textContent = data.mapLabel;
+
+      // Sync form dropdown
+      document.getElementById('book-location').value = key;
+
+      // Sync calendar summary details
+      updateBookingSummary();
+    }
+
+    function syncLocationFromDropdown(key) {
+      selectStore(key);
+    }
+
+
+    /* ==========================================
+       DYNAMIC CALENDAR GENERATION
+       ========================================== */
+    let currentMonth = new Date().getMonth(); // 0-11
+    let currentYear = new Date().getFullYear();
+    let selectedDate = null;
+    let selectedTimeSlot = '';
+
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June", 
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    function generateCalendar(month, year) {
+      const daysGrid = document.getElementById('calendar-days-grid');
+      daysGrid.innerHTML = '';
+
+      // Set month title
+      document.getElementById('month-title').textContent = `${monthNames[month]} ${year}`;
+
+      const firstDayIndex = new Date(year, month, 1).getDay();
+      const lastDayDate = new Date(year, month + 1, 0).getDate();
+      const today = new Date();
+
+      // Empty padding cells for preceding month
+      for (let i = 0; i < firstDayIndex; i++) {
+        const emptyCell = document.createElement('div');
+        daysGrid.appendChild(emptyCell);
+      }
+
+      // Populate days
+      for (let dayNum = 1; dayNum <= lastDayDate; dayNum++) {
+        const dayCell = document.createElement('button');
+        dayCell.className = 'calendar-day';
+        dayCell.textContent = dayNum;
+
+        const cellDate = new Date(year, month, dayNum);
+        
+        // Mark today
+        if (cellDate.toDateString() === today.toDateString()) {
+          dayCell.classList.add('today');
+        }
+
+        // Disable past dates
+        if (cellDate < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
+          dayCell.classList.add('disabled');
+        } else {
+          // Check if selected
+          if (selectedDate && cellDate.toDateString() === selectedDate.toDateString()) {
+            dayCell.classList.add('active');
+          }
+
+          dayCell.addEventListener('click', () => {
+            selectedDate = cellDate;
+            document.querySelectorAll('.calendar-day').forEach(cell => cell.classList.remove('active'));
+            dayCell.classList.add('active');
+            updateBookingSummary();
+          });
+        }
+
+        daysGrid.appendChild(dayCell);
+      }
+    }
+
+    function changeMonth(direction) {
+      currentMonth += direction;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear -= 1;
+      } else if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear += 1;
+      }
+      generateCalendar(currentMonth, currentYear);
+    }
+
+    function selectSlot(button, time) {
+      selectedTimeSlot = time;
+      document.querySelectorAll('.slot-capsule').forEach(capsule => capsule.classList.remove('active'));
+      button.classList.add('active');
+      updateBookingSummary();
+    }
+
+    function updateBookingSummary() {
+      const summaryDateText = document.getElementById('summary-badge-date');
+      const summaryDetailsText = document.getElementById('summary-badge-details');
+      const storeName = storesData[selectedLocationKey].title;
+
+      if (!selectedDate) {
+        summaryDateText.textContent = "Please select a date";
+        summaryDetailsText.textContent = storeName;
+      } else {
+        const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+        const dateStr = selectedDate.toLocaleDateString('en-US', dateOptions);
+        
+        if (!selectedTimeSlot) {
+          summaryDateText.textContent = dateStr;
+          summaryDetailsText.textContent = `${storeName} • Select Time`;
+        } else {
+          summaryDateText.textContent = `${dateStr} at ${selectedTimeSlot}`;
+          summaryDetailsText.textContent = `${storeName} Visit Reserved`;
+        }
+      }
+    }
+
+    // Initialize New York on load, calendar page
+    selectStore('ny');
+    generateCalendar(currentMonth, currentYear);
+
+
+    /* ==========================================
+       BOOKING VALIDATION & MODAL SUCCESS
+       ========================================== */
+    function validateAndBook() {
+      const form = document.getElementById('main-booking-form');
+      const name = document.getElementById('book-name').value.trim();
+      const email = document.getElementById('book-email').value.trim();
+      const phone = document.getElementById('book-phone').value.trim();
+
+      // Check form fields
+      if (!name || !email || !phone) {
+        alert("Please complete the booking form with your Name, Email, and Phone details first.");
+        document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      // Check date
+      if (!selectedDate) {
+        alert("Please select a date on the calendar for your consultation.");
+        document.getElementById('calendar').scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      // Check time slot
+      if (!selectedTimeSlot) {
+        alert("Please select an available time session on the right side of the calendar.");
+        document.getElementById('calendar').scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      // Form validation trigger browser validation check
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      // Update success modal details
+      document.getElementById('succ-name').textContent = name;
+      document.getElementById('succ-loc').textContent = storesData[selectedLocationKey].title;
+
+      const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+      const formattedDate = selectedDate.toLocaleDateString('en-US', dateOptions);
+      document.getElementById('succ-datetime').textContent = `${formattedDate} at ${selectedTimeSlot}`;
+
+      // Open Success Modal
+      document.getElementById('success-overlay-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('success-overlay-modal').classList.remove('open');
+      document.body.style.overflow = '';
+      
+      // Reset form and calendar state
+      document.getElementById('main-booking-form').reset();
+      selectedDate = null;
+      selectedTimeSlot = '';
+      document.querySelectorAll('.slot-capsule').forEach(caps => caps.classList.remove('active'));
+      generateCalendar(currentMonth, currentYear);
+      updateBookingSummary();
+      
+      // Scroll to top of page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

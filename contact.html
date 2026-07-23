@@ -1,0 +1,3552 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIGNUM - Contact Us</title>
+  
+  <!-- Google Fonts: Outfit (English) & Tajawal (Arabic/RTL) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ==========================================
+       1. DESIGN SYSTEM & VARIABLES
+       ========================================== */
+    :root {
+      /* Terracotta & Teak Wood Light Theme Palette */
+      --primary: #ab5c3c;       /* Warm Terracotta */
+      --primary-hover: #944d30;
+      --primary-glow: rgba(171, 92, 60, 0.15);
+      
+      --bg-body: #fafaf9;        /* Warm Linen 50 */
+      --bg-surface: #ffffff;
+      --bg-navbar: rgba(250, 250, 249, 0.85);
+      --bg-card: #ffffff;
+      --bg-input: #f5f5f4;       /* Stone 100 */
+      --bg-hover: #f5f5f4;
+      
+      --text-main: #1c1917;      /* Stone 900 */
+      --text-muted: #44403c;     /* Stone 500 */
+      --text-inverse: #ffffff;
+      
+      --border: #e7e5e4;         /* Stone 200 */
+      --border-focus: #d6d3d1;   /* Stone 300 */
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 15px -3px rgba(171, 92, 60, 0.04), 0 4px 6px -4px rgba(171, 92, 60, 0.04);
+      --shadow-lg: 0 20px 25px -5px rgba(171, 92, 60, 0.06), 0 8px 10px -6px rgba(171, 92, 60, 0.06);
+      
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      
+      --font-sans: 'Outfit', sans-serif;
+      --backdrop-blur: 20px;
+      --nav-height: 80px;
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Glassmorphism settings */
+      --glass-bg: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.45);
+      --glass-glow: rgba(171, 92, 60, 0.08);
+    }
+
+    /* Dark Mode Theme Palette (Walnut & Amber Glow) */
+    .dark {
+      --bg-body: #12100f;        /* Deep Walnut 950 */
+      --bg-surface: #1c1917;     /* Stone 900 */
+      --bg-navbar: rgba(18, 16, 15, 0.85);
+      --bg-card: #292524;        /* Stone 800 */
+      --bg-input: #292524;
+      --bg-hover: #292524;
+      
+      --text-main: #f5f5f4;      /* Stone 100 */
+      --text-muted: #a8a29e;     /* Stone 400 */
+      --text-inverse: #12100f;
+      
+      --border: #292524;
+      --border-focus: #44403c;
+      
+      --primary: #f59e0b;        /* Amber Gold Glow */
+      --primary-hover: #d97706;
+      --primary-glow: rgba(245, 158, 11, 0.15);
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+
+      /* Glassmorphic values in Dark Mode */
+      --glass-bg: rgba(28, 25, 23, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-glow: rgba(245, 158, 11, 0.08);
+    }
+
+    /* RTL Font Override */
+    [dir="rtl"] {
+      --font-sans: 'Tajawal', sans-serif;
+    }
+
+    /* ==========================================
+       2. GENERAL STYLES & RESET
+       ========================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    *::-webkit-scrollbar {
+      width: 6px;
+    }
+    *::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    *::-webkit-scrollbar-thumb {
+      background-color: var(--border);
+      border-radius: var(--radius-full);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      overflow-x: hidden;
+      transition: var(--transition);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      border: none;
+      background: none;
+      outline: none;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-padding {
+      padding: 120px 0;
+    }
+
+    @media (max-width: 768px) {
+      .section-padding {
+        padding: 80px 0;
+      }
+    }
+
+    /* Glassmorphism Utility */
+    .glass-panel {
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--backdrop-blur));
+      -webkit-backdrop-filter: blur(var(--backdrop-blur));
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.1);
+      transition: var(--transition);
+    }
+
+    /* ==========================================
+       3. NAVIGATION BAR (ONE-LINE LAYOUT)
+       ========================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      z-index: 1000;
+      background-color: var(--bg-navbar);
+      backdrop-filter: blur(var(--backdrop-blur));
+      -webkit-backdrop-filter: blur(var(--backdrop-blur));
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .header.scrolled {
+      height: 70px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      color: var(--primary);
+      width: 26px;
+      height: 26px;
+      transition: var(--transition);
+    }
+
+    /* Desktop Navigation Links */
+    .desktop-nav {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      gap: 4px;
+    }
+
+    .nav-links > li {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .nav-link {
+      padding: 0 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+    }
+
+    .nav-link:hover, 
+    .nav-links > li:hover > .nav-link,
+    .nav-link.active {
+      color: var(--primary);
+    }
+
+    /* Bottom hover indicator line */
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 12px;
+      right: 12px;
+      height: 2.5px;
+      background-color: var(--primary);
+      border-radius: var(--radius-full) var(--radius-full) 0 0;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-links > li:hover > .nav-link::after,
+    .nav-link.active::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    [dir="rtl"] .nav-link:hover::after,
+    [dir="rtl"] .nav-links > li:hover > .nav-link::after,
+    [dir="rtl"] .nav-link.active::after {
+      transform-origin: bottom right;
+    }
+
+    /* Chevron rotation */
+    .dropdown-chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-links > li:hover .dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown submenu */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      width: 180px;
+      padding: 6px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 1010;
+    }
+
+    [dir="rtl"] .dropdown-menu {
+      left: auto;
+      right: 50%;
+      transform: translateX(50%) translateY(10px);
+    }
+
+    .nav-links > li:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    [dir="rtl"] .nav-links > li:hover .dropdown-menu {
+      transform: translateX(50%) translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 12px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      text-align: start;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+      padding-inline-start: 16px;
+    }
+
+    /* Header Actions Container */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .action-btn, .icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .action-btn:hover, .icon-btn:hover {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+      border-color: var(--border);
+    }
+
+    .action-btn svg, .action-btn i, .icon-btn i {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* RTL icon button custom spacing */
+    .rtl-toggle {
+      width: auto;
+      padding: 0 10px;
+      gap: 4px;
+    }
+
+    .rtl-text {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Active theme toggling icon visibility via CSS class */
+    .theme-toggle .icon-sun {
+      display: none;
+    }
+    .theme-toggle .icon-moon {
+      display: block;
+    }
+    .dark .theme-toggle .icon-sun {
+      display: block;
+    }
+    .dark .theme-toggle .icon-moon {
+      display: none;
+    }
+
+    /* Login CTA Button */
+    .login-btn {
+      background-color: var(--text-main);
+      color: var(--bg-surface);
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      padding: 9px 18px;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .login-btn:hover {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    /* Hamburger menu for responsive */
+    .hamburger-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 16px;
+      cursor: pointer;
+      z-index: 1050;
+      position: relative;
+    }
+
+    .hamburger-btn span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text-main);
+      border-radius: var(--radius-full);
+      transition: var(--transition);
+    }
+
+    .hamburger-btn.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger-btn.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ==========================================
+       4. MOBILE NAVIGATION DRAWER
+       ========================================== */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 300px;
+      max-width: 85%;
+      background-color: var(--bg-surface);
+      border-inline-start: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      z-index: 1040;
+      padding: 90px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      overflow-y: auto;
+      
+      inset-inline-end: 0;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [dir="rtl"] .mobile-drawer {
+      transform: translateX(-100%);
+    }
+
+    .mobile-drawer.open {
+      transform: translateX(0) !important;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(28, 25, 23, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1030;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: start;
+    }
+
+    .mobile-link {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-link:hover,
+    .mobile-link.active {
+      color: var(--primary);
+    }
+
+    .mobile-dropdown-parent {
+      flex-direction: column;
+      align-items: stretch;
+      display: flex;
+    }
+
+    .mobile-dropdown-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .mobile-dropdown-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding-inline-start: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 0;
+    }
+
+    .mobile-dropdown-parent.active .mobile-dropdown-menu {
+      max-height: 120px;
+      margin-top: 8px;
+    }
+
+    .mobile-dropdown-parent.active .dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    .mobile-dropdown-menu a {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding: 6px 0;
+      text-align: start;
+    }
+
+    .mobile-dropdown-menu a:hover {
+      color: var(--primary);
+    }
+
+    .mobile-drawer-bottom {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ==========================================
+       5. LOGIN MODAL OVERLAY
+       ========================================== */
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(28, 25, 23, 0.55);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .login-modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .login-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 400px;
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.9);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .login-modal.open .login-card {
+      transform: scale(1);
+    }
+
+    .login-card-close {
+      position: absolute;
+      top: 20px;
+      inset-inline-end: 20px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .login-card-close:hover {
+      color: var(--text-main);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .login-header h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 13.5px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: start;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .form-input {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      color: var(--text-main);
+      font-size: 14px;
+      transition: var(--transition);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+    }
+
+    .form-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .forgot-pass {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .forgot-pass:hover {
+      text-decoration: underline;
+    }
+
+    .submit-btn {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      padding: 12px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--primary-glow);
+      transition: var(--transition);
+      text-align: center;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1.5px);
+    }
+
+    /* Common Typography / Headers */
+    .section-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text-main);
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 550px;
+      margin: 12px auto 0;
+    }
+
+
+    /* ==========================================
+       SECTION 1 – HERO BANNER
+       ========================================== */
+    .contact-hero {
+      position: relative;
+      height: 65vh;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(rgba(28, 25, 23, 0.45), rgba(28, 25, 23, 0.6)), url('images/contact_hero.jpg') no-repeat center center/cover;
+      color: white;
+      padding-top: var(--nav-height);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-glass-box {
+      padding: 50px 70px;
+      border-radius: var(--radius-lg);
+      max-width: 850px;
+      margin: 0 24px;
+      z-index: 10;
+      position: relative;
+      animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero-title {
+      font-size: 54px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      color: var(--text-main);
+      text-transform: uppercase;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 24px;
+      font-weight: 400;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumb-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(171, 92, 60, 0.08);
+      padding: 6px 20px;
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+    }
+
+    .breadcrumb-nav a {
+      color: var(--text-muted);
+      opacity: 0.85;
+      transition: var(--transition);
+    }
+
+    .breadcrumb-nav a:hover {
+      color: var(--primary);
+      opacity: 1;
+    }
+
+    .breadcrumb-separator {
+      color: var(--primary);
+      opacity: 0.6;
+    }
+
+    .breadcrumb-active {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Floating Animated Circles */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(30px);
+      z-index: 1;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .orb-primary {
+      width: 250px;
+      height: 250px;
+      background: var(--primary);
+      top: -50px;
+      left: 10%;
+      animation: orbMove 15s infinite alternate ease-in-out;
+    }
+
+    .orb-secondary {
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.3);
+      bottom: -100px;
+      right: 15%;
+      animation: orbMove 20s infinite alternate-reverse ease-in-out;
+    }
+
+    @keyframes orbMove {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, -60px) scale(1.1); }
+      100% { transform: translate(-30px, 40px) scale(0.9); }
+    }
+
+    /* Curved Section Divider */
+    .wave-divider {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      transform: rotate(180deg);
+      z-index: 5;
+    }
+
+    .wave-divider svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 50px;
+    }
+
+    .wave-divider .shape-fill {
+      fill: var(--bg-body);
+      transition: fill 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .hero-glass-box {
+        padding: 35px 24px;
+      }
+      .hero-title {
+        font-size: 36px;
+      }
+      .hero-subtitle {
+        font-size: 15px;
+      }
+    }
+
+
+    /* ==========================================
+       SECTION 2 – CONTACT INFORMATION
+       ========================================== */
+    .info-section {
+      background-color: var(--bg-body);
+      overflow: hidden;
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Asymmetrical Layout grid */
+    .asym-info-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 30px;
+    }
+
+    .info-block {
+      border-radius: var(--radius-lg);
+      padding: 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 28px;
+      position: relative;
+      overflow: hidden;
+      text-align: start;
+    }
+
+    /* Custom glowing borders & sizes */
+    .info-block.card-large {
+      grid-row: span 2;
+      background: linear-gradient(135deg, var(--glass-bg), rgba(255, 255, 255, 0.45));
+    }
+    
+    .info-block.card-phone {
+      background: linear-gradient(135deg, var(--primary-glow), var(--glass-bg));
+      border-color: rgba(171, 92, 60, 0.2);
+    }
+
+    .info-block.card-email {
+      background: linear-gradient(135deg, var(--glass-bg), var(--primary-glow));
+    }
+
+    .info-block.card-hours {
+      grid-column: span 2;
+      background: linear-gradient(135deg, var(--glass-bg), rgba(255, 255, 255, 0.4));
+    }
+
+    /* Sweeping light glow animation on hover */
+    .info-block::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent);
+      transform: rotate(45deg);
+      transition: transform 0.8s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .info-block:hover::before {
+      transform: translate(50%, 50%) rotate(45deg);
+    }
+
+    .info-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .info-icon-badge {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--radius-md);
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .info-block:hover .info-icon-badge {
+      background-color: var(--primary);
+      color: white;
+      transform: scale(1.08) rotate(5deg);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .info-icon-badge svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .info-card-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    .info-card-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .info-card-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+    }
+
+    .info-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .info-link-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: var(--transition);
+    }
+
+    .info-link-item:hover {
+      color: var(--primary);
+      transform: translateX(6px);
+    }
+
+    .info-link-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+    }
+
+    /* Working Hours Table Style inside glass card */
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14.5px;
+    }
+
+    .hours-row:last-child {
+      border-bottom: none;
+    }
+
+    .hours-day {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .hours-time {
+      color: var(--text-muted);
+    }
+
+    .hours-time.highlight {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .hours-card-split {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+      width: 100%;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hours-split-left {
+      display: flex;
+      flex-direction: column;
+      text-align: start;
+    }
+    
+    .hours-split-right {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .hours-card-split {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    /* Gradient borders via pseudo-elements */
+    .info-block::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      border: 1.5px solid transparent;
+      background: linear-gradient(135deg, var(--glass-border), var(--primary-glow)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .info-block:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg), 0 0 20px var(--glass-glow);
+    }
+
+    .info-block:hover::after {
+      background: linear-gradient(135deg, var(--primary), transparent) border-box;
+    }
+
+    @media (max-width: 992px) {
+      .asym-info-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .info-block.card-large, .info-block.card-hours {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+    }
+
+
+    /* ==========================================
+       SECTION 3 – CONTACT FORM
+       ========================================== */
+    .form-section {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .split-form-wrapper {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .form-left-panel {
+      text-align: start;
+    }
+
+    .form-left-panel h2 {
+      margin-bottom: 12px;
+    }
+
+    .form-left-panel p {
+      margin-bottom: 40px;
+      color: var(--text-muted);
+    }
+
+    /* Sleek Floating-Label Form Inputs */
+    .floating-form {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .input-field-group {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .floating-input, .floating-textarea {
+      width: 100%;
+      padding: 12px 0;
+      font-size: 15px;
+      color: var(--text-main);
+      background-color: transparent;
+      border: none;
+      border-bottom: 1.5px solid var(--border);
+      transition: var(--transition);
+      z-index: 2;
+    }
+
+    .floating-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .field-label {
+      position: absolute;
+      top: 12px;
+      left: 0;
+      font-size: 15px;
+      color: var(--text-muted);
+      pointer-events: none;
+      transition: 0.25s ease all;
+      font-weight: 500;
+      z-index: 1;
+    }
+
+    /* Expanding bottom border line on focus */
+    .input-focus-line {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: var(--transition);
+      z-index: 3;
+    }
+
+    .floating-input:focus ~ .input-focus-line,
+    .floating-textarea:focus ~ .input-focus-line {
+      left: 0;
+      width: 100%;
+    }
+
+    .floating-input:focus, .floating-textarea:focus {
+      border-bottom-color: transparent;
+    }
+
+    .floating-input:focus ~ .field-label,
+    .floating-input:not(:placeholder-shown) ~ .field-label,
+    .floating-textarea:focus ~ .field-label,
+    .floating-textarea:not(:placeholder-shown) ~ .field-label {
+      top: -14px;
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .form-submit-btn {
+      align-self: flex-start;
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      padding: 14px 40px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--primary-glow);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-submit-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px var(--primary-glow);
+    }
+
+    .form-submit-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Right Side: Showcase Image & Floating Card */
+    .form-right-panel {
+      position: relative;
+      width: 100%;
+    }
+
+    .portrait-image-frame {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      z-index: 2;
+    }
+
+    .portrait-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    /* Decorative elements */
+    .decor-outline-box {
+      position: absolute;
+      top: -24px;
+      inset-inline-end: -24px;
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .glow-orb-center {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(171,92,60,0.3) 0%, rgba(171,92,60,0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      filter: blur(15px);
+      pointer-events: none;
+    }
+
+    /* Overlapping Floating Quote Card */
+    .floating-quote-badge {
+      position: absolute;
+      bottom: 40px;
+      inset-inline-start: -30px;
+      padding: 24px;
+      border-radius: var(--radius-md);
+      max-width: 280px;
+      z-index: 10;
+      text-align: start;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .quote-badge-text {
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--text-main);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .quote-badge-author {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 992px) {
+      .split-form-wrapper {
+        grid-template-columns: 1fr;
+        gap: 60px;
+      }
+      .floating-quote-badge {
+        inset-inline-start: 20px;
+        bottom: -20px;
+      }
+    }
+
+
+    /* ==========================================
+       SECTION 4 – STORE LOCATIONS
+       ========================================== */
+    .storefronts-section {
+      background-color: var(--bg-body);
+      overflow: hidden;
+    }
+
+    /* Aligned Grid Layout */
+    .staggered-locations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      align-items: stretch;
+      padding: 40px 0;
+    }
+
+    .staggered-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      text-align: start;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .staggered-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .stagger-img-frame {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background-color: var(--bg-input);
+      position: relative;
+    }
+
+    .stagger-img-frame img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    /* Card image overlay filter on hover */
+    .stagger-card-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(28, 25, 23, 0.4);
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      z-index: 2;
+    }
+
+    .staggered-card:hover .stagger-card-mask {
+      opacity: 1;
+    }
+
+    .mask-action-label {
+      background: white;
+      color: var(--text-main);
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: var(--shadow-md);
+      transform: translateY(10px);
+      transition: var(--transition);
+    }
+
+    .staggered-card:hover .mask-action-label {
+      transform: translateY(0);
+    }
+
+    .stagger-card-body {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex-grow: 1;
+    }
+
+    .stagger-card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .stagger-card-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .stagger-row-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .stagger-row-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--primary);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .stagger-directions-btn {
+      margin-top: auto;
+      align-self: flex-start;
+      border: 1px solid var(--border);
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .staggered-card:hover .stagger-directions-btn {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px var(--primary-glow);
+    }
+
+    @media (max-width: 992px) {
+      .staggered-locations-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+      .staggered-card {
+        transform: none !important;
+      }
+    }
+
+
+    /* ==========================================
+       SECTION 5 – APPOINTMENT BOOKING
+       ========================================== */
+    .appointment-section {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .booking-glass-board {
+      border-radius: var(--radius-lg);
+      padding: 50px;
+      box-shadow: var(--shadow-lg);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+      text-align: start;
+    }
+
+    .booking-left-side {
+      border-inline-end: 1px solid var(--border);
+      padding-inline-end: 50px;
+    }
+
+    .booking-left-side h3 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .booking-left-side p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+
+    /* Dynamic Calendar Frame */
+    .calendar-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .calendar-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .calendar-title-text {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .calendar-nav-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .cal-arrow-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .cal-arrow-btn:hover {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .cal-arrow-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .calendar-days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .calendar-day-label {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      padding: 6px 0;
+    }
+
+    .calendar-day-btn {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--text-main);
+      border: 1px solid transparent;
+    }
+
+    .calendar-day-btn:hover:not(.disabled):not(.active) {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+    }
+
+    .calendar-day-btn.disabled {
+      color: var(--border-focus);
+      cursor: not-allowed;
+      opacity: 0.35;
+      text-decoration: line-through;
+    }
+
+    .calendar-day-btn.active {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      font-weight: 700;
+      box-shadow: 0 4px 10px var(--primary-glow);
+    }
+
+    .calendar-day-btn.today {
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .calendar-day-btn.today.active {
+      color: var(--text-inverse);
+    }
+
+    /* Booking parameters on the Right side */
+    .booking-right-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 30px;
+    }
+
+    .booking-inputs-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .booking-group-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .time-slot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 10px;
+    }
+
+    .slot-btn {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--text-main);
+      text-align: center;
+    }
+
+    .slot-btn:hover:not(.disabled):not(.active) {
+      border-color: var(--primary);
+      color: var(--primary);
+      background-color: var(--bg-hover);
+    }
+
+    .slot-btn.active {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px var(--primary-glow);
+    }
+
+    /* Select values */
+    .form-row-selects {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Summary display and submit button */
+    .booking-final-summary {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .summary-infobox {
+      background-color: var(--bg-input);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .summary-infobox svg {
+      width: 24px;
+      height: 24px;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .summary-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+      text-align: start;
+    }
+
+    .book-action-btn {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--primary-glow);
+      transition: var(--transition);
+    }
+
+    .book-action-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1.5px);
+    }
+
+    @media (max-width: 992px) {
+      .booking-glass-board {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+      }
+      .booking-left-side {
+        border-inline-end: none;
+        border-bottom: 1px solid var(--border);
+        padding-inline-end: 0;
+        padding-bottom: 30px;
+      }
+    }
+
+
+    /* ==========================================
+       SECTION 6 – FREQUENTLY ASKED QUESTIONS
+       ========================================== */
+    .faq-section {
+      background-color: var(--bg-body);
+      position: relative;
+    }
+
+    .faq-header {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .faq-header .section-subtitle {
+      margin-inline: auto;
+    }
+
+    /* FAQ Search Bar */
+    .faq-search-wrapper {
+      max-width: 500px;
+      margin: 0 auto 50px;
+      position: relative;
+    }
+
+    .faq-search-input {
+      width: 100%;
+      padding: 14px 20px;
+      padding-inline-start: 46px;
+      background-color: var(--bg-surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-full);
+      font-size: 14.5px;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .faq-search-input:focus {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md), 0 0 10px var(--primary-glow);
+    }
+
+    .faq-search-icon {
+      position: absolute;
+      top: 50%;
+      inset-inline-start: 16px;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Accordion items */
+    .faq-accordion-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+      text-align: start;
+    }
+
+    .faq-item:hover {
+      border-color: var(--border-focus);
+    }
+
+    .faq-item.active {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .faq-trigger {
+      width: 100%;
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-size: 16.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      transition: var(--transition);
+    }
+
+    .faq-trigger svg {
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-item.active .faq-trigger svg {
+      transform: rotate(180deg);
+      color: var(--primary);
+    }
+
+    .faq-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-panel-content {
+      padding: 0 28px 22px;
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* VIP Concierge widget at bottom */
+    .faq-support-bar {
+      margin-top: 60px;
+      max-width: 800px;
+      margin-inline: auto;
+      padding: 24px 32px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      text-align: start;
+    }
+
+    .support-bar-text h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .support-bar-text p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .support-bar-btn {
+      background-color: var(--text-main);
+      color: var(--bg-surface);
+      padding: 10px 24px;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .support-bar-btn:hover {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+    }
+
+    @media (max-width: 640px) {
+      .faq-trigger {
+        padding: 16px 20px;
+        font-size: 15px;
+      }
+      .faq-panel-content {
+        padding: 0 20px 16px;
+      }
+    }
+
+
+    /* ==========================================
+       SECTION 7 – GOOGLE MAP & CTA
+       ========================================== */
+    .map-cta-section {
+      position: relative;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(rgba(28, 25, 23, 0.4), rgba(28, 25, 23, 0.45)), url('images/contact_map_bg.jpg') no-repeat center center/cover;
+      background-attachment: fixed; /* Parallax effect */
+      padding: 60px 24px;
+    }
+
+    .map-wrapper-card {
+      width: 100%;
+      max-width: 1100px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      background-color: var(--bg-card);
+    }
+
+    .google-map-iframe-container {
+      height: 480px;
+      background-color: var(--bg-input);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .google-map-iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: grayscale(100%);
+      transition: filter 0.6s ease;
+    }
+
+    /* Grayscale transition to full color on hover */
+    .google-map-iframe-container:hover iframe {
+      filter: grayscale(0%);
+    }
+
+    .map-overlay-card {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: start;
+      position: relative;
+    }
+
+    /* Slow pulse terracotta outline on map info card */
+    @keyframes cardPulse {
+      0% { box-shadow: 0 0 0 0 rgba(171, 92, 60, 0.4); }
+      70% { box-shadow: 0 0 0 8px rgba(171, 92, 60, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(171, 92, 60, 0); }
+    }
+
+    .map-overlay-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      border: 2px solid var(--primary-glow);
+      pointer-events: none;
+      animation: cardPulse 3s infinite;
+    }
+
+    .overlay-header h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .overlay-header p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .overlay-details-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .overlay-detail-item {
+      display: flex;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .overlay-detail-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .overlay-actions-row {
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+      z-index: 2;
+    }
+
+    .map-action-primary {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px var(--primary-glow);
+    }
+
+    .map-action-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .map-action-secondary {
+      border: 1.5px solid var(--border);
+      color: var(--text-main);
+      padding: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .map-action-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background-color: var(--bg-hover);
+    }
+
+    @media (max-width: 992px) {
+      .map-wrapper-card {
+        grid-template-columns: 1fr;
+      }
+      .google-map-iframe-container {
+        height: 300px;
+      }
+      .map-overlay-card {
+        padding: 30px 20px;
+      }
+    }
+
+
+    /* ==========================================
+       8. PREMIUM MULTI-COLUMN FOOTER
+       ========================================== */
+    .main-footer {
+      background-color: #1c1917; /* Stone 900 */
+      color: #e7e5e4;            /* Stone 200 */
+      padding: 80px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 14.5px;
+      transition: var(--transition);
+      text-align: start;
+    }
+
+    .dark .main-footer {
+      background-color: #0b0909; /* Walnut black */
+      border-top-color: rgba(255,255,255,0.03);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .footer-brand .logo-icon {
+      color: var(--primary);
+    }
+
+    .footer-desc {
+      color: #a8a29e; /* Stone 400 */
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      background-color: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d6d3d1;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .social-icon:hover {
+      background-color: var(--primary);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .footer-title {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #a8a29e;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+      padding-inline-start: 6px;
+    }
+
+    .footer-link-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--primary);
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover .footer-link-icon {
+      transform: translateX(4px);
+    }
+
+    [dir="rtl"] .footer-links a:hover .footer-link-icon {
+      transform: translateX(-4px) rotate(180deg);
+    }
+
+    [dir="rtl"] .footer-link-icon {
+      transform: rotate(180deg);
+    }
+
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #a8a29e;
+      line-height: 1.5;
+    }
+
+    .footer-contact-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #a8a29e;
+      font-size: 13.5px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a:hover {
+      color: #ffffff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1120px) {
+      .nav-link {
+        padding: 0 8px;
+        font-size: 13.5px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .desktop-nav {
+        display: none;
+      }
+      .hamburger-btn {
+        display: flex;
+      }
+      .logo {
+        font-size: 20px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+      .header-actions .rtl-toggle,
+      .header-actions .login-btn {
+        display: none; /* Hide RTL and login on standard mobile bar */
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    /* ==========================================
+       GLOBAL MOBILE RESPONSIVENESS OVERRIDES
+       ========================================== */
+    html, body {
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px !important;
+      }
+      .section-padding {
+        padding: 50px 0 !important;
+      }
+      .section-title, .hero-title {
+        font-size: 26px !important;
+      }
+      .section-desc, .hero-desc {
+        font-size: 14.5px !important;
+      }
+    }
+    @media (max-width: 320px) {
+      .container {
+        padding: 0 12px !important;
+      }
+      .section-padding {
+        padding: 40px 0 !important;
+      }
+      .section-title, .hero-title {
+        font-size: 22px !important;
+      }
+    }
+      @media (max-width: 1024px) {
+      .header-actions #darkModeToggle,
+      .header-actions #rtlToggleBtn,
+      .header-actions .login-btn {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+     NAVBAR HEADER (ONE-LINE LAYOUT)
+     ========================================== -->
+  <header class="header" id="navbar-header">
+    <div class="container nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="logo">
+        <i data-lucide="sofa" class="logo-icon"></i>
+        <span>LIGNUM</span>
+      </a>
+      
+      <!-- Desktop Navigation Menu -->
+      <nav class="desktop-nav">
+        <ul class="nav-links">
+          <li class="dropdown-parent">
+            <a href="#" class="nav-link">
+              Home <i data-lucide="chevron-down" class="dropdown-chevron"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="index.html">Home 1 - Studio Living</a></li>
+              <li><a href="home2.html">Home 2 - Scandi Gallery</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="furniture.html" class="nav-link">Furniture</a></li>
+          <li><a href="room-lookbook.html" class="nav-link">Room Lookbook</a></li>
+          <li><a href="room-ideas.html" class="nav-link">Room Ideas</a></li>
+          <li><a href="customization.html" class="nav-link">Customization</a></li>
+          <li><a href="collections.html" class="nav-link">Collections</a></li>
+          <li><a href="schedule.html" class="nav-link">Schedule Visit</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Desktop Header Actions -->
+      <div class="header-actions">
+        <button class="action-btn icon-btn theme-toggle" id="darkModeToggle" aria-label="Dark Mode">
+          <i class="fas fa-moon icon-moon"></i>
+          <i class="fas fa-sun icon-sun" style="display: none;"></i>
+        </button>
+
+        <button class="action-btn icon-btn rtl-toggle" id="rtlToggleBtn" aria-label="Toggle Layout Direction" title="Toggle Layout Direction">
+          <i class="fas fa-exchange-alt"></i>
+        </button>
+
+        <a href="login.html" class="login-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Login</a>
+
+        <button class="hamburger-btn" id="hamburger-menu-btn" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+     MOBILE DRAWER
+     ========================================== -->
+  <div class="drawer-overlay" id="drawer-backdrop"></div>
+  <div class="mobile-drawer" id="mobile-sidebar-drawer">
+    <nav class="mobile-links">
+      <div class="mobile-dropdown-parent" id="mobile-home-dropdown">
+        <div class="mobile-dropdown-header mobile-link">
+          <span>Home</span>
+          <i data-lucide="chevron-down" class="dropdown-chevron"></i>
+        </div>
+        <div class="mobile-dropdown-menu">
+          <a href="index.html" class="mobile-drawer-close-trigger">Home 1 - Studio Living</a>
+          <a href="home2.html" class="mobile-drawer-close-trigger">Home 2 - Scandi Gallery</a>
+        </div>
+      </div>
+      
+      <a href="about.html" class="mobile-link mobile-drawer-close-trigger">About</a>
+      <a href="furniture.html" class="mobile-link mobile-drawer-close-trigger">Furniture</a>
+      <a href="room-lookbook.html" class="mobile-link mobile-drawer-close-trigger">Room Lookbook</a>
+      <a href="room-ideas.html" class="mobile-link mobile-drawer-close-trigger">Room Ideas</a>
+      <a href="customization.html" class="mobile-link mobile-drawer-close-trigger">Customization</a>
+      <a href="collections.html" class="mobile-link mobile-drawer-close-trigger">Collections</a>
+      <a href="schedule.html" class="mobile-link mobile-drawer-close-trigger">Schedule Visit</a>
+      <a href="contact.html" class="mobile-link mobile-drawer-close-trigger active">Contact</a>
+    </nav>
+
+    <div class="mobile-drawer-bottom">
+      <button class="action-btn theme-toggle" id="mobile-theme-toggle" style="width: 100%; justify-content: center; height: 44px; margin-bottom: 8px; border: 1px solid var(--border)">
+        <i class="fas fa-moon icon-moon" style="margin-inline-end: 8px;"></i>
+        <i class="fas fa-sun icon-sun" style="margin-inline-end: 8px; display: none;"></i>
+        <span>Toggle Theme</span>
+      </button>
+
+      <button class="action-btn rtl-toggle" id="mobile-rtl-toggle" style="width: 100%; justify-content: center; height: 44px; margin-bottom: 12px; border: 1px solid var(--border)">
+        <i class="fas fa-exchange-alt" style="margin-inline-end: 8px;"></i>
+        <span>Toggle RTL / LTR</span>
+      </button>
+      
+      <a href="login.html" class="login-btn" style="width: 100%; justify-content: center; height: 48px; text-decoration: none; display: inline-flex; align-items: center;">Login</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+     LOGIN MODAL (Clean popup)
+     ========================================== -->
+  <div class="login-modal" id="login-modal-overlay">
+    <div class="login-card">
+      <button class="login-card-close" id="login-modal-close-btn">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="login-header">
+        <h3>Welcome back</h3>
+        <p>Login to your premium designer account</p>
+      </div>
+      <form class="login-form" onsubmit="event.preventDefault(); alert('Logged in successfully (Mock)!'); document.getElementById('login-modal-overlay').classList.remove('open');">
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input type="email" placeholder="name@domain.com" required class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" placeholder="••••••••" required class="form-input">
+        </div>
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" style="accent-color: var(--primary)">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-pass">Forgot Password?</a>
+        </div>
+        <button type="submit" class="submit-btn">Login</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+     SECTION 1 – HERO BANNER
+     ========================================== -->
+  <section class="contact-hero">
+    <div class="orb orb-primary"></div>
+    <div class="orb orb-secondary"></div>
+    
+    <div class="glass-panel hero-glass-box">
+      <span class="hero-tagline" style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 3px; display: block; margin-bottom: 12px;">Global Concierge Desk</span>
+      <h1 class="hero-title">Communicate With Lignum</h1>
+      <p class="hero-subtitle">Connect with our design curators and spatial consultants. We are ready to help you orchestrate organic layouts and custom furniture solutions.</p>
+      
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-active">Contact Us</span>
+      </nav>
+    </div>
+
+    <!-- SVG Curved wave bottom divider -->
+    <div class="wave-divider">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1130.5,120,1059.57,112.5,985.66,92.83Z" class="shape-fill"></path>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 2 – CONTACT INFORMATION
+     ========================================== -->
+  <section class="info-section section-padding">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Direct Lines</span>
+        <h2 class="section-title">Asymmetrical Communications</h2>
+        <p class="section-subtitle">Reach our specific business teams directly through our secure channels.</p>
+      </div>
+
+      <div class="asym-info-grid">
+        <!-- Address Block (Large) -->
+        <div class="info-block card-large glass-panel">
+          <div class="info-card-header">
+            <span class="info-card-tag">Corporate Headquarters</span>
+            <div class="info-icon-badge">
+              <i data-lucide="building"></i>
+            </div>
+          </div>
+          <div>
+            <h3 class="info-card-title">LIGNUM Design Lab</h3>
+            <p class="info-card-desc">Our master creative offices and flagship studio reside in the heart of Manhattan's premier architectural gallery corridor.</p>
+            <div class="info-links-list">
+              <div class="info-link-item">
+                <i data-lucide="map-pin"></i>
+                <span>5th Avenue, Design District, New York, NY 10011</span>
+              </div>
+              <div class="info-link-item">
+                <i data-lucide="phone-call"></i>
+                <span>+1 (212) 555-0190</span>
+              </div>
+            </div>
+          </div>
+          <!-- Decorative storefront image to fill the bottom height beautifully and avoid empty spaces -->
+          <div class="info-card-footer-image" style="margin-top: auto; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 16/9; width: 100%; border: 1px solid var(--border);">
+            <img src="images/store_ny.jpg" alt="New York Showroom Interior" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85; filter: grayscale(20%);">
+          </div>
+        </div>
+
+        <!-- Phone Block (Medium) -->
+        <div class="info-block card-phone glass-panel">
+          <div class="info-card-header">
+            <span class="info-card-tag">Concierge Hotlines</span>
+            <div class="info-icon-badge">
+              <i data-lucide="phone"></i>
+            </div>
+          </div>
+          <div>
+            <h3 class="info-card-title">Call Our Desks</h3>
+            <p class="info-card-desc">Call us for order tracking, local showroom directions, or technical wood specifications.</p>
+            <div class="info-links-list">
+              <a href="tel:+12125550190" class="info-link-item">
+                <i data-lucide="chevron-right"></i>
+                <span>Main Office: +1 (212) 555-0190</span>
+              </a>
+              <a href="tel:+12125550195" class="info-link-item">
+                <i data-lucide="chevron-right"></i>
+                <span>Press Desk: +1 (212) 555-0195</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email Block (Medium) -->
+        <div class="info-block card-email glass-panel">
+          <div class="info-card-header">
+            <span class="info-card-tag">Digital Despatch</span>
+            <div class="info-icon-badge">
+              <i data-lucide="mail"></i>
+            </div>
+          </div>
+          <div>
+            <h3 class="info-card-title">Send Emails</h3>
+            <p class="info-card-desc">Drop us a line and receive a comprehensive reply from our design coordinators within 24 hours.</p>
+            <div class="info-links-list">
+              <a href="mailto:concierge@lignum.design" class="info-link-item">
+                <i data-lucide="chevron-right"></i>
+                <span>concierge@lignum.design</span>
+              </a>
+              <a href="mailto:trade@lignum.design" class="info-link-item">
+                <i data-lucide="chevron-right"></i>
+                <span>trade@lignum.design</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hours Block (Wide) -->
+        <div class="info-block card-hours glass-panel" style="gap: 16px;">
+          <div class="info-card-header" style="margin-bottom: 0;">
+            <span class="info-card-tag">Showroom availability</span>
+            <div class="info-icon-badge">
+              <i data-lucide="clock"></i>
+            </div>
+          </div>
+          <div class="hours-card-split">
+            <!-- Left Column: Title & Description -->
+            <div class="hours-split-left">
+              <h3 class="info-card-title" style="margin-bottom: 12px;">Operating Schedules</h3>
+              <p class="info-card-desc" style="margin-bottom: 0; max-width: 500px;">Come experience our high-end, hand-finished Scandinavian collections in person. Walk-ins are always welcome, or you can coordinate a private walkthrough session with our design desk curators.</p>
+            </div>
+            <!-- Right Column: Clean aligned table -->
+            <div class="hours-split-right">
+              <div class="hours-table" style="margin-top: 0;">
+                <div class="hours-row">
+                  <span class="hours-day">Monday - Friday</span>
+                  <span class="hours-time">09:00 AM - 08:00 PM</span>
+                </div>
+                <div class="hours-row">
+                  <span class="hours-day">Saturday</span>
+                  <span class="hours-time">10:00 AM - 06:00 PM</span>
+                </div>
+                <div class="hours-row">
+                  <span class="hours-day">Sunday</span>
+                  <span class="hours-time highlight">11:00 AM - 05:00 PM (Manhattan Flagship)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 3 – CONTACT FORM
+     ========================================== -->
+  <section class="form-section section-padding">
+    <div class="container">
+      <div class="split-form-wrapper">
+        <!-- Left Side: Custom Input Form -->
+        <div class="form-left-panel">
+          <span class="section-tag">Enquiry Portal</span>
+          <h2 class="section-title">Draft a Design Message</h2>
+          <p>Share details about your upcoming apartment renovation or custom joinery projects. Our master curators will analyze your query.</p>
+
+          <form class="floating-form" onsubmit="event.preventDefault(); alert('Message dispatched! A designer will contact you shortly.'); this.reset();">
+            <div class="input-field-group">
+              <input type="text" id="contact-name" placeholder=" " required class="floating-input">
+              <label for="contact-name" class="field-label">Full Name *</label>
+              <div class="input-focus-line"></div>
+            </div>
+
+            <div class="input-field-group">
+              <input type="email" id="contact-email" placeholder=" " required class="floating-input">
+              <label for="contact-email" class="field-label">Email Address *</label>
+              <div class="input-focus-line"></div>
+            </div>
+
+            <div class="input-field-group">
+              <input type="tel" id="contact-phone" placeholder=" " required class="floating-input">
+              <label for="contact-phone" class="field-label">Phone Number *</label>
+              <div class="input-focus-line"></div>
+            </div>
+
+            <div class="input-field-group">
+              <input type="text" id="contact-subject" placeholder=" " required class="floating-input">
+              <label for="contact-subject" class="field-label">Subject of Inquiry *</label>
+              <div class="input-focus-line"></div>
+            </div>
+
+            <div class="input-field-group">
+              <textarea id="contact-message" placeholder=" " required class="floating-input floating-textarea"></textarea>
+              <label for="contact-message" class="field-label">Your Spatial Vision / Notes *</label>
+              <div class="input-focus-line"></div>
+            </div>
+
+            <button type="submit" class="form-submit-btn">
+              <span>Send Message</span>
+              <i data-lucide="send"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- Right Side: Showroom Image Frame & Quote Badge -->
+        <div class="form-right-panel">
+          <div class="decor-outline-box"></div>
+          <div class="glow-orb-center"></div>
+          
+          <div class="portrait-image-frame">
+            <img src="images/contact_form_luxury.jpg" alt="Minimalist LIGNUM armchair setup">
+          </div>
+
+          <div class="glass-panel floating-quote-badge">
+            <p class="quote-badge-text">"Details are not simply decoration. They represent the structural essence that anchors visual balance in a room."</p>
+            <span class="quote-badge-author">— LIGNUM Studio Denmark</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 4 – STORE LOCATIONS
+     ========================================== -->
+  <section class="storefronts-section section-padding">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Global Ateliers</span>
+        <h2 class="section-title">Explore Storefront Galleries</h2>
+        <p class="section-subtitle">Stunning staggered display showcases in key fashion capital design corridors.</p>
+      </div>
+
+      <div class="staggered-locations-grid">
+        <!-- Milan Showroom -->
+        <article class="staggered-card">
+          <div class="stagger-img-frame">
+            <img src="images/storefront_milan.jpg" alt="LIGNUM Milan Design Storefront">
+            <div class="stagger-card-mask">
+              <div class="mask-action-label">Explore Milan Showroom</div>
+            </div>
+          </div>
+          <div class="stagger-card-body">
+            <h3 class="stagger-card-title">Milan Brera Gallery</h3>
+            <div class="stagger-card-rows">
+              <div class="stagger-row-item">
+                <i data-lucide="map-pin"></i>
+                <span>Via dell'Orso, Brera District, Milan 20121</span>
+              </div>
+              <div class="stagger-row-item">
+                <i data-lucide="phone"></i>
+                <span>+39 (02) 555-0391</span>
+              </div>
+              <div class="stagger-row-item">
+                <i data-lucide="clock"></i>
+                <span>Mon - Sat: 10:00 AM - 07:00 PM</span>
+              </div>
+            </div>
+            <button class="stagger-directions-btn" onclick="alert('Milan route synced to map navigator!');">
+              <span>Get Directions</span>
+              <i data-lucide="compass"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Paris Showroom -->
+        <article class="staggered-card">
+          <div class="stagger-img-frame">
+            <img src="images/storefront_paris.jpg" alt="LIGNUM Paris Design Storefront">
+            <div class="stagger-card-mask">
+              <div class="mask-action-label">Explore Paris Showroom</div>
+            </div>
+          </div>
+          <div class="stagger-card-body">
+            <h3 class="stagger-card-title">Paris Marais Atelier</h3>
+            <div class="stagger-card-rows">
+              <div class="stagger-row-item">
+                <i data-lucide="map-pin"></i>
+                <span>Rue de Turenne, Le Marais, Paris 75003</span>
+              </div>
+              <div class="stagger-row-item">
+                <i data-lucide="phone"></i>
+                <span>+33 (1) 42 77 55 90</span>
+              </div>
+              <div class="stagger-row-item">
+                <i data-lucide="clock"></i>
+                <span>Mon - Sat: 10:00 AM - 07:00 PM</span>
+              </div>
+            </div>
+            <button class="stagger-directions-btn" onclick="alert('Paris route synced to map navigator!');">
+              <span>Get Directions</span>
+              <i data-lucide="compass"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Los Angeles Showroom -->
+        <article class="staggered-card">
+          <div class="stagger-img-frame">
+            <img src="images/storefront_la.jpg" alt="LIGNUM Los Angeles Design Storefront">
+            <div class="stagger-card-mask">
+              <div class="mask-action-label">Explore LA Showroom</div>
+            </div>
+          </div>
+          <div class="stagger-card-body">
+            <h3 class="stagger-card-title">Los Angeles Studio</h3>
+            <div class="stagger-card-rows">
+              <div class="stagger-row-item">
+                <i data-lucide="map-pin"></i>
+                <span>Melrose Avenue, West Hollywood, CA 90069</span>
+              </div>
+              <div class="stagger-row-item">
+                <i data-lucide="phone"></i>
+                <span>+1 (310) 555-0142</span>
+              </div>
+              <div class="stagger-row-item">
+                <i data-lucide="clock"></i>
+                <span>Mon - Sat: 09:00 AM - 06:00 PM</span>
+              </div>
+            </div>
+            <button class="stagger-directions-btn" onclick="alert('Los Angeles route synced to map navigator!');">
+              <span>Get Directions</span>
+              <i data-lucide="compass"></i>
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 5 – APPOINTMENT BOOKING
+     ========================================== -->
+  <section class="appointment-section section-padding">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Exclusive Access</span>
+        <h2 class="section-title">Schedule private walkthrough</h2>
+        <p class="section-subtitle">Avoid public hours and coordinate a private walkthrough session with our gallery directors.</p>
+      </div>
+
+      <div class="glass-panel booking-glass-board">
+        <!-- Left Side: Interactive Calendar -->
+        <div class="booking-left-side">
+          <h3>Select Preferred Date</h3>
+          <p>Please select a date on the calendar. Only dates with solid borders represent open reservation windows.</p>
+          
+          <div class="calendar-container">
+            <div class="calendar-header-bar">
+              <span class="calendar-title-text" id="book-cal-title">July 2026</span>
+              <div class="calendar-nav-row">
+                <button class="cal-arrow-btn" onclick="adjustBookingMonth(-1)" aria-label="Previous Month">
+                  <i data-lucide="chevron-left"></i>
+                </button>
+                <button class="cal-arrow-btn" onclick="adjustBookingMonth(1)" aria-label="Next Month">
+                  <i data-lucide="chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="calendar-days-grid">
+              <div class="calendar-day-label">Su</div>
+              <div class="calendar-day-label">Mo</div>
+              <div class="calendar-day-label">Tu</div>
+              <div class="calendar-day-label">We</div>
+              <div class="calendar-day-label">Th</div>
+              <div class="calendar-day-label">Fr</div>
+              <div class="calendar-day-label">Sa</div>
+            </div>
+            <div class="calendar-days-grid" id="book-days-grid">
+              <!-- Dynamically Populated Days -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Booking Parameters & Slots -->
+        <div class="booking-right-side">
+          <div class="booking-inputs-panel">
+            <div>
+              <span class="booking-group-title">Available Hours</span>
+              <div class="time-slot-grid">
+                <button class="slot-btn" onclick="setBookingSlot(this, '10:00 AM')">10:00 AM</button>
+                <button class="slot-btn" onclick="setBookingSlot(this, '12:00 PM')">12:00 PM</button>
+                <button class="slot-btn" onclick="setBookingSlot(this, '02:00 PM')">02:00 PM</button>
+                <button class="slot-btn" onclick="setBookingSlot(this, '04:00 PM')">04:00 PM</button>
+              </div>
+            </div>
+
+            <div class="form-row-selects">
+              <div class="form-group">
+                <label class="form-label" style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase;" for="visit-type">Visit Type</label>
+                <select id="visit-type" class="form-select" style="margin-top:6px; background-color: var(--bg-body);" onchange="updateBookingUI()">
+                  <option value="Bespoke Consultation">Bespoke Consultation</option>
+                  <option value="General Gallery Tour">General Gallery Tour</option>
+                  <option value="Trade Order Planning">Trade Order Planning</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase;" for="visitors-count">Guests</label>
+                <select id="visitors-count" class="form-select" style="margin-top:6px; background-color: var(--bg-body);" onchange="updateBookingUI()">
+                  <option value="1 Visitor">1 Visitor</option>
+                  <option value="2 Visitors">2 Visitors</option>
+                  <option value="3+ Visitors">3+ Group</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="booking-final-summary">
+            <div class="summary-infobox">
+              <i data-lucide="check-circle-2"></i>
+              <span class="summary-text" id="booking-badge-text">Select a date and time slot.</span>
+            </div>
+            <button class="book-action-btn" onclick="confirmConsultBooking()">
+              Book Showroom Walkthrough
+            </button>
+
+            <!-- Pre-visit guidelines to fill the height beautifully and avoid empty spaces -->
+            <div class="booking-guidelines" style="margin-top: 24px; border-top: 1px dashed var(--border); padding-top: 20px;">
+              <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 1.5px; display: block; margin-bottom: 12px;">Pre-Visit Guidelines</span>
+              <ul style="display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; color: var(--text-muted); padding: 0; margin: 0; list-style: none;">
+                <li style="display: flex; align-items: flex-start; gap: 8px;">
+                  <i data-lucide="clock" style="width: 14px; height: 14px; color: var(--primary); flex-shrink: 0; margin-top: 3px;"></i>
+                  <span>Standard consultations are 45 minutes in duration.</span>
+                </li>
+                <li style="display: flex; align-items: flex-start; gap: 8px;">
+                  <i data-lucide="file-text" style="width: 14px; height: 14px; color: var(--primary); flex-shrink: 0; margin-top: 3px;"></i>
+                  <span>Feel free to bring room dimensions or material samples.</span>
+                </li>
+                <li style="display: flex; align-items: flex-start; gap: 8px;">
+                  <i data-lucide="check-circle" style="width: 14px; height: 14px; color: var(--primary); flex-shrink: 0; margin-top: 3px;"></i>
+                  <span>Complimentary valet parking validation is provided.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 6 – FREQUENTLY ASKED QUESTIONS
+     ========================================== -->
+  <section class="faq-section section-padding">
+    <div class="container">
+      <div class="faq-header">
+        <span class="section-tag">Help Desk</span>
+        <h2 class="section-title">Clarify Design Details</h2>
+        <p class="section-subtitle">Browse frequently discussed spatial questions or filter them in real-time below.</p>
+      </div>
+
+      <!-- FAQ Search bar -->
+      <div class="faq-search-wrapper">
+        <i data-lucide="search" class="faq-search-icon"></i>
+        <input type="text" id="faq-search" class="faq-search-input" placeholder="Search answers (e.g. warranty, wood, care)..." oninput="filterFAQs(this.value)">
+      </div>
+
+      <!-- Accordion Grid -->
+      <div class="faq-accordion-list" id="faq-accordion-list">
+        <!-- FAQ 1 -->
+        <article class="faq-item" data-keywords="shipping delivery timeline international">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>Do you offer global logistics and shipping?</span>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="faq-panel">
+            <div class="faq-panel-content">
+              Yes, LIGNUM arranges insured global freight deliveries to destinations across Europe, North America, and parts of Asia. All solid timber articles are packed in custom wooden crates to insulate items from transit shocks and humidity shifts.
+            </div>
+          </div>
+        </article>
+
+        <!-- FAQ 2 -->
+        <article class="faq-item" data-keywords="warranty wood timber quality duration">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>What is LIGNUM's warranty policy on woodwork?</span>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="faq-panel">
+            <div class="faq-panel-content">
+              Every solid ash and Baltic oak furniture piece carries a structural warranty of 10 years. This covers mortise and tenon joinery stability and wood structural warping, provided standard care guidelines are adhered to.
+            </div>
+          </div>
+        </article>
+
+        <!-- FAQ 3 -->
+        <article class="faq-item" data-keywords="custom customization size dimensions upholstery fabrics">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>Can I customize catalog sizes or specify custom fabrics?</span>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="faq-panel">
+            <div class="faq-panel-content">
+              Yes. Through our Bespoke Design service, clients can adjust table lengths, cabinet widths, and select from over 40 upholstery fabric grades. Share your apartment blueprints with our design team for an accurate dimensional mock-up.
+            </div>
+          </div>
+        </article>
+
+        <!-- FAQ 4 -->
+        <article class="faq-item" data-keywords="care oil finish wood wax maintenance">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>How do I maintain hand-oiled organic finishes?</span>
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="faq-panel">
+            <div class="faq-panel-content">
+              We recommend re-applying wood wax oils once every six months to sustain organic elasticity. Wipe surfaces with a lint-free damp cloth, avoid harsh chemical detergents, and place items away from direct ventilation ducts.
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Support bar widget -->
+      <div class="glass-panel faq-support-bar">
+        <div class="support-bar-text">
+          <h4>Have a unique design question?</h4>
+          <p>Contact our custom design desk and discuss bespoke blueprints with our joiners.</p>
+        </div>
+        <button class="support-bar-btn" onclick="alert('Connecting to chat support (mock)...');">Connect to Support</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     SECTION 7 – GOOGLE MAP & CTA
+     ========================================== -->
+  <section class="map-cta-section" id="interactive-map">
+    <div class="map-wrapper-card">
+      <!-- Left side: Map View -->
+      <div class="google-map-iframe-container">
+        <!-- Mock Map iframe or placeholder -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.4282381283624!2d-73.99676768459385!3d40.75129697932765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259ae15b2cfc1%3A0xc367685e6ef2a544!2s5th%20Ave%2C%20New%20York%2C%20NY%2010011!5e0!3m2!1sen!2sus!4v1658428282319!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <!-- Right side: Map Overlay & Actions -->
+      <div class="map-overlay-card">
+        <div class="overlay-header">
+          <span class="info-card-tag" style="font-size: 11px;">Primary Showroom</span>
+          <h3>LIGNUM Fifth Ave</h3>
+          <p>Step inside our physical display rooms to experience Japanese-Scandinavian spatial harmony.</p>
+        </div>
+
+        <div class="overlay-details-list">
+          <div class="overlay-detail-item">
+            <i data-lucide="map-pin"></i>
+            <span>5th Ave, Manhattan Design District, New York, NY 10011</span>
+          </div>
+          <div class="overlay-detail-item">
+            <i data-lucide="clock"></i>
+            <span>Mon - Sat: 09:00 AM - 08:00 PM • Sun: 11:00 AM - 05:00 PM</span>
+          </div>
+        </div>
+
+        <div class="overlay-actions-row">
+          <a href="schedule.html" class="map-action-primary">Schedule Showroom Walkthrough</a>
+          <a href="tel:+12125550190" class="map-action-secondary">Call Concierge Desk Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+     PREMIUM MULTI-COLUMN FOOTER
+     ========================================== -->
+  <footer class="main-footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Column 1: Brand & Socials -->
+        <div class="footer-col">
+          <div class="footer-brand">
+            <i data-lucide="sofa" class="logo-icon"></i>
+            <span>LIGNUM</span>
+          </div>
+          <p class="footer-desc">Crafting premium Scandinavian and minimalist designer furniture. Elevate your living room, study, or bedroom spaces with tailored woodwork.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-icon" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" class="social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a href="#" class="social-icon" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="footer-col">
+          <h4 class="footer-title">Shop Collection</h4>
+          <ul class="footer-links">
+            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Living Room</span></a></li>
+            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Lounge Chairs</span></a></li>
+            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Dining Room</span></a></li>
+            <li><a href="customization.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Custom Projects</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Company info -->
+        <div class="footer-col">
+          <h4 class="footer-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>About LIGNUM</span></a></li>
+            <li><a href="schedule.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Private Showrooms</span></a></li>
+            <li><a href="schedule.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Book Designer Consult</span></a></li>
+            <li><a href="about.html#sustainability"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Sustainability</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Detailed Contact Info -->
+        <div class="footer-col">
+          <h4 class="footer-title">Contact Us</h4>
+          <div class="footer-links" style="gap: 16px;">
+            <div class="footer-contact-item">
+              <i data-lucide="map-pin"></i>
+              <span>5th Avenue, Design District,<br>New York, NY 10011</span>
+            </div>
+            <div class="footer-contact-item">
+              <i data-lucide="mail"></i>
+              <span>concierge@lignum.design</span>
+            </div>
+            <div class="footer-contact-item">
+              <i data-lucide="phone"></i>
+              <span>+1 (212) 555-0190</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Row -->
+      <div class="footer-bottom">
+        <p>© 2026 LIGNUM Luxury Furniture Co. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Help Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ==========================================
+     JAVASCRIPT LOGIC
+     ========================================== -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Highlight Active Navbar Link
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Clean up any hardcoded active classes
+    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    
+    let matched = false;
+    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPath) {
+        link.classList.add('active');
+        matched = true;
+      }
+    });
+    
+    if (!matched || currentPath === 'index.html' || currentPath === 'home2.html') {
+      document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === '#' || href === 'index.html' || href === 'home2.html') {
+          if (link.textContent.trim().startsWith('Home') || href === 'index.html' || href === 'home2.html') {
+            link.classList.add('active');
+          }
+        }
+      });
+    }
+
+    // Elements Selectors
+    const header = document.getElementById('navbar-header');
+    
+    // Theme Toggles
+    const themeBtn = document.getElementById('darkModeToggle');
+    const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+    
+    // RTL Toggles
+    const rtlBtn = document.getElementById('rtlToggleBtn');
+    const mobileRtlBtn = document.getElementById('mobile-rtl-toggle');
+    
+    // Mobile Drawer
+    const hamburgerBtn = document.getElementById('hamburger-menu-btn');
+    const mobileDrawer = document.getElementById('mobile-sidebar-drawer');
+    const drawerBackdrop = document.getElementById('drawer-backdrop');
+    const mobileCloseTriggers = document.querySelectorAll('.mobile-drawer-close-trigger');
+    const mobileHomeDropdown = document.getElementById('mobile-home-dropdown');
+    
+    // Login Modal
+    const navLoginBtn = document.getElementById('nav-login-btn');
+    const mobileLoginBtn = document.getElementById('mobile-login-btn');
+    const loginModalOverlay = document.getElementById('login-modal-overlay');
+    const loginModalCloseBtn = document.getElementById('login-modal-close-btn');
+
+    /* ==========================================
+       SCROLL NAVBAR ANIMATION
+       ========================================== */
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    /* ==========================================
+       DARK MODE IMPLEMENTATION
+       ========================================== */
+    const initTheme = () => {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+    initTheme();
+
+    const toggleTheme = () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    };
+
+    themeBtn.addEventListener('click', toggleTheme);
+    mobileThemeBtn.addEventListener('click', () => {
+      toggleTheme();
+      toggleMobileDrawer();
+    });
+
+    /* ==========================================
+       RTL (RIGHT-TO-LEFT) IMPLEMENTATION
+       ========================================== */
+    const applyRtl = (isRtl) => {
+      if (isRtl) {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+        localStorage.setItem('rtl', 'true');
+        const badge = document.querySelector('.rtl-text');
+        if (badge) badge.textContent = 'LTR';
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', 'en');
+        localStorage.setItem('rtl', 'false');
+        const badge = document.querySelector('.rtl-text');
+        if (badge) badge.textContent = 'RTL';
+      }
+      lucide.createIcons();
+    };
+
+    const initRtl = () => {
+      const savedRtl = localStorage.getItem('rtl') === 'true';
+      applyRtl(savedRtl);
+    };
+    initRtl();
+
+    rtlBtn.addEventListener('click', () => {
+      const currentRtl = document.documentElement.getAttribute('dir') === 'rtl';
+      applyRtl(!currentRtl);
+    });
+
+    mobileRtlBtn.addEventListener('click', () => {
+      const currentRtl = document.documentElement.getAttribute('dir') === 'rtl';
+      applyRtl(!currentRtl);
+      toggleMobileDrawer();
+    });
+
+    /* ==========================================
+       MOBILE DRAWER IMPLEMENTATION
+       ========================================== */
+    const toggleMobileDrawer = () => {
+      const isOpen = mobileDrawer.classList.toggle('open');
+      drawerBackdrop.classList.toggle('open');
+      hamburgerBtn.classList.toggle('active');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
+
+    hamburgerBtn.addEventListener('click', toggleMobileDrawer);
+    drawerBackdrop.addEventListener('click', toggleMobileDrawer);
+
+    // Mobile home accordion click
+    mobileHomeDropdown.querySelector('.mobile-dropdown-header').addEventListener('click', () => {
+      mobileHomeDropdown.classList.toggle('active');
+    });
+
+    // Close mobile drawer when clicking anchors
+    mobileCloseTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        if (mobileDrawer.classList.contains('open')) {
+          toggleMobileDrawer();
+        }
+      });
+    });
+
+    /* ==========================================
+       LOGIN MODAL IMPLEMENTATION
+       ========================================== */
+    const openLogin = () => {
+      loginModalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeLogin = () => {
+      loginModalOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    if (navLoginBtn) navLoginBtn.addEventListener('click', openLogin);
+    if (mobileLoginBtn) {
+      mobileLoginBtn.addEventListener('click', () => {
+        toggleMobileDrawer(); // Close mobile drawer
+        openLogin();
+      });
+    }
+    loginModalCloseBtn.addEventListener('click', closeLogin);
+
+    loginModalOverlay.addEventListener('click', (e) => {
+      if (e.target === loginModalOverlay) {
+        closeLogin();
+      }
+    });
+
+    // Close modal on ESC key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLogin();
+      }
+    });
+
+
+    /* ==========================================
+       SECTION 5 – APPOINTMENT CALENDAR CODE
+       ========================================== */
+    let currentBookMonth = new Date().getMonth();
+    let currentBookYear = new Date().getFullYear();
+    let selectedBookDate = null;
+    let selectedBookSlot = '';
+
+    const calMonthNames = [
+      "January", "February", "March", "April", "May", "June", 
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    function renderBookingCalendar(month, year) {
+      const grid = document.getElementById('book-days-grid');
+      grid.innerHTML = '';
+
+      document.getElementById('book-cal-title').textContent = `${calMonthNames[month]} ${year}`;
+
+      const startDayIndex = new Date(year, month, 1).getDay();
+      const lastDay = new Date(year, month + 1, 0).getDate();
+      const today = new Date();
+
+      // Empty grids
+      for (let i = 0; i < startDayIndex; i++) {
+        const empty = document.createElement('div');
+        grid.appendChild(empty);
+      }
+
+      for (let dayNum = 1; dayNum <= lastDay; dayNum++) {
+        const cell = document.createElement('button');
+        cell.className = 'calendar-day-btn';
+        cell.textContent = dayNum;
+
+        const dateObj = new Date(year, month, dayNum);
+
+        if (dateObj.toDateString() === today.toDateString()) {
+          cell.classList.add('today');
+        }
+
+        if (dateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
+          cell.classList.add('disabled');
+        } else {
+          if (selectedBookDate && dateObj.toDateString() === selectedBookDate.toDateString()) {
+            cell.classList.add('active');
+          }
+
+          cell.addEventListener('click', () => {
+            selectedBookDate = dateObj;
+            document.querySelectorAll('.calendar-day-btn').forEach(btn => btn.classList.remove('active'));
+            cell.classList.add('active');
+            updateBookingUI();
+          });
+        }
+        grid.appendChild(cell);
+      }
+    }
+
+    function adjustBookingMonth(dir) {
+      currentBookMonth += dir;
+      if (currentBookMonth < 0) {
+        currentBookMonth = 11;
+        currentBookYear -= 1;
+      } else if (currentBookMonth > 11) {
+        currentBookMonth = 0;
+        currentBookYear += 1;
+      }
+      renderBookingCalendar(currentBookMonth, currentBookYear);
+    }
+
+    function setBookingSlot(button, time) {
+      selectedBookSlot = time;
+      document.querySelectorAll('.slot-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      updateBookingUI();
+    }
+
+    function updateBookingUI() {
+      const summaryText = document.getElementById('booking-badge-text');
+      const visitType = document.getElementById('visit-type').value;
+      const guests = document.getElementById('visitors-count').value;
+
+      if (!selectedBookDate) {
+        summaryText.textContent = "Select a date and time slot.";
+      } else {
+        const dateStr = selectedBookDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        if (!selectedBookSlot) {
+          summaryText.textContent = `${dateStr} | Select a time slot`;
+        } else {
+          summaryText.textContent = `${dateStr} at ${selectedBookSlot} • ${visitType} for ${guests}`;
+        }
+      }
+    }
+
+    function confirmConsultBooking() {
+      if (!selectedBookDate) {
+        alert("Please select a date on the calendar first.");
+        return;
+      }
+      if (!selectedBookSlot) {
+        alert("Please select a time slot.");
+        return;
+      }
+      
+      const dateStr = selectedBookDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      alert(`Walkthrough booked successfully for ${dateStr} at ${selectedBookSlot}!\nA verification pin has been sent to your primary device.`);
+      
+      // Reset State
+      selectedBookDate = null;
+      selectedBookSlot = '';
+      document.querySelectorAll('.slot-btn').forEach(btn => btn.classList.remove('active'));
+      renderBookingCalendar(currentBookMonth, currentBookYear);
+      updateBookingUI();
+    }
+
+    renderBookingCalendar(currentBookMonth, currentBookYear);
+
+
+    /* ==========================================
+       SECTION 6 – FAQ ACCORDION CODE
+       ========================================== */
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      const panel = button.nextElementSibling;
+      const isActive = item.classList.contains('active');
+
+      document.querySelectorAll('.faq-item').forEach(faq => {
+        faq.classList.remove('active');
+        faq.querySelector('.faq-panel').style.maxHeight = null;
+        faq.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isActive) {
+        item.classList.add('active');
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        button.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    function filterFAQs(query) {
+      const lowerQuery = query.toLowerCase().trim();
+      const faqItems = document.querySelectorAll('.faq-item');
+
+      faqItems.forEach(item => {
+        const keywords = item.getAttribute('data-keywords').toLowerCase();
+        const text = item.textContent.toLowerCase();
+
+        if (text.includes(lowerQuery) || keywords.includes(lowerQuery)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

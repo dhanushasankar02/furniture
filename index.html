@@ -1,0 +1,3669 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIGNUM - Luxury Modern Furniture</title>
+  
+  <!-- Google Fonts: Outfit (English) & Tajawal (Arabic/RTL) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+/* ==========================================
+       1. DESIGN SYSTEM & VARIABLES
+       ========================================== */
+    :root {
+      /* Terracotta & Teak Wood Light Theme Palette */
+      --primary: #ab5c3c;       /* Warm Terracotta */
+      --primary-hover: #944d30;
+      --primary-glow: rgba(171, 92, 60, 0.15);
+      
+      --bg-body: #fafaf9;        /* Warm Linen 50 */
+      --bg-surface: #ffffff;
+      --bg-navbar: rgba(250, 250, 249, 0.85);
+      --bg-card: #ffffff;
+      --bg-input: #f5f5f4;       /* Stone 100 */
+      --bg-hover: #f5f5f4;
+      
+      --text-main: #1c1917;      /* Stone 900 */
+      --text-muted: #44403c;     /* Stone 500 */
+      --text-inverse: #ffffff;
+      
+      --border: #e7e5e4;         /* Stone 200 */
+      --border-focus: #d6d3d1;   /* Stone 300 */
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 15px -3px rgba(171, 92, 60, 0.04), 0 4px 6px -4px rgba(171, 92, 60, 0.04);
+      --shadow-lg: 0 20px 25px -5px rgba(171, 92, 60, 0.06), 0 8px 10px -6px rgba(171, 92, 60, 0.06);
+      
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      
+      --font-sans: 'Outfit', sans-serif;
+      --backdrop-blur: 16px;
+      --nav-height: 80px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Mode Theme Palette (Walnut & Amber Glow) */
+    .dark {
+      --bg-body: #12100f;        /* Deep Walnut 950 */
+      --bg-surface: #1c1917;     /* Stone 900 */
+      --bg-navbar: rgba(18, 16, 15, 0.85);
+      --bg-card: #292524;        /* Stone 800 */
+      --bg-input: #292524;
+      --bg-hover: #292524;
+      
+      --text-main: #f5f5f4;      /* Stone 100 */
+      --text-muted: #a8a29e;     /* Stone 400 */
+      --text-inverse: #12100f;
+      
+      --border: #292524;
+      --border-focus: #44403c;
+      
+      --primary: #f59e0b;        /* Amber Gold Glow */
+      --primary-hover: #d97706;
+      --primary-glow: rgba(245, 158, 11, 0.15);
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* RTL Font Override */
+    [dir="rtl"] {
+      --font-sans: 'Tajawal', sans-serif;
+    }
+
+    /* ==========================================
+       2. GENERAL STYLES & RESET
+       ========================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    *::-webkit-scrollbar {
+      width: 6px;
+    }
+    *::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    *::-webkit-scrollbar-thumb {
+      background-color: var(--border);
+      border-radius: var(--radius-full);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      overflow-x: hidden;
+      transition: var(--transition);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      border: none;
+      background: none;
+      outline: none;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-padding {
+      padding: 100px 0;
+    }
+
+    @media (max-width: 768px) {
+      .section-padding {
+        padding: 60px 0;
+      }
+    }
+
+    /* ==========================================
+       3. NAVIGATION BAR (ONE-LINE LAYOUT)
+       ========================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      z-index: 1000;
+      background-color: var(--bg-navbar);
+      backdrop-filter: blur(var(--backdrop-blur));
+      -webkit-backdrop-filter: blur(var(--backdrop-blur));
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .header.scrolled {
+      height: 70px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      color: var(--primary);
+      width: 26px;
+      height: 26px;
+      transition: var(--transition);
+    }
+
+    /* Desktop Navigation Links */
+    .desktop-nav {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      gap: 4px;
+    }
+
+    .nav-links > li {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .nav-link {
+      padding: 0 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+    }
+
+    .nav-link:hover,
+    .nav-links > li:hover > .nav-link,
+    .nav-link.active {
+      color: var(--primary);
+    }
+
+    /* Bottom hover indicator line */
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 12px;
+      right: 12px;
+      height: 2.5px;
+      background-color: var(--primary);
+      border-radius: var(--radius-full) var(--radius-full) 0 0;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-links > li:hover > .nav-link::after,
+    .nav-link.active::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    [dir="rtl"] .nav-link:hover::after,
+    [dir="rtl"] .nav-links > li:hover > .nav-link::after,
+    [dir="rtl"] .nav-link.active::after {
+      transform-origin: bottom right;
+    }
+
+    /* Chevron rotation */
+    .dropdown-chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-links > li:hover .dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown submenu */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      width: 180px;
+      padding: 6px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 1010;
+    }
+
+    [dir="rtl"] .dropdown-menu {
+      left: auto;
+      right: 50%;
+      transform: translateX(50%) translateY(10px);
+    }
+
+    .nav-links > li:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    [dir="rtl"] .nav-links > li:hover .dropdown-menu {
+      transform: translateX(50%) translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 12px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+    }
+
+    .dropdown-menu a:hover {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+      padding-inline-start: 16px;
+    }
+
+    /* Header Actions Container */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .action-btn, .icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .action-btn:hover, .icon-btn:hover {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+      border-color: var(--border);
+    }
+
+    .action-btn svg, .action-btn i, .icon-btn i {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* RTL icon button custom spacing */
+    .rtl-toggle {
+      width: auto;
+      padding: 0 10px;
+      gap: 4px;
+    }
+
+    .rtl-text {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Active theme toggling icon visibility via CSS class */
+    .theme-toggle .icon-sun {
+      display: none;
+    }
+    .theme-toggle .icon-moon {
+      display: block;
+    }
+    .dark .theme-toggle .icon-sun {
+      display: block;
+    }
+    .dark .theme-toggle .icon-moon {
+      display: none;
+    }
+
+    /* Login CTA Button */
+    .login-btn {
+      background-color: var(--text-main);
+      color: var(--bg-surface);
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      padding: 9px 18px;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .login-btn:hover {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    /* Hamburger menu for responsive */
+    .hamburger-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 16px;
+      cursor: pointer;
+      z-index: 1050;
+      position: relative;
+    }
+
+    .hamburger-btn span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text-main);
+      border-radius: var(--radius-full);
+      transition: var(--transition);
+    }
+
+    .hamburger-btn.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger-btn.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ==========================================
+       4. MOBILE NAVIGATION DRAWER
+       ========================================== */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 300px;
+      max-width: 85%;
+      background-color: var(--bg-surface);
+      border-inline-start: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      z-index: 1040;
+      padding: 90px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      overflow-y: auto;
+      
+      inset-inline-end: 0;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [dir="rtl"] .mobile-drawer {
+      transform: translateX(-100%);
+    }
+
+    .mobile-drawer.open {
+      transform: translateX(0) !important;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(28, 25, 23, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1030;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mobile-link {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-link:hover,
+    .mobile-link.active {
+      color: var(--primary);
+    }
+
+    .mobile-dropdown-parent {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .mobile-dropdown-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .mobile-dropdown-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding-inline-start: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 0;
+    }
+
+    .mobile-dropdown-parent.active .mobile-dropdown-menu {
+      max-height: 120px;
+      margin-top: 8px;
+    }
+
+    .mobile-dropdown-parent.active .dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    .mobile-dropdown-menu a {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding: 6px 0;
+    }
+
+    .mobile-dropdown-menu a:hover {
+      color: var(--primary);
+    }
+
+    .mobile-drawer-bottom {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ==========================================
+       5. LOGIN MODAL OVERLAY
+       ========================================== */
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(28, 25, 23, 0.5);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .login-modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .login-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 400px;
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .login-modal.open .login-card {
+      transform: scale(1);
+    }
+
+    .login-card-close {
+      position: absolute;
+      top: 20px;
+      inset-inline-end: 20px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .login-card-close:hover {
+      color: var(--text-main);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .login-header h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 13.5px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .form-input {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 14.5px;
+      color: var(--text-main);
+      transition: var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .form-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13.5px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--text-muted);
+      user-select: none;
+    }
+
+    .forgot-pass {
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .forgot-pass:hover {
+      text-decoration: underline;
+    }
+
+    .submit-btn {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      padding: 12px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 14.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--primary-glow);
+      transition: var(--transition);
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================
+       6. HERO SECTION
+       ========================================== */
+    .hero-section {
+      position: relative;
+      height: 100vh;
+      min-height: 550px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url('images/hero.png') no-repeat center center/cover;
+      color: white;
+      padding-top: var(--nav-height);
+    }
+
+    .hero-content {
+      max-width: 600px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-tagline {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-title {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      margin-bottom: 30px;
+      color: #e7e5e4;
+    }
+
+    .hero-actions-btns {
+      display: flex;
+      gap: 12px;
+    }
+
+    .hero-btn-primary {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .hero-btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1.5px);
+    }
+
+    .hero-btn-secondary {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1.5px);
+    }
+
+/* ==========================================
+       FOOTER
+       ========================================== */
+    .main-footer {
+      background-color: #1c1917; /* Stone 900 */
+      color: #e7e5e4;            /* Stone 200 */
+      padding: 80px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 14.5px;
+      transition: var(--transition);
+    }
+
+    .dark .main-footer {
+      background-color: #0b0909; /* Walnut black */
+      border-top-color: rgba(255,255,255,0.03);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .footer-brand .logo-icon {
+      color: var(--primary);
+    }
+
+    .footer-desc {
+      color: #a8a29e; /* Stone 400 */
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      background-color: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d6d3d1;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .social-icon:hover {
+      background-color: var(--primary);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .footer-title {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #a8a29e;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+      padding-inline-start: 6px;
+    }
+
+    .footer-link-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--primary);
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover .footer-link-icon {
+      transform: translateX(4px);
+    }
+
+    [dir="rtl"] .footer-links a:hover .footer-link-icon {
+      transform: translateX(-4px) rotate(180deg);
+    }
+
+    [dir="rtl"] .footer-link-icon {
+      transform: rotate(180deg);
+    }
+
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #a8a29e;
+      line-height: 1.5;
+    }
+
+    .footer-contact-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #a8a29e;
+      font-size: 13.5px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a:hover {
+      color: #ffffff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1120px) {
+      .nav-link {
+        padding: 0 8px;
+        font-size: 13.5px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .desktop-nav {
+        display: none;
+      }
+      .hamburger-btn {
+        display: flex;
+      }
+      .logo {
+        font-size: 20px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+      .header-actions .rtl-toggle,
+      .header-actions .login-btn {
+        display: none; /* Hide RTL and login on standard mobile bar */
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ==========================================
+       SECTION 1: HERO SECTION (FULL SCREEN)
+       ========================================== */
+    .hero-section {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url('images/hero.png') no-repeat center center/cover;
+      color: white;
+      padding-top: var(--nav-height);
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 0 24px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-tagline {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-title {
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-size: 19px;
+      margin-bottom: 40px;
+      color: #e7e5e4;
+      max-width: 600px;
+      margin-inline: auto;
+    }
+
+    .hero-actions-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .hero-btn-primary {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+
+    .hero-btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .hero-btn-secondary {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, -10px); }
+      60% { transform: translate(-50%, -5px); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 40px;
+      }
+      .hero-desc {
+        font-size: 16px;
+      }
+    }
+
+    /* ==========================================
+       SECTION 2: ABOUT / BRAND CRAFTSMANSHIP
+       ========================================== */
+    .about-section {
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .about-text {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .feature-icon-wrapper {
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .feature-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Unified image wrappers to keep all layouts consistent */
+    .split-image-wrapper {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      aspect-ratio: 4/3;
+      width: 100%;
+    }
+
+    .split-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 992px) {
+      .split-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* ==========================================
+       SECTION 3: PRODUCTS SHOWCASE
+       ========================================== */
+    .products-section {
+      background-color: var(--bg-body);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 500px;
+      margin: 10px auto 0;
+    }
+
+    .grid-products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .product-img-wrapper {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background-color: var(--bg-hover);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .product-img {
+      transform: scale(1.05);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      inset-inline-start: 12px;
+      background-color: var(--text-main);
+      color: var(--bg-surface);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+    }
+
+    .product-content {
+      padding: 20px;
+    }
+
+    .product-category {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .product-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .product-price {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .add-to-cart-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-hover);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .add-to-cart-btn {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    /* ==========================================
+       SECTION 4: STYLED SPACES LOOKBOOK (SYMMETRICAL IMAGE SIZES)
+       ========================================== */
+    .lookbook-section {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lookbook-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* Symmetrical equal columns */
+      gap: 30px;
+    }
+
+    .look-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      aspect-ratio: 4/3; /* Uniform identical aspect ratio for all lookbook items */
+      width: 100%;
+    }
+
+    .look-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .look-card:hover .look-img {
+      transform: scale(1.03);
+    }
+
+    .look-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .look-card:hover .look-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%);
+    }
+
+    .look-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .look-desc {
+      font-size: 14px;
+      color: #d6d3d1;
+    }
+
+    @media (max-width: 992px) {
+      .lookbook-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ==========================================
+       SECTION 5: SPATIAL DESIGN CONSULTATION
+       ========================================== */
+    .design-section {
+      background-color: var(--bg-body);
+    }
+
+    .design-consult-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .consult-step-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: var(--transition);
+    }
+
+    .consult-step-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .consult-step-icon {
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .consult-step-heading {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .consult-step-body {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       SECTION 6: CUSTOMIZATION WORKSPACE (MATERIALS)
+       ========================================== */
+    .customization-section {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .materials-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .materials-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .materials-options {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 10px;
+    }
+
+    .option-group-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .swatch-list {
+      display: flex;
+      gap: 16px;
+    }
+
+    .swatch-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .swatch-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      border: 2px solid transparent;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .swatch-circle:hover,
+    .swatch-item.active .swatch-circle {
+      border-color: var(--primary);
+      transform: scale(1.08);
+    }
+
+    .swatch-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .swatch-item.active .swatch-name {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .oak-wood { background-color: #e5c39c; }
+    .walnut-wood { background-color: #4b382a; }
+    .boucle-fabric { background-color: #f1ebd9; }
+    .linen-fabric { background-color: #d1c7bd; }
+
+    @media (max-width: 992px) {
+      .materials-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* ==========================================
+       SECTION 7: MATERIAL CARE & MAINTENANCE
+       ========================================== */
+    .care-section {
+      background-color: var(--bg-body);
+    }
+
+    .care-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .care-step-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .care-step-number {
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      font-size: 16px;
+      font-weight: 800;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .care-step-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .care-step-desc {
+      font-size: 14.5px;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       SECTION 8: SHOWROOM STOREFRONT GALLERY
+       ========================================== */
+    .storefront-section {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .showroom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .showroom-grid .split-image-wrapper {
+      max-width: 530px;
+      aspect-ratio: 4/3;
+      margin: 0 auto;
+    }
+
+    .showroom-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .showroom-locations {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .location-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .location-card:hover,
+    .location-card.active {
+      border-color: var(--primary);
+      background-color: var(--bg-hover);
+    }
+
+    .location-name {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .location-info {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 992px) {
+      .showroom-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* ==========================================
+       SECTION 9: SCHEDULE A PRIVATE VISIT
+       ========================================== */
+    .schedule-section {
+      background-color: var(--bg-body);
+    }
+
+    .schedule-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .schedule-info {
+      padding: 60px;
+      background-color: var(--bg-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .schedule-info .section-title {
+      margin-bottom: 0px;
+    }
+
+    .schedule-form-side {
+      padding: 60px;
+      background-color: var(--bg-input);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .schedule-details-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .schedule-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .schedule-detail-item svg {
+      color: var(--primary);
+    }
+
+    @media (max-width: 992px) {
+      .schedule-card {
+        grid-template-columns: 1fr;
+      }
+      .schedule-info, .schedule-form-side {
+        padding: 40px 24px;
+      }
+    }
+
+    /* ==========================================
+       FOOTER
+       ========================================== */
+    .main-footer {
+      background-color: #1c1917; /* Stone 900 */
+      color: #e7e5e4;            /* Stone 200 */
+      padding: 80px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 14.5px;
+      transition: var(--transition);
+    }
+
+    .dark .main-footer {
+      background-color: #0b0909; /* Walnut black */
+      border-top-color: rgba(255,255,255,0.03);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .footer-brand .logo-icon {
+      color: var(--primary);
+    }
+
+    .footer-desc {
+      color: #a8a29e; /* Stone 400 */
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      background-color: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d6d3d1;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .social-icon:hover {
+      background-color: var(--primary);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .footer-title {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #a8a29e;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+      padding-inline-start: 6px;
+    }
+
+    .footer-link-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--primary);
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover .footer-link-icon {
+      transform: translateX(4px);
+    }
+
+    [dir="rtl"] .footer-links a:hover .footer-link-icon {
+      transform: translateX(-4px) rotate(180deg);
+    }
+
+    [dir="rtl"] .footer-link-icon {
+      transform: rotate(180deg);
+    }
+
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #a8a29e;
+      line-height: 1.5;
+    }
+
+    .footer-contact-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #a8a29e;
+      font-size: 13.5px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a:hover {
+      color: #ffffff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1120px) {
+      .nav-link {
+        padding: 0 8px;
+        font-size: 13.5px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .desktop-nav {
+        display: none;
+      }
+      .hamburger-btn {
+        display: flex;
+      }
+      .logo {
+        font-size: 20px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+      .header-actions .rtl-toggle,
+      .header-actions .login-btn {
+        display: none; /* Hide RTL and login on standard mobile bar */
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    
+/* ==========================================
+       SECTION 1: HERO SECTION (FULL SCREEN)
+       ========================================== */
+    .hero-section {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url('images/hero.png') no-repeat center center/cover;
+      color: white;
+      padding-top: var(--nav-height);
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 0 24px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-tagline {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-title {
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-size: 19px;
+      margin-bottom: 40px;
+      color: #e7e5e4;
+      max-width: 600px;
+      margin-inline: auto;
+    }
+
+    .hero-actions-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .hero-btn-primary {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+
+    .hero-btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .hero-btn-secondary {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, -10px); }
+      60% { transform: translate(-50%, -5px); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 40px;
+      }
+      .hero-desc {
+        font-size: 16px;
+      }
+    }
+
+    /* ==========================================
+       SECTION 2: ABOUT / BRAND CRAFTSMANSHIP
+       ========================================== */
+    .about-section {
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .about-text {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .feature-icon-wrapper {
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .feature-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Unified image wrappers to keep all layouts consistent */
+    .split-image-wrapper {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      aspect-ratio: 4/3;
+      width: 100%;
+    }
+
+    .split-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 992px) {
+      .split-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* ==========================================
+       SECTION 3: PRODUCTS SHOWCASE
+       ========================================== */
+    .products-section {
+      background-color: var(--bg-body);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 500px;
+      margin: 10px auto 0;
+    }
+
+    .grid-products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .product-img-wrapper {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background-color: var(--bg-hover);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .product-img {
+      transform: scale(1.05);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      inset-inline-start: 12px;
+      background-color: var(--text-main);
+      color: var(--bg-surface);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+    }
+
+    .product-content {
+      padding: 20px;
+    }
+
+    .product-category {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .product-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .product-price {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .add-to-cart-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-hover);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .add-to-cart-btn {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    /* ==========================================
+       SECTION 4: STYLED SPACES LOOKBOOK (SYMMETRICAL IMAGE SIZES)
+       ========================================== */
+    .lookbook-section {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lookbook-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* Symmetrical equal columns */
+      gap: 30px;
+    }
+
+    .look-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      aspect-ratio: 4/3; /* Uniform identical aspect ratio for all lookbook items */
+      width: 100%;
+    }
+
+    .look-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .look-card:hover .look-img {
+      transform: scale(1.03);
+    }
+
+    .look-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .look-card:hover .look-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%);
+    }
+
+    .look-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .look-desc {
+      font-size: 14px;
+      color: #d6d3d1;
+    }
+
+    @media (max-width: 992px) {
+      .lookbook-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ==========================================
+       SECTION 5: SPATIAL DESIGN CONSULTATION
+       ========================================== */
+    .design-section {
+      background-color: var(--bg-body);
+    }
+
+    .design-consult-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .consult-step-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: var(--transition);
+    }
+
+    .consult-step-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .consult-step-icon {
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .consult-step-heading {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .consult-step-body {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       SECTION 6: CUSTOMIZATION WORKSPACE (MATERIALS)
+       ========================================== */
+    .customization-section {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .materials-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .materials-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .materials-options {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 10px;
+    }
+
+    .option-group-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .swatch-list {
+      display: flex;
+      gap: 16px;
+    }
+
+    .swatch-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .swatch-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      border: 2px solid transparent;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .swatch-circle:hover,
+    .swatch-item.active .swatch-circle {
+      border-color: var(--primary);
+      transform: scale(1.08);
+    }
+
+    .swatch-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .swatch-item.active .swatch-name {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .oak-wood { background-color: #e5c39c; }
+    .walnut-wood { background-color: #4b382a; }
+    .boucle-fabric { background-color: #f1ebd9; }
+    .linen-fabric { background-color: #d1c7bd; }
+
+    @media (max-width: 992px) {
+      .materials-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* ==========================================
+       SECTION 7: MATERIAL CARE & MAINTENANCE
+       ========================================== */
+    .care-section {
+      background-color: var(--bg-body);
+    }
+
+    .care-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .care-step-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .care-step-number {
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      font-size: 16px;
+      font-weight: 800;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .care-step-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .care-step-desc {
+      font-size: 14.5px;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       SECTION 8: SHOWROOM STOREFRONT GALLERY
+       ========================================== */
+    .storefront-section {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .showroom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .showroom-grid .split-image-wrapper {
+      max-width: 530px;
+      aspect-ratio: 4/3;
+      margin: 0 auto;
+    }
+
+    .showroom-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .showroom-locations {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .location-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .location-card:hover,
+    .location-card.active {
+      border-color: var(--primary);
+      background-color: var(--bg-hover);
+    }
+
+    .location-name {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .location-info {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 992px) {
+      .showroom-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* ==========================================
+       SECTION 9: SCHEDULE A PRIVATE VISIT
+       ========================================== */
+    .schedule-section {
+      background-color: var(--bg-body);
+    }
+
+    .schedule-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .schedule-info {
+      padding: 60px;
+      background-color: var(--bg-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .schedule-info .section-title {
+      margin-bottom: 0px;
+    }
+
+    .schedule-form-side {
+      padding: 60px;
+      background-color: var(--bg-input);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .schedule-details-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .schedule-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .schedule-detail-item svg {
+      color: var(--primary);
+    }
+
+    @media (max-width: 992px) {
+      .schedule-card {
+        grid-template-columns: 1fr;
+      }
+      .schedule-info, .schedule-form-side {
+        padding: 40px 24px;
+      }
+    }
+
+    /* ==========================================
+       FOOTER
+       ========================================== */
+    .main-footer {
+      background-color: #1c1917; /* Stone 900 */
+      color: #e7e5e4;            /* Stone 200 */
+      padding: 80px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 14.5px;
+      transition: var(--transition);
+    }
+
+    .dark .main-footer {
+      background-color: #0b0909; /* Walnut black */
+      border-top-color: rgba(255,255,255,0.03);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .footer-brand .logo-icon {
+      color: var(--primary);
+    }
+
+    .footer-desc {
+      color: #a8a29e; /* Stone 400 */
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      background-color: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d6d3d1;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .social-icon:hover {
+      background-color: var(--primary);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .footer-title {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #a8a29e;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+      padding-inline-start: 6px;
+    }
+
+    .footer-link-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--primary);
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover .footer-link-icon {
+      transform: translateX(4px);
+    }
+
+    [dir="rtl"] .footer-links a:hover .footer-link-icon {
+      transform: translateX(-4px) rotate(180deg);
+    }
+
+    [dir="rtl"] .footer-link-icon {
+      transform: rotate(180deg);
+    }
+
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #a8a29e;
+      line-height: 1.5;
+    }
+
+    .footer-contact-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #a8a29e;
+      font-size: 13.5px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a:hover {
+      color: #ffffff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1120px) {
+      .nav-link {
+        padding: 0 8px;
+        font-size: 13.5px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .desktop-nav {
+        display: none;
+      }
+      .hamburger-btn {
+        display: flex;
+      }
+      .logo {
+        font-size: 20px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+      .header-actions .rtl-toggle,
+      .header-actions .login-btn {
+        display: none; /* Hide RTL and login on standard mobile bar */
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    /* ==========================================
+       GLOBAL MOBILE RESPONSIVENESS OVERRIDES
+       ========================================== */
+    html, body {
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px !important;
+      }
+      .section-padding {
+        padding: 50px 0 !important;
+      }
+      .section-title, .hero-title {
+        font-size: 26px !important;
+      }
+      .section-desc, .hero-desc {
+        font-size: 14.5px !important;
+      }
+    }
+    @media (max-width: 320px) {
+      .container {
+        padding: 0 12px !important;
+      }
+      .section-padding {
+        padding: 40px 0 !important;
+      }
+      .section-title, .hero-title {
+        font-size: 22px !important;
+      }
+    }
+      @media (max-width: 1024px) {
+      .header-actions #darkModeToggle,
+      .header-actions #rtlToggleBtn,
+      .header-actions .login-btn {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ==========================================
+     NAVBAR HEADER (ONE-LINE LAYOUT)
+     ========================================== -->
+  <header class="header" id="navbar-header">
+    <div class="container nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="logo">
+        <i data-lucide="sofa" class="logo-icon"></i>
+        <span>LIGNUM</span>
+      </a>
+      
+      <!-- Desktop Navigation Menu -->
+      <nav class="desktop-nav">
+        <ul class="nav-links">
+          <li class="dropdown-parent">
+            <a href="#" class="nav-link">
+              Home <i data-lucide="chevron-down" class="dropdown-chevron"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="index.html">Home 1 - Studio Living</a></li>
+              <li><a href="home2.html">Home 2 - Scandi Gallery</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="furniture.html" class="nav-link">Furniture</a></li>
+          <li><a href="room-lookbook.html" class="nav-link">Room Lookbook</a></li>
+          <li><a href="room-ideas.html" class="nav-link">Room Ideas</a></li>
+          <li><a href="customization.html" class="nav-link">Customization</a></li>
+          <li><a href="collections.html" class="nav-link">Collections</a></li>
+          <li><a href="schedule.html" class="nav-link">Schedule Visit</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Desktop Header Actions -->
+      <div class="header-actions">
+        <button class="action-btn icon-btn theme-toggle" id="darkModeToggle" aria-label="Dark Mode">
+          <i class="fas fa-moon icon-moon"></i>
+          <i class="fas fa-sun icon-sun" style="display: none;"></i>
+        </button>
+
+        <button class="action-btn icon-btn rtl-toggle" id="rtlToggleBtn" aria-label="Toggle Layout Direction" title="Toggle Layout Direction">
+          <i class="fas fa-exchange-alt"></i>
+        </button>
+
+        <a href="login.html" class="login-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Login</a>
+
+        <button class="hamburger-btn" id="hamburger-menu-btn" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+     MOBILE DRAWER
+     ========================================== -->
+  <div class="drawer-overlay" id="drawer-backdrop"></div>
+  <div class="mobile-drawer" id="mobile-sidebar-drawer">
+    <nav class="mobile-links">
+      <div class="mobile-dropdown-parent" id="mobile-home-dropdown">
+        <div class="mobile-dropdown-header mobile-link">
+          <span>Home</span>
+          <i data-lucide="chevron-down" class="dropdown-chevron"></i>
+        </div>
+        <div class="mobile-dropdown-menu">
+          <a href="index.html" class="mobile-drawer-close-trigger">Home 1 - Studio Living</a>
+          <a href="home2.html" class="mobile-drawer-close-trigger">Home 2 - Scandi Gallery</a>
+        </div>
+      </div>
+      
+      <a href="about.html" class="mobile-link mobile-drawer-close-trigger">About</a>
+      <a href="furniture.html" class="mobile-link mobile-drawer-close-trigger">Furniture</a>
+      <a href="room-lookbook.html" class="mobile-link mobile-drawer-close-trigger">Room Lookbook</a>
+      <a href="room-ideas.html" class="mobile-link mobile-drawer-close-trigger">Room Ideas</a>
+      <a href="customization.html" class="mobile-link mobile-drawer-close-trigger">Customization</a>
+      <a href="collections.html" class="mobile-link mobile-drawer-close-trigger">Collections</a>
+      <a href="schedule.html" class="mobile-link mobile-drawer-close-trigger">Schedule Visit</a>
+      <a href="contact.html" class="mobile-link mobile-drawer-close-trigger">Contact</a>
+    </nav>
+
+    <div class="mobile-drawer-bottom">
+      <button class="action-btn theme-toggle" id="mobile-theme-toggle" style="width: 100%; justify-content: center; height: 44px; margin-bottom: 8px; border: 1px solid var(--border)">
+        <i class="fas fa-moon icon-moon" style="margin-inline-end: 8px;"></i>
+        <i class="fas fa-sun icon-sun" style="margin-inline-end: 8px; display: none;"></i>
+        <span>Toggle Theme</span>
+      </button>
+
+      <button class="action-btn rtl-toggle" id="mobile-rtl-toggle" style="width: 100%; justify-content: center; height: 44px; margin-bottom: 12px; border: 1px solid var(--border)">
+        <i class="fas fa-exchange-alt" style="margin-inline-end: 8px;"></i>
+        <span>Toggle RTL / LTR</span>
+      </button>
+      
+      <a href="login.html" class="login-btn" style="width: 100%; justify-content: center; height: 48px; text-decoration: none; display: inline-flex; align-items: center;">Login</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+     LOGIN MODAL (Clean popup)
+     ========================================== -->
+  <div class="login-modal" id="login-modal-overlay">
+    <div class="login-card">
+      <button class="login-card-close" id="login-modal-close-btn">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="login-header">
+        <h3>Welcome back</h3>
+        <p>Login to your premium designer account</p>
+      </div>
+      <form class="login-form" onsubmit="event.preventDefault(); alert('Logged in successfully (Mock)!'); document.getElementById('login-modal-overlay').classList.remove('open');">
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input type="email" placeholder="name@domain.com" required class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" placeholder="••••••••" required class="form-input">
+        </div>
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" style="accent-color: var(--primary)">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-pass">Forgot Password?</a>
+        </div>
+        <button type="submit" class="submit-btn">Login</button>
+      </form>
+    </div>
+  </div>
+
+<!-- ==========================================
+     SECTION 1: HERO (FULL SCREEN BACKGROUND IMAGE)
+     ========================================== -->
+  <section class="hero-section" id="hero">
+    <div class="hero-content">
+      <span class="hero-tagline">Exclusive Furniture Collection</span>
+      <h1 class="hero-title">Crafting Comfort For Your Space</h1>
+      <p class="hero-desc">Experience Scandinavian minimalism blended with functional luxury. Handcrafted pieces customized to blend seamlessly with your interior architecture.</p>
+      <div class="hero-actions-btns">
+        <a href="#furniture" class="hero-btn-primary">Explore Collection</a>
+        <a href="schedule.html" class="hero-btn-secondary">Book Showroom Visit</a>
+      </div>
+    </div>
+    <div class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView();">
+      <i data-lucide="chevron-down" style="width: 32px; height: 32px;"></i>
+    </div>
+  </section>
+
+  <!-- ==========================================
+     SECTION 2: ABOUT / CRAFTSMANSHIP BRAND STORY
+     ========================================== -->
+  <section class="about-section section-padding" id="about">
+    <div class="container">
+      <div class="split-grid">
+        
+        <div class="about-info">
+          <span class="section-tag">Our Philosophy</span>
+          <h2 class="section-title">Artisanal Design Built for Lifetimes</h2>
+          <p class="about-text">Every LIGNUM article begins its life in our custom designer studios. We source wood exclusively from sustainable Baltic oak plantations, drying every block slowly to ensure extreme durability before crafting.</p>
+          <p class="about-text">Our dedicated joiners cut, assemble, and seal by hand using eco-friendly natural oils, maintaining organic textures while creating statement layouts that elevate modern homes.</p>
+          
+          <div class="about-features">
+            <div class="feature-item">
+              <div class="feature-icon-wrapper"><i data-lucide="leaf"></i></div>
+              <div>
+                <h4 class="feature-title">Eco-Sustainable</h4>
+                <p class="feature-desc">100% FSC-certified timber source</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon-wrapper"><i data-lucide="award"></i></div>
+              <div>
+                <h4 class="feature-title">Lifetime Integrity</h4>
+                <p class="feature-desc">Built using robust mortise joinery</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-image-wrapper">
+          <img src="images/craft.png" alt="Woodworking Craftsman Studio">
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+     SECTION 3: FEATURED PRODUCTS
+     ========================================== -->
+  <section class="products-section section-padding" id="furniture">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Featured Pieces</span>
+        <h2 class="section-title">The Summer Collection</h2>
+        <p class="section-subtitle">Exquisite minimalist pieces designed to fit naturally in contemporary living and dining environments.</p>
+      </div>
+      
+      <div class="grid-products">
+        <!-- Card 1 -->
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img src="images/chair.png" alt="Elysian Boucle Lounge Chair" class="product-img">
+            <span class="product-badge">New Arrival</span>
+          </div>
+          <div class="product-content">
+            <span class="product-category">Lounge Chairs</span>
+            <h3 class="product-title">Elysian Bouclé Chair</h3>
+            <div class="product-footer">
+              <span class="product-price">$850</span>
+              <button class="add-to-cart-btn" aria-label="Add to cart"><i data-lucide="plus"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img src="images/sofa.png" alt="Scandi Olive 3-Seater Sofa" class="product-img">
+            <span class="product-badge">Best Seller</span>
+          </div>
+          <div class="product-content">
+            <span class="product-category">Sofas</span>
+            <h3 class="product-title">Scandi Olive 3-Seater</h3>
+            <div class="product-footer">
+              <span class="product-price">$2,450</span>
+              <button class="add-to-cart-btn" aria-label="Add to cart"><i data-lucide="plus"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="product-card">
+          <div class="product-img-wrapper">
+            <img src="images/dining.png" alt="Nordic Oak Dining Table" class="product-img">
+            <span class="product-badge">Curated</span>
+          </div>
+          <div class="product-content">
+            <span class="product-category">Dining Sets</span>
+            <h3 class="product-title">Nordic Oak Dining Table</h3>
+            <div class="product-footer">
+              <span class="product-price">$1,890</span>
+              <button class="add-to-cart-btn" aria-label="Add to cart"><i data-lucide="plus"></i></button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+     SECTION 4: ROOM IDEAS / LOOKBOOK GRID (FIXED SYMMETRICAL IMAGE SIZE)
+     ========================================== -->
+  <section class="lookbook-section section-padding" id="room-ideas">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Inspiration Lookbook</span>
+        <h2 class="section-title">Explore Styled Room Environments</h2>
+        <p class="section-subtitle">Stunning room presets curated by our interior design experts to showcase spatial harmony.</p>
+      </div>
+      
+      <div class="lookbook-grid">
+        <!-- Room 1 (Landscape aspect) -->
+        <div class="look-card">
+          <img src="images/bedroom.png" alt="Luxury Minimalist Bedroom preset" class="look-img">
+          <div class="look-overlay">
+            <h3 class="look-title">The Serene Sleeping Quarters</h3>
+            <p class="look-desc">Featuring low-profile oak platform frames and raw linen textiles.</p>
+          </div>
+        </div>
+
+        <!-- Room 2 (Now matches Room 1 exact size and aspect) -->
+        <div class="look-card">
+          <img src="images/study.png" alt="Designer Study Desk preset" class="look-img">
+          <div class="look-overlay">
+            <h3 class="look-title">Creative Home Office</h3>
+            <p class="look-desc">Clean workspaces designed to stimulate focus and structural clarity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+     SECTION 5: SPATIAL DESIGN ADVISORY (LINKED DIRECTLY FROM ROOM IDEAS DROPDOWN)
+     ========================================== -->
+  <section class="design-section section-padding" id="designers">
+    <div class="container">
+      <div class="split-grid">
+        
+        <div class="about-info">
+          <span class="section-tag">Spatial Advisory</span>
+          <h2 class="section-title">Co-Create Your Space with Designers</h2>
+          <p class="about-text">Styling a home requires an understanding of volume, lighting, and textiles. Our architects draft custom sketches and build fabric moodboards tailored to your apartment's blueprint layout.</p>
+          
+          <div class="design-consult-list">
+            <div class="consult-step-card">
+              <div class="consult-step-icon"><i data-lucide="scroll"></i></div>
+              <div>
+                <h4 class="consult-step-heading">1. Blueprint Assessment</h4>
+                <p class="consult-step-body">Share your room dimensions to receive layout recommendations maximizing spacing and path flow.</p>
+              </div>
+            </div>
+            <div class="consult-step-card">
+              <div class="consult-step-icon"><i data-lucide="palette"></i></div>
+              <div>
+                <h4 class="consult-step-heading">2. Palette Synchronization</h4>
+                <p class="consult-step-body">We harmonize wood textures with existing paint colors and structural finishes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-image-wrapper">
+          <img src="images/designers.png" alt="Designer interior moodboard layout">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+     SECTION 6: CUSTOMIZATION WORKSPACE (MATERIALS swatches selector)
+     ========================================== -->
+  <section class="customization-section section-padding" id="customization">
+    <div class="container">
+      <div class="materials-wrapper">
+        
+        <div class="split-image-wrapper">
+          <img src="images/materials.png" alt="Luxury wood swatches and textured fabrics layout">
+        </div>
+
+        <div class="materials-info">
+          <span class="section-tag">Custom Tailoring</span>
+          <h2 class="section-title">Finishes Configured to Your Taste</h2>
+          <p class="about-text">At LIGNUM, we believe catalog options are just a starting point. Every piece can be customized to match your space's exact color profile. Choose from our premium woods and textured fabrics.</p>
+          
+          <div class="materials-options">
+            <div>
+              <h4 class="option-group-title">Premium Timber Selection</h4>
+              <div class="swatch-list">
+                <div class="swatch-item active" onclick="selectSwatch(this, 'Natural Baltic Oak')">
+                  <div class="swatch-circle oak-wood"></div>
+                  <span class="swatch-name">Baltic Oak</span>
+                </div>
+                <div class="swatch-item" onclick="selectSwatch(this, 'Dark Walnut Veneer')">
+                  <div class="swatch-circle walnut-wood"></div>
+                  <span class="swatch-name">Dark Walnut</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 class="option-group-title">Exclusive Upholstery Fabrics</h4>
+              <div class="swatch-list">
+                <div class="swatch-item" onclick="selectSwatch(this, 'Textured Cream Bouclé')">
+                  <div class="swatch-circle boucle-fabric"></div>
+                  <span class="swatch-name">Cream Bouclé</span>
+                </div>
+                <div class="swatch-item" onclick="selectSwatch(this, 'Organic Flax Linen')">
+                  <div class="swatch-circle linen-fabric"></div>
+                  <span class="swatch-name">Flax Linen</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="about-text" id="customization-feedback" style="font-weight: 600; color: var(--primary);">Currently Selected Finishes: Natural Baltic Oak</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+     SECTION 7: MATERIAL CARE & MAINTENANCE (LINKED DIRECTLY FROM CUSTOMIZATION DROPDOWN)
+     ========================================== -->
+  <section class="care-section section-padding" id="care-guide">
+    <div class="container">
+      <div class="split-grid">
+        
+        <div class="split-image-wrapper">
+          <img src="images/care.png" alt="Wood Wax Oil Container on Oak Desk">
+        </div>
+
+        <div class="about-info">
+          <span class="section-tag">Furniture Care</span>
+          <h2 class="section-title">Preserving the Organic Value</h2>
+          <p class="about-text">LIGNUM designer creations are protected by natural organic oil treatments. With simple care guidelines, the warm textures and structural stability of your custom woods will endure for generations.</p>
+          
+          <div class="care-steps">
+            <div class="care-step-item">
+              <div class="care-step-number">1</div>
+              <div>
+                <h4 class="care-step-title">Hydration & Wax Treatment</h4>
+                <p class="care-step-desc">Apply premium natural wood wax oil once every six months to keep the oak fibers elastic and prevent dry splitting.</p>
+              </div>
+            </div>
+            <div class="care-step-item">
+              <div class="care-step-number">2</div>
+              <div>
+                <h4 class="care-step-title">Sunlight & Humidity Balance</h4>
+                <p class="care-step-desc">Position your solid wood items away from direct vents and intense windows to maintain uniform internal moisture content.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+     SECTION 8: SHOWROOM STOREFRONT GALLERY
+     ========================================== -->
+  <section class="storefront-section section-padding" id="collections">
+    <div class="container">
+      <div class="showroom-grid">
+        
+        <div class="split-image-wrapper">
+          <img src="images/storefront.png" alt="Modern glass front LIGNUM gallery showroom">
+        </div>
+
+        <div class="showroom-details">
+          <span class="section-tag">Our Showrooms</span>
+          <h2 class="section-title">Step Into the World of LIGNUM</h2>
+          <p class="about-text">Experience the texture, weight, and layout of our materials in person. Our flagship design galleries offer tailored spatial consultations with showroom experts.</p>
+          
+          <div class="showroom-locations">
+            <div class="location-card active" onclick="activateLocation(this, 'New York Studio')">
+              <h4 class="location-name">New York Studio Gallery</h4>
+              <p class="location-info">5th Avenue, Design District • Mon - Sun: 9 AM - 8 PM</p>
+            </div>
+            <div class="location-card" onclick="activateLocation(this, 'London Showroom')">
+              <h4 class="location-name">London Design District</h4>
+              <p class="location-info">Kensington High Street • Mon - Sat: 10 AM - 7 PM</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+     SECTION 9: SCHEDULE SHOWROOM VISIT
+     ========================================== -->
+  <section class="schedule-section section-padding" id="schedule-visit">
+    <div class="container">
+      <div class="schedule-card">
+        
+        <div class="schedule-info">
+          <span class="section-tag">Showroom Booking</span>
+          <h2 class="section-title">Schedule a Private Spatial Consultation</h2>
+          <p class="about-text" style="margin: 0;">Reserve a private, guided walkthrough in our studio gallery. Consult with our expert architects and touch our materials before curating your home catalog.</p>
+          
+          <div class="schedule-details-list">
+            <div class="schedule-detail-item">
+              <i data-lucide="clock"></i>
+              <span>Mon - Sun: 9:00 AM - 8:00 PM</span>
+            </div>
+            <div class="schedule-detail-item">
+              <i data-lucide="map-pin"></i>
+              <span id="selected-showroom-address">5th Avenue, Design District, NY</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="schedule-form-side">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Visit Date</label>
+            <input type="date" class="form-input">
+          </div>
+          <button class="submit-btn" onclick="alert('Visit scheduled successfully! Look out for an email confirmation.');">Book Appointment</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- ==========================================
+     JAVASCRIPT LOGIC
+     ========================================== -->
+  
+
+
+  
+
+  <!-- ==========================================
+     PREMIUM MULTI-COLUMN FOOTER
+     ========================================== -->
+  <footer class="main-footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Column 1: Brand & Socials -->
+        <div class="footer-col">
+          <div class="footer-brand">
+            <i data-lucide="sofa" class="logo-icon"></i>
+            <span>LIGNUM</span>
+          </div>
+          <p class="footer-desc">Crafting premium Scandinavian and minimalist designer furniture. Elevate your living room, study, or bedroom spaces with tailored woodwork.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-icon" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" class="social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a href="#" class="social-icon" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="footer-col">
+          <h4 class="footer-title">Shop Collection</h4>
+          <ul class="footer-links">
+            <li><a href="#furniture"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Living Room</span></a></li>
+            <li><a href="#furniture"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Lounge Chairs</span></a></li>
+            <li><a href="#furniture"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Dining Room</span></a></li>
+            <li><a href="#furniture"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Custom Projects</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Company info -->
+        <div class="footer-col">
+          <h4 class="footer-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#about"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>About LIGNUM</span></a></li>
+            <li><a href="schedule.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Private Showrooms</span></a></li>
+            <li><a href="schedule.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Book Designer Consult</span></a></li>
+            <li><a href="#"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Sustainability</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Detailed Contact Info -->
+        <div class="footer-col">
+          <h4 class="footer-title">Contact Us</h4>
+          <div class="footer-links" style="gap: 16px;">
+            <div class="footer-contact-item">
+              <i data-lucide="map-pin"></i>
+              <span>5th Avenue, Design District,<br>New York, NY 10011</span>
+            </div>
+            <div class="footer-contact-item">
+              <i data-lucide="mail"></i>
+              <span>concierge@lignum.design</span>
+            </div>
+            <div class="footer-contact-item">
+              <i data-lucide="phone"></i>
+              <span>+1 (212) 555-0190</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Row -->
+      <div class="footer-bottom">
+        <p>© 2026 LIGNUM Luxury Furniture Co. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Help Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+// Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Highlight Active Navbar Link
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Clean up any hardcoded active classes
+    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    
+    let matched = false;
+    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPath) {
+        link.classList.add('active');
+        matched = true;
+      }
+    });
+    
+    if (!matched || currentPath === 'index.html' || currentPath === 'home2.html') {
+      document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === '#' || href === 'index.html' || href === 'home2.html') {
+          if (link.textContent.trim().startsWith('Home') || href === 'index.html' || href === 'home2.html') {
+            link.classList.add('active');
+          }
+        }
+      });
+    }
+
+    // Elements Selectors
+    const header = document.getElementById('navbar-header');
+    
+    // Theme Toggles
+    const themeBtn = document.getElementById('darkModeToggle');
+    const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+    
+    // RTL Toggles
+    const rtlBtn = document.getElementById('rtlToggleBtn');
+    const mobileRtlBtn = document.getElementById('mobile-rtl-toggle');
+    
+    // Mobile Drawer
+    const hamburgerBtn = document.getElementById('hamburger-menu-btn');
+    const mobileDrawer = document.getElementById('mobile-sidebar-drawer');
+    const drawerBackdrop = document.getElementById('drawer-backdrop');
+    const mobileCloseTriggers = document.querySelectorAll('.mobile-drawer-close-trigger');
+    const mobileHomeDropdown = document.getElementById('mobile-home-dropdown');
+    
+    // Login Modal
+    const navLoginBtn = document.getElementById('nav-login-btn');
+    const mobileLoginBtn = document.getElementById('mobile-login-btn');
+    const loginModalOverlay = document.getElementById('login-modal-overlay');
+    const loginModalCloseBtn = document.getElementById('login-modal-close-btn');
+
+    /* ==========================================
+       SCROLL NAVBAR ANIMATION
+       ========================================== */
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    /* ==========================================
+       DARK MODE IMPLEMENTATION
+       ========================================== */
+    const initTheme = () => {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+    initTheme();
+
+    const toggleTheme = () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    };
+
+    themeBtn.addEventListener('click', toggleTheme);
+    mobileThemeBtn.addEventListener('click', () => {
+      toggleTheme();
+      toggleMobileDrawer();
+    });
+
+    /* ==========================================
+       RTL (RIGHT-TO-LEFT) IMPLEMENTATION
+       ========================================== */
+    const applyRtl = (isRtl) => {
+      if (isRtl) {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+        localStorage.setItem('rtl', 'true');
+        const badge = document.querySelector('.rtl-text');
+        if (badge) badge.textContent = 'LTR';
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', 'en');
+        localStorage.setItem('rtl', 'false');
+        const badge = document.querySelector('.rtl-text');
+        if (badge) badge.textContent = 'RTL';
+      }
+      lucide.createIcons();
+    };
+
+    const initRtl = () => {
+      const savedRtl = localStorage.getItem('rtl') === 'true';
+      applyRtl(savedRtl);
+    };
+    initRtl();
+
+    rtlBtn.addEventListener('click', () => {
+      const currentRtl = document.documentElement.getAttribute('dir') === 'rtl';
+      applyRtl(!currentRtl);
+    });
+
+    mobileRtlBtn.addEventListener('click', () => {
+      const currentRtl = document.documentElement.getAttribute('dir') === 'rtl';
+      applyRtl(!currentRtl);
+      toggleMobileDrawer();
+    });
+
+    /* ==========================================
+       MOBILE DRAWER IMPLEMENTATION
+       ========================================== */
+    const toggleMobileDrawer = () => {
+      const isOpen = mobileDrawer.classList.toggle('open');
+      drawerBackdrop.classList.toggle('open');
+      hamburgerBtn.classList.toggle('active');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
+
+    hamburgerBtn.addEventListener('click', toggleMobileDrawer);
+    drawerBackdrop.addEventListener('click', toggleMobileDrawer);
+
+    // Mobile home accordion click
+    mobileHomeDropdown.querySelector('.mobile-dropdown-header').addEventListener('click', () => {
+      mobileHomeDropdown.classList.toggle('active');
+    });
+
+    // Close mobile drawer when clicking anchors
+    mobileCloseTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        if (mobileDrawer.classList.contains('open')) {
+          toggleMobileDrawer();
+        }
+      });
+    });
+
+    /* ==========================================
+       LOGIN MODAL IMPLEMENTATION
+       ========================================== */
+    const openLogin = () => {
+      loginModalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeLogin = () => {
+      loginModalOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    if (navLoginBtn) navLoginBtn.addEventListener('click', openLogin);
+    if (mobileLoginBtn) {
+      mobileLoginBtn.addEventListener('click', () => {
+        toggleMobileDrawer(); // Close mobile drawer
+        openLogin();
+      });
+    }
+    loginModalCloseBtn.addEventListener('click', closeLogin);
+
+    loginModalOverlay.addEventListener('click', (e) => {
+      if (e.target === loginModalOverlay) {
+        closeLogin();
+      }
+    });
+
+    // Close modal on ESC key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLogin();
+      }
+    });
+
+
+  </script>
+</body>
+</html>

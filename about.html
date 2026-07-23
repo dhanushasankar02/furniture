@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIGNUM - About Our Craft</title>
+  
+  <!-- Google Fonts: Outfit (English) & Tajawal (Arabic/RTL) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ==========================================
+       1. DESIGN SYSTEM & VARIABLES
+       ========================================== */
+    :root {
+      --primary: #ab5c3c;       /* Warm Terracotta */
+      --primary-hover: #944d30;
+      --primary-glow: rgba(171, 92, 60, 0.15);
+      
+      --bg-body: #fafaf9;        /* Warm Linen 50 */
+      --bg-surface: #ffffff;
+      --bg-navbar: rgba(250, 250, 249, 0.85);
+      --bg-card: #ffffff;
+      --bg-input: #f5f5f4;       /* Stone 100 */
+      --bg-hover: #f5f5f4;
+      
+      --text-main: #1c1917;      /* Stone 900 */
+      --text-muted: #44403c;     /* Stone 500 */
+      --text-inverse: #ffffff;
+      
+      --border: #e7e5e4;         /* Stone 200 */
+      --border-focus: #d6d3d1;   /* Stone 300 */
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 15px -3px rgba(171, 92, 60, 0.04), 0 4px 6px -4px rgba(171, 92, 60, 0.04);
+      --shadow-lg: 0 20px 25px -5px rgba(171, 92, 60, 0.06), 0 8px 10px -6px rgba(171, 92, 60, 0.06);
+      
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      
+      --font-sans: 'Outfit', sans-serif;
+      --backdrop-blur: 16px;
+      --nav-height: 80px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Mode Theme Palette (Walnut & Amber Glow) */
+    .dark {
+      --bg-body: #12100f;        /* Deep Walnut 950 */
+      --bg-surface: #1c1917;     /* Stone 900 */
+      --bg-navbar: rgba(18, 16, 15, 0.85);
+      --bg-card: #292524;        /* Stone 800 */
+      --bg-input: #292524;
+      --bg-hover: #292524;
+      
+      --text-main: #f5f5f4;      /* Stone 100 */
+      --text-muted: #a8a29e;     /* Stone 400 */
+      --text-inverse: #12100f;
+      
+      --border: #292524;
+      --border-focus: #44403c;
+      
+      --primary: #f59e0b;        /* Amber Gold Glow */
+      --primary-hover: #d97706;
+      --primary-glow: rgba(245, 158, 11, 0.15);
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* RTL Font Override */
+    [dir="rtl"] {
+      --font-sans: 'Tajawal', sans-serif;
+    }
+
+    /* ==========================================
+       2. GENERAL STYLES & RESET
+       ========================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    *::-webkit-scrollbar {
+      width: 6px;
+    }
+    *::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    *::-webkit-scrollbar-thumb {
+      background-color: var(--border);
+      border-radius: var(--radius-full);
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-padding {
+      padding: 100px 0;
+    }
+
+    /* Centered Section Headers */
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+    }
+
+    .section-tag {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    /* Glassmorphic Utilities */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(var(--backdrop-blur));
+      -webkit-backdrop-filter: blur(var(--backdrop-blur));
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: var(--radius-lg);
+    }
+
+    .dark .glass-card {
+      background: rgba(18, 16, 15, 0.45);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* ==========================================
+       3. NAVIGATION BAR (ONE-LINE LAYOUT)
+       ========================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      z-index: 1000;
+      background-color: var(--bg-navbar);
+      backdrop-filter: blur(var(--backdrop-blur));
+      -webkit-backdrop-filter: blur(var(--backdrop-blur));
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .header.scrolled {
+      height: 70px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      color: var(--primary);
+      width: 26px;
+      height: 26px;
+      transition: var(--transition);
+    }
+
+    /* Desktop Navigation Links */
+    .desktop-nav {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      gap: 4px;
+    }
+
+    .nav-links > li {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .nav-link {
+      padding: 0 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+    }
+
+    .nav-link:hover,
+    .nav-links > li:hover > .nav-link,
+    .nav-link.active {
+      color: var(--primary);
+    }
+
+    /* Bottom hover indicator line */
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 12px;
+      right: 12px;
+      height: 2.5px;
+      background-color: var(--primary);
+      border-radius: var(--radius-full) var(--radius-full) 0 0;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-links > li:hover > .nav-link::after,
+    .nav-link.active::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    [dir="rtl"] .nav-link:hover::after,
+    [dir="rtl"] .nav-links > li:hover > .nav-link::after,
+    [dir="rtl"] .nav-link.active::after {
+      transform-origin: bottom right;
+    }
+
+    /* Chevron rotation */
+    .dropdown-chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-links > li:hover .dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown submenu */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      width: 180px;
+      padding: 6px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 1010;
+    }
+
+    [dir="rtl"] .dropdown-menu {
+      left: auto;
+      right: 50%;
+      transform: translateX(50%) translateY(10px);
+    }
+
+    .nav-links > li:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    [dir="rtl"] .nav-links > li:hover .dropdown-menu {
+      transform: translateX(50%) translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 12px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+    }
+
+    .dropdown-menu a:hover {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+      padding-inline-start: 16px;
+    }
+
+    /* Header Actions Container */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .action-btn, .icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .action-btn:hover, .icon-btn:hover {
+      background-color: var(--bg-hover);
+      color: var(--primary);
+      border-color: var(--border);
+    }
+
+    .action-btn svg, .action-btn i, .icon-btn i {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* RTL icon button custom spacing */
+    .rtl-toggle {
+      width: auto;
+      padding: 0 10px;
+      gap: 4px;
+    }
+
+    .rtl-text {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Active theme toggling icon visibility via CSS class */
+    .theme-toggle .icon-sun {
+      display: none;
+    }
+    .theme-toggle .icon-moon {
+      display: block;
+    }
+    .dark .theme-toggle .icon-sun {
+      display: block;
+    }
+    .dark .theme-toggle .icon-moon {
+      display: none;
+    }
+
+    /* Login CTA Button */
+    .login-btn {
+      background-color: var(--text-main);
+      color: var(--bg-surface);
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      padding: 9px 18px;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .login-btn:hover {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    /* Hamburger menu for responsive */
+    .hamburger-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 16px;
+      cursor: pointer;
+      z-index: 1050;
+      position: relative;
+    }
+
+    .hamburger-btn span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text-main);
+      border-radius: var(--radius-full);
+      transition: var(--transition);
+    }
+
+    .hamburger-btn.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger-btn.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ==========================================
+       4. MOBILE NAVIGATION DRAWER
+       ========================================== */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 300px;
+      max-width: 85%;
+      background-color: var(--bg-surface);
+      border-inline-start: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      z-index: 1040;
+      padding: 90px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      overflow-y: auto;
+      
+      inset-inline-end: 0;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [dir="rtl"] .mobile-drawer {
+      transform: translateX(-100%);
+    }
+
+    .mobile-drawer.open {
+      transform: translateX(0) !important;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(28, 25, 23, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1030;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mobile-link {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-link:hover,
+    .mobile-link.active {
+      color: var(--primary);
+    }
+
+    .mobile-dropdown-parent {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .mobile-dropdown-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .mobile-dropdown-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding-inline-start: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 0;
+    }
+
+    .mobile-dropdown-parent.active .mobile-dropdown-menu {
+      max-height: 120px;
+      margin-top: 8px;
+    }
+
+    .mobile-dropdown-parent.active .dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    .mobile-dropdown-menu a {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding: 6px 0;
+    }
+
+    .mobile-dropdown-menu a:hover {
+      color: var(--primary);
+    }
+
+    .mobile-drawer-bottom {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ==========================================
+       5. LOGIN MODAL OVERLAY
+       ========================================== */
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(28, 25, 23, 0.5);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .login-modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .login-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 400px;
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .login-modal.open .login-card {
+      transform: scale(1);
+    }
+
+    .login-card-close {
+      position: absolute;
+      top: 20px;
+      inset-inline-end: 20px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .login-card-close:hover {
+      color: var(--text-main);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .login-header h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 13.5px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .form-input {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 14.5px;
+      color: var(--text-main);
+      transition: var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .form-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13.5px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--text-muted);
+      user-select: none;
+    }
+
+    .forgot-pass {
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .forgot-pass:hover {
+      text-decoration: underline;
+    }
+
+    .submit-btn {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      padding: 12px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 14.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--primary-glow);
+      transition: var(--transition);
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    
+
+    /* ==========================================
+       6. LUXURY HERO BANNER (about.html)
+       ========================================== */
+    .about-hero-section {
+      height: 70vh;
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: var(--nav-height);
+    }
+    .about-hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .about-hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about-hero-card {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+      padding: 40px;
+      margin: 0 24px;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+    }
+    .about-hero-tag {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .about-hero-title {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    .about-hero-text {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       6. OUR STORY (TIMELINE LAYOUT)
+       ========================================== */
+    .story-timeline {
+      position: relative;
+      max-width: 1000px;
+      margin: 40px auto 0;
+      padding: 20px 0;
+    }
+    .story-timeline::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      background-color: var(--border);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -1px;
+      z-index: 1;
+    }
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+    }
+    .timeline-item.left {
+      left: 0;
+      align-items: flex-end;
+      text-align: right;
+    }
+    .timeline-item.right {
+      left: 50%;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      right: -8px;
+      background-color: var(--bg-body);
+      border: 4px solid var(--primary);
+      top: 25px;
+      border-radius: 50%;
+      z-index: 3;
+      transition: var(--transition);
+    }
+    .timeline-item.left::after {
+      right: -8px;
+    }
+    .timeline-item.right::after {
+      left: -8px;
+    }
+    .timeline-item:hover::after {
+      background-color: var(--primary);
+      transform: scale(1.2);
+    }
+    .timeline-year {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .timeline-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      max-width: 440px;
+      transition: var(--transition);
+    }
+    .timeline-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+    .timeline-img-frame {
+      width: 100%;
+      height: 180px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .timeline-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .timeline-card:hover .timeline-img-frame img {
+      transform: scale(1.05);
+    }
+    .timeline-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .timeline-text {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       7. BRAND PHILOSOPHY (ASYSMMETRICAL COLLAGE)
+       ========================================== */
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .philosophy-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .philosophy-quote {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.4;
+      font-style: italic;
+      color: var(--text-main);
+      border-inline-start: 4px solid var(--primary);
+      padding-inline-start: 20px;
+    }
+    .philosophy-quote span {
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .philosophy-manifesto {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+    .philosophy-collage {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(6, 60px);
+      gap: 16px;
+    }
+    .collage-item {
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+    }
+    .collage-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .collage-item:hover img {
+      transform: scale(1.05);
+    }
+    .collage-item-1 {
+      grid-column: 1 / 4;
+      grid-row: 1 / 5;
+    }
+    .collage-item-2 {
+      grid-column: 4 / 7;
+      grid-row: 2 / 6;
+    }
+    .collage-item-3 {
+      grid-column: 2 / 5;
+      grid-row: 5 / 7;
+    }
+
+    /* ==========================================
+       8. MEET OUR DESIGNERS (CIRCULAR PROFILE CARDS)
+       ========================================== */
+    .designers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    .designer-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .designer-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+    .designer-avatar-container {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 24px;
+    }
+    .designer-avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--bg-card);
+      position: relative;
+      z-index: 2;
+    }
+    .designer-avatar-border {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 50%;
+      border: 2px dashed var(--primary);
+      z-index: 1;
+      transition: transform 6s linear;
+    }
+    .designer-card:hover .designer-avatar-border {
+      transform: rotate(360deg);
+    }
+    .designer-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .designer-role {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .designer-bio {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      min-height: 84px;
+    }
+    .designer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .designer-social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+    .designer-social-icon:hover {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      border-color: var(--primary);
+    }
+    .designer-social-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ==========================================
+       9. CRAFTSMANSHIP PROCESS (HORIZONTAL STEP TIMELINE)
+       ========================================== */
+    .process-timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      position: relative;
+      padding-top: 20px;
+    }
+    .process-timeline::after {
+      content: '';
+      position: absolute;
+      top: 55px;
+      left: 30px;
+      right: 30px;
+      height: 2px;
+      background-color: var(--border);
+      z-index: 1;
+    }
+    .process-step {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .process-icon-box {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: var(--bg-card);
+      border: 2px solid var(--border);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      position: relative;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .process-icon-box svg {
+      width: 26px;
+      height: 26px;
+    }
+    .process-step:hover .process-icon-box {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px var(--primary-glow);
+    }
+    .process-step-num {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 24px;
+      height: 24px;
+      background-color: var(--text-main);
+      color: var(--bg-surface);
+      font-size: 11px;
+      font-weight: 800;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg-card);
+    }
+    .process-step:hover .process-step-num {
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+    }
+    .process-step h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .process-step p {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding: 0 10px;
+    }
+
+    /* ==========================================
+       10. AWARDS & ACHIEVEMENTS (FLOATING GLASS CARDS)
+       ========================================== */
+    .awards-row {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding-top: 20px;
+    }
+    .award-card {
+      flex: 1;
+      max-width: 360px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .award-card:nth-child(2) {
+      transform: translateY(-20px);
+    }
+    .award-card:hover {
+      transform: translateY(-8px) !important;
+      border-color: var(--primary);
+      box-shadow: var(--shadow-lg);
+    }
+    .award-icon-container {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background-color: var(--primary-glow);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .award-icon-container svg {
+      width: 28px;
+      height: 28px;
+    }
+    .award-year {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .award-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .award-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ==========================================
+       11. PREMIUM CTA BANNER
+       ========================================== */
+    .about-cta-section {
+      height: 60vh;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-cta-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .about-cta-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about-cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      padding: 50px;
+      margin: 0 24px;
+      text-align: center;
+    }
+    .about-cta-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .about-cta-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--primary);
+      color: var(--text-inverse);
+      padding: 12px 28px;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      transition: var(--transition);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+    .cta-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px var(--primary-glow);
+    }
+    .cta-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ==========================================
+       12. PREMIUM MULTI-COLUMN FOOTER
+       ========================================== */
+    .main-footer {
+      background-color: #1c1917; /* Stone 900 */
+      color: #e7e5e4;            /* Stone 200 */
+      padding: 80px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 14.5px;
+      transition: var(--transition);
+    }
+
+    .dark .main-footer {
+      background-color: #0b0909; /* Walnut black */
+      border-top-color: rgba(255,255,255,0.03);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .footer-brand .logo-icon {
+      color: var(--primary);
+    }
+
+    .footer-desc {
+      color: #a8a29e; /* Stone 400 */
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      background-color: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d6d3d1;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .social-icon:hover {
+      background-color: var(--primary);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .footer-title {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #a8a29e;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+      padding-inline-start: 6px;
+    }
+
+    .footer-link-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--primary);
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover .footer-link-icon {
+      transform: translateX(4px);
+    }
+
+    [dir="rtl"] .footer-links a:hover .footer-link-icon {
+      transform: translateX(-4px) rotate(180deg);
+    }
+
+    [dir="rtl"] .footer-link-icon {
+      transform: rotate(180deg);
+    }
+
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #a8a29e;
+      line-height: 1.5;
+    }
+
+    .footer-contact-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #a8a29e;
+      font-size: 13.5px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a:hover {
+      color: #ffffff;
+    }
+
+    /* ==========================================
+       13. RTL STYLE CORRECTIONS
+       ========================================== */
+    [dir="rtl"] .logo {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .dropdown-menu {
+      left: auto;
+      right: 50%;
+      transform: translateX(50%) translateY(10px);
+    }
+
+    [dir="rtl"] .about-hero-card {
+      margin-inline-start: 0;
+      margin-inline-end: 0;
+    }
+
+    [dir="rtl"] .story-timeline::after {
+      left: 50%;
+      right: auto;
+    }
+
+    [dir="rtl"] .timeline-item.left {
+      left: auto;
+      right: 0;
+      align-items: flex-start;
+      text-align: start;
+    }
+
+    [dir="rtl"] .timeline-item.right {
+      left: auto;
+      right: 50%;
+      align-items: flex-end;
+      text-align: end;
+    }
+
+    [dir="rtl"] .timeline-item::after {
+      right: -8px;
+      left: auto;
+    }
+
+    [dir="rtl"] .timeline-item.left::after {
+      right: -8px;
+      left: auto;
+    }
+
+    [dir="rtl"] .timeline-item.right::after {
+      left: -8px;
+      right: auto;
+    }
+
+    [dir="rtl"] .process-step-num {
+      left: -6px;
+      right: auto;
+    }
+
+    [dir="rtl"] .footer-brand {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .footer-links a:hover {
+      transform: translateX(-4px);
+    }
+
+    /* ==========================================
+       14. RESPONSIVE MEDIA QUERIES
+       ========================================== */
+    @media (max-width: 1120px) {
+      .nav-link {
+        padding: 0 8px;
+        font-size: 13.5px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .desktop-nav {
+        display: none;
+      }
+      .hamburger-btn {
+        display: flex;
+      }
+      .logo {
+        font-size: 20px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .philosophy-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .designers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process-timeline {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+
+      .process-timeline::after {
+        display: none;
+      }
+
+      .awards-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+      }
+
+      .award-card {
+        transform: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section-padding {
+        padding: 70px 0;
+      }
+
+      .about-hero-section {
+        height: auto;
+        padding: 80px 0;
+      }
+
+      .about-hero-card {
+        margin: 0 20px;
+        padding: 30px;
+      }
+
+      .about-hero-title {
+        font-size: 32px;
+      }
+
+      .story-timeline::after {
+        left: 20px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        right: 0 !important;
+        padding-left: 50px;
+        padding-right: 0;
+        align-items: flex-start !important;
+        text-align: start !important;
+      }
+
+      .timeline-item::after {
+        left: 12px !important;
+        right: auto !important;
+        top: 18px;
+      }
+
+      .timeline-card {
+        max-width: 100%;
+      }
+
+      .designers-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .process-timeline {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* Keyframe Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    /* ==========================================
+       GLOBAL MOBILE RESPONSIVENESS OVERRIDES
+       ========================================== */
+    html, body {
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px !important;
+      }
+      .section-padding {
+        padding: 50px 0 !important;
+      }
+      .section-title, .hero-title {
+        font-size: 26px !important;
+      }
+      .section-desc, .hero-desc {
+        font-size: 14.5px !important;
+      }
+    }
+    @media (max-width: 320px) {
+      .container {
+        padding: 0 12px !important;
+      }
+      .section-padding {
+        padding: 40px 0 !important;
+      }
+      .section-title, .hero-title {
+        font-size: 22px !important;
+      }
+    }
+      @media (max-width: 1024px) {
+      .header-actions #darkModeToggle,
+      .header-actions #rtlToggleBtn,
+      .header-actions .login-btn {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+     NAVBAR HEADER (ONE-LINE LAYOUT)
+     ========================================== -->
+  <header class="header" id="navbar-header">
+    <div class="container nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="logo">
+        <i data-lucide="sofa" class="logo-icon"></i>
+        <span>LIGNUM</span>
+      </a>
+      
+      <!-- Desktop Navigation Menu -->
+      <nav class="desktop-nav">
+        <ul class="nav-links">
+          <li class="dropdown-parent">
+            <a href="#" class="nav-link">
+              Home <i data-lucide="chevron-down" class="dropdown-chevron"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="index.html">Home 1 - Studio Living</a></li>
+              <li><a href="home2.html">Home 2 - Scandi Gallery</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="furniture.html" class="nav-link">Furniture</a></li>
+          <li><a href="room-lookbook.html" class="nav-link">Room Lookbook</a></li>
+          <li><a href="room-ideas.html" class="nav-link">Room Ideas</a></li>
+          <li><a href="customization.html" class="nav-link">Customization</a></li>
+          <li><a href="collections.html" class="nav-link">Collections</a></li>
+          <li><a href="schedule.html" class="nav-link">Schedule Visit</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Desktop Header Actions -->
+      <div class="header-actions">
+        <button class="action-btn icon-btn theme-toggle" id="darkModeToggle" aria-label="Dark Mode">
+          <i class="fas fa-moon icon-moon"></i>
+          <i class="fas fa-sun icon-sun" style="display: none;"></i>
+        </button>
+
+        <button class="action-btn icon-btn rtl-toggle" id="rtlToggleBtn" aria-label="Toggle Layout Direction" title="Toggle Layout Direction">
+          <i class="fas fa-exchange-alt"></i>
+        </button>
+
+        <a href="login.html" class="login-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Login</a>
+
+        <button class="hamburger-btn" id="hamburger-menu-btn" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+     MOBILE DRAWER
+     ========================================== -->
+  <div class="drawer-overlay" id="drawer-backdrop"></div>
+  <div class="mobile-drawer" id="mobile-sidebar-drawer">
+    <nav class="mobile-links">
+      <div class="mobile-dropdown-parent" id="mobile-home-dropdown">
+        <div class="mobile-dropdown-header mobile-link">
+          <span>Home</span>
+          <i data-lucide="chevron-down" class="dropdown-chevron"></i>
+        </div>
+        <div class="mobile-dropdown-menu">
+          <a href="index.html" class="mobile-drawer-close-trigger">Home 1 - Studio Living</a>
+          <a href="home2.html" class="mobile-drawer-close-trigger">Home 2 - Scandi Gallery</a>
+        </div>
+      </div>
+      
+      <a href="about.html" class="mobile-link active mobile-drawer-close-trigger">About</a>
+      <a href="furniture.html" class="mobile-link mobile-drawer-close-trigger">Furniture</a>
+      <a href="room-lookbook.html" class="mobile-link mobile-drawer-close-trigger">Room Lookbook</a>
+      <a href="room-ideas.html" class="mobile-link mobile-drawer-close-trigger">Room Ideas</a>
+      <a href="customization.html" class="mobile-link mobile-drawer-close-trigger">Customization</a>
+      <a href="collections.html" class="mobile-link mobile-drawer-close-trigger">Collections</a>
+      <a href="schedule.html" class="mobile-link mobile-drawer-close-trigger">Schedule Visit</a>
+      <a href="contact.html" class="mobile-link mobile-drawer-close-trigger">Contact</a>
+    </nav>
+
+    <div class="mobile-drawer-bottom">
+      <button class="action-btn theme-toggle" id="mobile-theme-toggle" style="width: 100%; justify-content: center; height: 44px; margin-bottom: 8px; border: 1px solid var(--border)">
+        <i class="fas fa-moon icon-moon" style="margin-inline-end: 8px;"></i>
+        <i class="fas fa-sun icon-sun" style="margin-inline-end: 8px; display: none;"></i>
+        <span>Toggle Theme</span>
+      </button>
+
+      <button class="action-btn rtl-toggle" id="mobile-rtl-toggle" style="width: 100%; justify-content: center; height: 44px; margin-bottom: 12px; border: 1px solid var(--border)">
+        <i class="fas fa-exchange-alt" style="margin-inline-end: 8px;"></i>
+        <span>Toggle RTL / LTR</span>
+      </button>
+      
+      <a href="login.html" class="login-btn" style="width: 100%; justify-content: center; height: 48px; text-decoration: none; display: inline-flex; align-items: center;">Login</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+     LOGIN MODAL (Clean popup)
+     ========================================== -->
+  <div class="login-modal" id="login-modal-overlay">
+    <div class="login-card">
+      <button class="login-card-close" id="login-modal-close-btn">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="login-header">
+        <h3>Welcome back</h3>
+        <p>Login to your premium designer account</p>
+      </div>
+      <form class="login-form" onsubmit="event.preventDefault(); alert('Logged in successfully (Mock)!'); document.getElementById('login-modal-overlay').classList.remove('open');">
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input type="email" placeholder="name@domain.com" required class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" placeholder="••••••••" required class="form-input">
+        </div>
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" style="accent-color: var(--primary)">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-pass">Forgot Password?</a>
+        </div>
+        <button type="submit" class="submit-btn">Login</button>
+      </form>
+    </div>
+  </div>
+
+<main>
+    <!-- ==========================================
+       SECTION 1: LUXURY HERO BANNER
+       ========================================== -->
+    <section class="about-hero-section">
+      <div class="about-hero-bg">
+        <img src="images/about_hero.jpg" alt="Lignum Luxury Showroom Atrium">
+      </div>
+      <div class="about-hero-card glass-card">
+        <span class="about-hero-tag">Aesthetics of Silence</span>
+        <h1 class="about-hero-title">Crafting Sacred Home Sanctuaries</h1>
+        <p class="about-hero-text">LIGNUM creates organic Scandinavian furniture that speaks through minimalism, natural timber, and architectural space. Welcome to an exhibition of timeless materials and exquisite construction.</p>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       SECTION 2: OUR STORY (ALTERNATING TIMELINE)
+       ========================================== -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Chronology</span>
+          <h2 class="section-title">Our Milestone Journey</h2>
+          <p class="section-desc">Follow the steps, workshops, and flagship facades that built LIGNUM from a small cabinet maker to an international benchmark of Scandi craft.</p>
+        </div>
+
+        <div class="story-timeline">
+          <!-- Milestone 1 -->
+          <div class="timeline-item left">
+            <span class="timeline-year">1998</span>
+            <div class="timeline-card">
+              <div class="timeline-img-frame">
+                <img src="images/about_story_1998.jpg" alt="1998 Founding Carpenter Workshop">
+              </div>
+              <h3 class="timeline-title">The Oslo Woodworking Atelier</h3>
+              <p class="timeline-text">LIGNUM began as a single-bench joinery shop in the Oslo harbor docks, dedicated to hand-carving organic birch chests and dining sets.</p>
+            </div>
+          </div>
+
+          <!-- Milestone 2 -->
+          <div class="timeline-item right">
+            <span class="timeline-year">2008</span>
+            <div class="timeline-card">
+              <div class="timeline-img-frame">
+                <img src="images/about_story_2008.jpg" alt="2008 Oslo Boutique Facade">
+              </div>
+              <h3 class="timeline-title">First Concept Showroom</h3>
+              <p class="timeline-text">We launched our Oslo concept gallery, introducing clean Scandinavian minimalism, natural woven paper cords, and custom linen-finish upholstery.</p>
+            </div>
+          </div>
+
+          <!-- Milestone 3 -->
+          <div class="timeline-item left">
+            <span class="timeline-year">2018</span>
+            <div class="timeline-card">
+              <div class="timeline-img-frame">
+                <img src="images/about_story_2018.jpg" alt="2018 Carbon-neutral Factory Facade">
+              </div>
+              <h3 class="timeline-title">Carbon-Neutral Sourcing Facility</h3>
+              <p class="timeline-text">A massive eco-shift. We established a zero-emission facility powered by solar panels to dry, treat, and assemble timber using local pine sources.</p>
+            </div>
+          </div>
+
+          <!-- Milestone 4 -->
+          <div class="timeline-item right">
+            <span class="timeline-year">2026</span>
+            <div class="timeline-card">
+              <div class="timeline-img-frame">
+                <img src="images/about_story_2026.jpg" alt="2026 International Design Exhibition">
+              </div>
+              <h3 class="timeline-title">Global Flagship Galleries</h3>
+              <p class="timeline-text">Expanding our luxury reach with architectural showrooms in New York, London, and Tokyo, providing bespoke interior styling consultation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       SECTION 3: BRAND PHILOSOPHY (ASYSMMETRICAL COLLAGE)
+       ========================================== */ -->
+    <section class="section-padding" style="background-color: var(--bg-surface);">
+      <div class="container">
+        <div class="philosophy-grid">
+          <div class="philosophy-left">
+            <span class="section-tag">Manifesto</span>
+            <h2 class="section-title" style="margin-bottom: 0;">Philosophy of Quietude</h2>
+            <p class="philosophy-quote">"True luxury is not loud. It is found in the <span>honesty of the timber grain</span>, the precision of a joint, and the peace it brings to a room."</p>
+            <p class="philosophy-manifesto">We source only sustainable FSC-certified Swedish oak, birch, and walnut. Every plank is dried in solar kilns and shaped by master carvers to ensure LIGNUM furniture becomes a legacy heirloom, growing more beautiful as it patinas with age.</p>
+          </div>
+
+          <div class="philosophy-collage">
+            <div class="collage-item collage-item-1">
+              <img src="images/about_philosophy_forest.jpg" alt="Sustainable Birch Woods and Timber Selections">
+            </div>
+            <div class="collage-item collage-item-2">
+              <img src="images/about_philosophy_detail.jpg" alt="Detailed Oak Joint Joinery Work">
+            </div>
+            <div class="collage-item collage-item-3">
+              <img src="images/about_philosophy_materials.jpg" alt="Boucle Fabrics and Stone Material Swatches">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       SECTION 4: MEET OUR DESIGNERS (CIRCULAR PROFILE CARDS)
+       ========================================== -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Aesthetic Council</span>
+          <h2 class="section-title">Meet Our Designers</h2>
+          <p class="section-desc">The architects and creative visionaries who sketch, contour, and curate the organic layouts of the LIGNUM collection.</p>
+        </div>
+
+        <div class="designers-grid">
+          <!-- Designer 1 -->
+          <div class="designer-card">
+            <div class="designer-avatar-container">
+              <div class="designer-avatar-border"></div>
+              <img src="images/about_designer_1.jpg" alt="Astrid Lindqvist Headshot" class="designer-avatar">
+            </div>
+            <h3 class="designer-name">Astrid Lindqvist</h3>
+            <p class="designer-role">Head of Scandi Design</p>
+            <p class="designer-bio">Astrid blends clean Norwegian lines with cozy organic geometries, aiming to bring the calmness of northern forests into residential lounges.</p>
+            <div class="designer-socials">
+              <a href="#" class="designer-social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+              <a href="#" class="designer-social-icon" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+            </div>
+          </div>
+
+          <!-- Designer 2 -->
+          <div class="designer-card">
+            <div class="designer-avatar-container">
+              <div class="designer-avatar-border"></div>
+              <img src="images/about_designer_2.jpg" alt="Koji Tanaka Headshot" class="designer-avatar">
+            </div>
+            <h3 class="designer-name">Koji Tanaka</h3>
+            <p class="designer-role">Bespoke Furniture Carver</p>
+            <p class="designer-bio">Trained in Kyoto carpentry, Koji focuses on the 'Japandi' fusion, crafting interlocking timber joints that require zero metallic fasteners.</p>
+            <div class="designer-socials">
+              <a href="#" class="designer-social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+              <a href="#" class="designer-social-icon" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+            </div>
+          </div>
+
+          <!-- Designer 3 -->
+          <div class="designer-card">
+            <div class="designer-avatar-container">
+              <div class="designer-avatar-border"></div>
+              <img src="images/about_designer_3.jpg" alt="Sophia Rossi Headshot" class="designer-avatar">
+            </div>
+            <h3 class="designer-name">Sophia Rossi</h3>
+            <p class="designer-role">Senior Interior Architect</p>
+            <p class="designer-bio">Sophia curates the layout spacing and custom finishes, turning spacious raw apartments into refined, warm glassmorphic living spaces.</p>
+            <div class="designer-socials">
+              <a href="#" class="designer-social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+              <a href="#" class="designer-social-icon" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       SECTION 5: CRAFTSMANSHIP PROCESS (HORIZONTAL TIMELINE)
+       ========================================== -->
+    <section class="section-padding" style="background-color: var(--bg-surface);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Meticulous Steps</span>
+          <h2 class="section-title">The Craftsmanship Process</h2>
+          <p class="section-desc">From sustainable forest logs to high-precision finishing coats, this is how we craft each furniture work.</p>
+        </div>
+
+        <div class="process-timeline">
+          <!-- Step 1 -->
+          <div class="process-step">
+            <div class="process-icon-box">
+              <i data-lucide="leaf"></i>
+              <div class="process-step-num">01</div>
+            </div>
+            <h3 class="process-title">Timber Sourcing</h3>
+            <p class="process-desc">We select only slow-grown, FSC-certified Scandinavian timber trees for maximum core ring density.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="process-step">
+            <div class="process-icon-box">
+              <i data-lucide="pencil"></i>
+              <div class="process-step-num">02</div>
+            </div>
+            <h3 class="process-title">Precision Milling</h3>
+            <p class="process-desc">Logs are cut and naturally seasoned in solar kilns to stabilize water content and prevent wood warping.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="process-step">
+            <div class="process-icon-box">
+              <i data-lucide="wrench"></i>
+              <div class="process-step-num">03</div>
+            </div>
+            <h3 class="process-title">Cabinet Joinery</h3>
+            <p class="process-desc">Master carpenters hand-shape, carve, and wedge traditional wood joints with micrometric accuracy.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="process-step">
+            <div class="process-icon-box">
+              <i data-lucide="sparkles"></i>
+              <div class="process-step-num">04</div>
+            </div>
+            <h3 class="process-title">Organic Oil Coat</h3>
+            <p class="process-desc">A double coating of natural beeswax and eco-oils seals the grain, highlighting the timber wood’s texture.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       SECTION 6: AWARDS & ACHIEVEMENTS (FLOATING GLASS CARDS)
+       ========================================== -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Praise</span>
+          <h2 class="section-title">Recognitions & Accolades</h2>
+          <p class="section-desc">LIGNUM's dedication to sustainable furniture construction and design aesthetics has earned international critical acclaim.</p>
+        </div>
+
+        <div class="awards-row">
+          <!-- Award 1 -->
+          <div class="award-card glass-card">
+            <div class="award-icon-container">
+              <i data-lucide="trophy"></i>
+            </div>
+            <span class="award-year">2021</span>
+            <h3 class="award-title">Oslo Eco-Design Gold</h3>
+            <p class="award-desc">Awarded for our commitment to carbon-neutral production, zero waste, and locally sourced sustainable pine trees.</p>
+          </div>
+
+          <!-- Award 2 -->
+          <div class="award-card glass-card">
+            <div class="award-icon-container">
+              <i data-lucide="award"></i>
+            </div>
+            <span class="award-year">2023</span>
+            <h3 class="award-title">Milan Design Week Winner</h3>
+            <p class="award-desc">Our flagship Interlocking Dining Set took the award for outstanding innovation in metal-free cabinet joinery.</p>
+          </div>
+
+          <!-- Award 3 -->
+          <div class="award-card glass-card">
+            <div class="award-icon-container">
+              <i data-lucide="medal"></i>
+            </div>
+            <span class="award-year">2025</span>
+            <h3 class="award-title">Tokyo Minimalist Atelier Choice</h3>
+            <p class="award-desc">Presented by the Tokyo Architectural Council for the finest integration of natural timber inside modern urban spaces.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       SECTION 7: PREMIUM CTA BANNER
+       ========================================== -->
+    <section class="about-cta-section">
+      <div class="about-cta-bg">
+        <img src="images/about_cta_bg.jpg" alt="Cozy Warm Scandinavian Cottage Sunset Interior">
+      </div>
+      <div class="about-cta-content glass-card">
+        <h2 class="about-cta-title">Experience LIGNUM In Person</h2>
+        <p class="about-cta-desc">Come touch our timbers, feel the organic texture of our fabrics, and coordinate with an interior stylist at one of our private, museum-like showrooms.</p>
+        <a href="schedule.html" class="cta-btn">
+          <span>Book Private Consultation</span>
+          <i data-lucide="calendar"></i>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================
+     PREMIUM MULTI-COLUMN FOOTER
+     ========================================== -->
+  <footer class="main-footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Column 1: Brand & Socials -->
+        <div class="footer-col">
+          <div class="footer-brand">
+            <i data-lucide="sofa" class="logo-icon"></i>
+            <span>LIGNUM</span>
+          </div>
+          <p class="footer-desc">Crafting premium Scandinavian and minimalist designer furniture. Elevate your living room, study, or bedroom spaces with tailored woodwork.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-icon" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" class="social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a href="#" class="social-icon" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="footer-col">
+          <h4 class="footer-title">Shop Collection</h4>
+          <ul class="footer-links">
+            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Living Room</span></a></li>
+            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Lounge Chairs</span></a></li>
+            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Dining Room</span></a></li>
+            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Custom Projects</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Company info -->
+        <div class="footer-col">
+          <h4 class="footer-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>About LIGNUM</span></a></li>
+            <li><a href="schedule.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Private Showrooms</span></a></li>
+            <li><a href="schedule.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Book Designer Consult</span></a></li>
+            <li><a href="#"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Sustainability</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Detailed Contact Info -->
+        <div class="footer-col">
+          <h4 class="footer-title">Contact Us</h4>
+          <div class="footer-links" style="gap: 16px;">
+            <div class="footer-contact-item">
+              <i data-lucide="map-pin"></i>
+              <span>5th Avenue, Design District,<br>New York, NY 10011</span>
+            </div>
+            <div class="footer-contact-item">
+              <i data-lucide="mail"></i>
+              <span>concierge@lignum.design</span>
+            </div>
+            <div class="footer-contact-item">
+              <i data-lucide="phone"></i>
+              <span>+1 (212) 555-0190</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Row -->
+      <div class="footer-bottom">
+        <p>© 2026 LIGNUM Luxury Furniture Co. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Help Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide Icons
+        lucide.createIcons();
+
+    // Highlight Active Navbar Link
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Clean up any hardcoded active classes
+    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    
+    let matched = false;
+    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPath) {
+        link.classList.add('active');
+        matched = true;
+      }
+    });
+    
+    if (!matched || currentPath === 'index.html' || currentPath === 'home2.html') {
+      document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === '#' || href === 'index.html' || href === 'home2.html') {
+          if (link.textContent.trim().startsWith('Home') || href === 'index.html' || href === 'home2.html') {
+            link.classList.add('active');
+          }
+        }
+      });
+    }
+    
+        // Elements Selectors
+        const header = document.getElementById('navbar-header');
+        
+        // Theme Toggles
+        const themeBtn = document.getElementById('darkModeToggle');
+        const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+        
+        // RTL Toggles
+        const rtlBtn = document.getElementById('rtlToggleBtn');
+        const mobileRtlBtn = document.getElementById('mobile-rtl-toggle');
+        
+        // Mobile Drawer
+        const hamburgerBtn = document.getElementById('hamburger-menu-btn');
+        const mobileDrawer = document.getElementById('mobile-sidebar-drawer');
+        const drawerBackdrop = document.getElementById('drawer-backdrop');
+        const mobileCloseTriggers = document.querySelectorAll('.mobile-drawer-close-trigger');
+        const mobileHomeDropdown = document.getElementById('mobile-home-dropdown');
+        
+        // Login Modal
+        const navLoginBtn = document.getElementById('nav-login-btn');
+        const mobileLoginBtn = document.getElementById('mobile-login-btn');
+        const loginModalOverlay = document.getElementById('login-modal-overlay');
+        const loginModalCloseBtn = document.getElementById('login-modal-close-btn');
+    
+        /* ==========================================
+           SCROLL NAVBAR ANIMATION
+           ========================================== */
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 20) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        });
+    
+        /* ==========================================
+           DARK MODE IMPLEMENTATION
+           ========================================== */
+        const initTheme = () => {
+          const savedTheme = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        };
+        initTheme();
+    
+        const toggleTheme = () => {
+          const isDark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        };
+    
+        themeBtn.addEventListener('click', toggleTheme);
+        mobileThemeBtn.addEventListener('click', () => {
+          toggleTheme();
+          toggleMobileDrawer();
+        });
+    
+        /* ==========================================
+           RTL (RIGHT-TO-LEFT) IMPLEMENTATION
+           ========================================== */
+        const applyRtl = (isRtl) => {
+          if (isRtl) {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', 'ar');
+            localStorage.setItem('rtl', 'true');
+            const badge = document.querySelector('.rtl-text');
+            if (badge) badge.textContent = 'LTR';
+          } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.setAttribute('lang', 'en');
+            localStorage.setItem('rtl', 'false');
+            const badge = document.querySelector('.rtl-text');
+            if (badge) badge.textContent = 'RTL';
+          }
+          lucide.createIcons();
+        };
+    
+        const initRtl = () => {
+          const savedRtl = localStorage.getItem('rtl') === 'true';
+          applyRtl(savedRtl);
+        };
+        initRtl();
+    
+        rtlBtn.addEventListener('click', () => {
+          const currentRtl = document.documentElement.getAttribute('dir') === 'rtl';
+          applyRtl(!currentRtl);
+        });
+    
+        mobileRtlBtn.addEventListener('click', () => {
+          const currentRtl = document.documentElement.getAttribute('dir') === 'rtl';
+          applyRtl(!currentRtl);
+          toggleMobileDrawer();
+        });
+    
+        /* ==========================================
+           MOBILE DRAWER IMPLEMENTATION
+           ========================================== */
+        const toggleMobileDrawer = () => {
+          const isOpen = mobileDrawer.classList.toggle('open');
+          drawerBackdrop.classList.toggle('open');
+          hamburgerBtn.classList.toggle('active');
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        };
+    
+        hamburgerBtn.addEventListener('click', toggleMobileDrawer);
+        drawerBackdrop.addEventListener('click', toggleMobileDrawer);
+    
+        // Mobile home accordion click
+        mobileHomeDropdown.querySelector('.mobile-dropdown-header').addEventListener('click', () => {
+          mobileHomeDropdown.classList.toggle('active');
+        });
+    
+        // Close mobile drawer when clicking anchors
+        mobileCloseTriggers.forEach(trigger => {
+          trigger.addEventListener('click', () => {
+            if (mobileDrawer.classList.contains('open')) {
+              toggleMobileDrawer();
+            }
+          });
+        });
+    
+        /* ==========================================
+           LOGIN MODAL IMPLEMENTATION
+           ========================================== */
+        const openLogin = () => {
+          loginModalOverlay.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        };
+    
+        const closeLogin = () => {
+          loginModalOverlay.classList.remove('open');
+          document.body.style.overflow = '';
+        };
+    
+        if (navLoginBtn) navLoginBtn.addEventListener('click', openLogin);
+        if (mobileLoginBtn) {
+          mobileLoginBtn.addEventListener('click', () => {
+            toggleMobileDrawer(); // Close mobile drawer
+            openLogin();
+          });
+        }
+        loginModalCloseBtn.addEventListener('click', closeLogin);
+    
+        loginModalOverlay.addEventListener('click', (e) => {
+          if (e.target === loginModalOverlay) {
+            closeLogin();
+          }
+        });
+    
+        // Close modal on ESC key
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            closeLogin();
+          }
+        });
+  </script>
+</body>
+</html>

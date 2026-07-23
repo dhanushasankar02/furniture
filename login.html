@@ -625,22 +625,37 @@
     // RTL TOGGLE (Switches reading direction)
     // ==========================================
     const rtlToggleBtn = document.getElementById('rtlToggleBtn');
-    
-    rtlToggleBtn.addEventListener('click', () => {
-      const currentDir = document.documentElement.getAttribute('dir');
-      const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
-      document.documentElement.setAttribute('dir', newDir);
-      document.documentElement.setAttribute('lang', newDir === 'rtl' ? 'ar' : 'en');
-      
-      // Save RTL preference to localStorage
-      localStorage.setItem('rtl', newDir);
-    });
 
-    // Sync RTL with localStorage if present
-    const savedRTL = localStorage.getItem('rtl');
-    if (savedRTL) {
-      document.documentElement.setAttribute('dir', savedRTL);
-      document.documentElement.setAttribute('lang', savedRTL === 'rtl' ? 'ar' : 'en');
+    const applyRtl = (isRtl) => {
+      if (isRtl) {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+        localStorage.setItem('rtl', 'true');
+        const badge = document.querySelector('.rtl-text');
+        if (badge) badge.textContent = 'LTR';
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', 'en');
+        localStorage.setItem('rtl', 'false');
+        const badge = document.querySelector('.rtl-text');
+        if (badge) badge.textContent = 'RTL';
+      }
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    };
+
+    const initRtl = () => {
+      const savedRtl = localStorage.getItem('rtl') === 'true';
+      applyRtl(savedRtl);
+    };
+    initRtl();
+
+    if (rtlToggleBtn) {
+      rtlToggleBtn.addEventListener('click', () => {
+        const currentRtl = document.documentElement.getAttribute('dir') === 'rtl';
+        applyRtl(!currentRtl);
+      });
     }
   </script>
 </body>

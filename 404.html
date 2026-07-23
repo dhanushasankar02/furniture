@@ -5,8 +5,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LIGNUM - About Our Craft</title>
+  <title>LIGNUM - Page Not Found</title>
   <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <meta name="description" content="The premium modern minimalist furniture page you are looking for does not exist. Explore LIGNUM collections or schedule a showroom visit.">
   
   <!-- Google Fonts: Outfit (English) & Tajawal (Arabic/RTL) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1669,693 +1670,277 @@
         display: none !important;
       }
     }
+
+    /* ==========================================
+       404 ERROR PAGE STYLES
+       ========================================== */
+    .error-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      position: relative;
+      background: radial-gradient(circle at 10% 20%, rgba(171, 92, 60, 0.03) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(171, 92, 60, 0.03) 0%, transparent 40%);
+      overflow: hidden;
+    }
+
+    .dark .error-section {
+      background: radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.02) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.02) 0%, transparent 40%);
+    }
+
+    /* Ambient glowing blurred circles */
+    .error-section::before,
+    .error-section::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: var(--primary);
+      filter: blur(150px);
+      opacity: 0.08;
+      z-index: 1;
+      pointer-events: none;
+      animation: floatGlow 12s infinite alternate ease-in-out;
+    }
+
+    .error-section::before {
+      top: 10%;
+      left: 15%;
+    }
+
+    .error-section::after {
+      bottom: 10%;
+      right: 15%;
+      animation-delay: -6s;
+    }
+
+    @keyframes floatGlow {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        transform: translate(30px, 30px) scale(1.1);
+      }
+    }
+
+    .error-container {
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .error-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 60px 40px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .dark .error-card {
+      background: rgba(28, 25, 23, 0.4);
+      border-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .error-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 60px rgba(171, 92, 60, 0.08);
+      border-color: rgba(171, 92, 60, 0.2);
+    }
+
+    .dark .error-card:hover {
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+
+    .error-number {
+      font-size: 130px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--text-main) 30%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: -10px;
+      position: relative;
+      animation: pulseText 3s infinite alternate ease-in-out;
+    }
+
+    @keyframes pulseText {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.02);
+      }
+    }
+
+    .error-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+    }
+
+    .error-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 460px;
+      line-height: 1.6;
+    }
+
+    .error-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .error-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .error-btn.primary-btn {
+      background-color: var(--primary);
+      color: var(--text-inverse);
+    }
+
+    .error-btn.primary-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--primary-glow);
+    }
+
+    .error-btn.secondary-btn {
+      background-color: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .error-btn.secondary-btn:hover {
+      background-color: var(--bg-hover);
+      border-color: var(--border-focus);
+      transform: translateY(-2px);
+    }
+
+    .error-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media (max-width: 640px) {
+      .error-card {
+        padding: 40px 24px;
+      }
+      .error-number {
+        font-size: 90px;
+      }
+      .error-title {
+        font-size: 26px;
+      }
+      .error-desc {
+        font-size: 14.5px;
+      }
+      .error-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .error-btn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ==========================================
-     NAVBAR HEADER (ONE-LINE LAYOUT)
-     ========================================== -->
-  <header class="header" id="navbar-header">
-    <div class="container nav-container">
-      
-      <!-- Brand Logo -->
-      <a href="index.html" class="logo">
-        <i data-lucide="sofa" class="logo-icon"></i>
-        <span>LIGNUM</span>
-      </a>
-      
-      <!-- Desktop Navigation Menu -->
-      <nav class="desktop-nav">
-        <ul class="nav-links">
-          <li class="dropdown-parent">
-            <a href="#" class="nav-link">
-              Home <i data-lucide="chevron-down" class="dropdown-chevron"></i>
+  <main>
+    <!-- ==========================================
+       SECTION: 404 PAGE CONTENT
+       ========================================== -->
+    <section class="error-section">
+      <div class="error-container">
+        <div class="error-card glass-card">
+          <div class="error-number">404</div>
+          <h1 class="error-title">Page Not Found</h1>
+          <p class="error-desc">The design piece or spatial concept you are looking for has been moved, archived, or does not exist in this catalog.</p>
+          <div class="error-actions">
+            <a href="index.html" class="error-btn primary-btn" id="btn-return-home">
+              <i data-lucide="home"></i>
+              <span>Return to Studio</span>
             </a>
-            <ul class="dropdown-menu">
-              <li><a href="index.html">Home 1 - Studio Living</a></li>
-              <li><a href="home2.html">Home 2 - Scandi Gallery</a></li>
-            </ul>
-          </li>
-          <li><a href="about.html" class="nav-link">About</a></li>
-          <li><a href="furniture.html" class="nav-link">Furniture</a></li>
-          <li><a href="room-lookbook.html" class="nav-link">Room Lookbook</a></li>
-          <li><a href="room-ideas.html" class="nav-link">Room Ideas</a></li>
-          <li><a href="customization.html" class="nav-link">Customization</a></li>
-          <li><a href="collections.html" class="nav-link">Collections</a></li>
-          <li><a href="schedule.html" class="nav-link">Schedule Visit</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-
-      <!-- Desktop Header Actions -->
-      <div class="header-actions">
-        <button class="action-btn icon-btn theme-toggle" id="darkModeToggle" aria-label="Dark Mode">
-          <i class="fas fa-moon icon-moon"></i>
-          <i class="fas fa-sun icon-sun" style="display: none;"></i>
-        </button>
-
-        <button class="action-btn icon-btn rtl-toggle" id="rtlToggleBtn" aria-label="Toggle Layout Direction" title="Toggle Layout Direction">
-          <i class="fas fa-exchange-alt"></i>
-        </button>
-
-        <a href="login.html" class="login-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Login</a>
-
-        <button class="hamburger-btn" id="hamburger-menu-btn" aria-label="Toggle Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- ==========================================
-     MOBILE DRAWER
-     ========================================== -->
-  <div class="drawer-overlay" id="drawer-backdrop"></div>
-  <div class="mobile-drawer" id="mobile-sidebar-drawer">
-    <nav class="mobile-links">
-      <div class="mobile-dropdown-parent" id="mobile-home-dropdown">
-        <div class="mobile-dropdown-header mobile-link">
-          <span>Home</span>
-          <i data-lucide="chevron-down" class="dropdown-chevron"></i>
-        </div>
-        <div class="mobile-dropdown-menu">
-          <a href="index.html" class="mobile-drawer-close-trigger">Home 1 - Studio Living</a>
-          <a href="home2.html" class="mobile-drawer-close-trigger">Home 2 - Scandi Gallery</a>
-        </div>
-      </div>
-      
-      <a href="about.html" class="mobile-link active mobile-drawer-close-trigger">About</a>
-      <a href="furniture.html" class="mobile-link mobile-drawer-close-trigger">Furniture</a>
-      <a href="room-lookbook.html" class="mobile-link mobile-drawer-close-trigger">Room Lookbook</a>
-      <a href="room-ideas.html" class="mobile-link mobile-drawer-close-trigger">Room Ideas</a>
-      <a href="customization.html" class="mobile-link mobile-drawer-close-trigger">Customization</a>
-      <a href="collections.html" class="mobile-link mobile-drawer-close-trigger">Collections</a>
-      <a href="schedule.html" class="mobile-link mobile-drawer-close-trigger">Schedule Visit</a>
-      <a href="contact.html" class="mobile-link mobile-drawer-close-trigger">Contact</a>
-    </nav>
-
-    <div class="mobile-drawer-bottom">
-      <button class="action-btn theme-toggle" id="mobile-theme-toggle" style="width: 100%; justify-content: center; height: 44px; margin-bottom: 8px; border: 1px solid var(--border)">
-        <i class="fas fa-moon icon-moon" style="margin-inline-end: 8px;"></i>
-        <i class="fas fa-sun icon-sun" style="margin-inline-end: 8px; display: none;"></i>
-        <span>Toggle Theme</span>
-      </button>
-
-      <button class="action-btn rtl-toggle" id="mobile-rtl-toggle" style="width: 100%; justify-content: center; height: 44px; margin-bottom: 12px; border: 1px solid var(--border)">
-        <i class="fas fa-exchange-alt" style="margin-inline-end: 8px;"></i>
-        <span>Toggle RTL / LTR</span>
-      </button>
-      
-      <a href="login.html" class="login-btn" style="width: 100%; justify-content: center; height: 48px; text-decoration: none; display: inline-flex; align-items: center;">Login</a>
-    </div>
-  </div>
-
-  <!-- ==========================================
-     LOGIN MODAL (Clean popup)
-     ========================================== -->
-  <div class="login-modal" id="login-modal-overlay">
-    <div class="login-card">
-      <button class="login-card-close" id="login-modal-close-btn">
-        <i data-lucide="x"></i>
-      </button>
-      <div class="login-header">
-        <h3>Welcome back</h3>
-        <p>Login to your premium designer account</p>
-      </div>
-      <form class="login-form" onsubmit="event.preventDefault(); alert('Logged in successfully (Mock)!'); document.getElementById('login-modal-overlay').classList.remove('open');">
-        <div class="form-group">
-          <label class="form-label">Email address</label>
-          <input type="email" placeholder="name@domain.com" required class="form-input">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <input type="password" placeholder="••••••••" required class="form-input">
-        </div>
-        <div class="form-options">
-          <label class="remember-me">
-            <input type="checkbox" style="accent-color: var(--primary)">
-            <span>Remember me</span>
-          </label>
-          <a href="#" class="forgot-pass">Forgot Password?</a>
-        </div>
-        <button type="submit" class="submit-btn">Login</button>
-      </form>
-    </div>
-  </div>
-
-<main>
-    <!-- ==========================================
-       SECTION 1: LUXURY HERO BANNER
-       ========================================== -->
-    <section class="about-hero-section">
-      <div class="about-hero-bg">
-        <img src="images/about_hero.jpg" alt="Lignum Luxury Showroom Atrium">
-      </div>
-      <div class="about-hero-card glass-card">
-        <span class="about-hero-tag">Aesthetics of Silence</span>
-        <h1 class="about-hero-title">Crafting Sacred Home Sanctuaries</h1>
-        <p class="about-hero-text">LIGNUM creates organic Scandinavian furniture that speaks through minimalism, natural timber, and architectural space. Welcome to an exhibition of timeless materials and exquisite construction.</p>
-      </div>
-    </section>
-
-    <!-- ==========================================
-       SECTION 2: OUR STORY (ALTERNATING TIMELINE)
-       ========================================== -->
-    <section class="section-padding">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Chronology</span>
-          <h2 class="section-title">Our Milestone Journey</h2>
-          <p class="section-desc">Follow the steps, workshops, and flagship facades that built LIGNUM from a small cabinet maker to an international benchmark of Scandi craft.</p>
-        </div>
-
-        <div class="story-timeline">
-          <!-- Milestone 1 -->
-          <div class="timeline-item left">
-            <span class="timeline-year">1998</span>
-            <div class="timeline-card">
-              <div class="timeline-img-frame">
-                <img src="images/about_story_1998.jpg" alt="1998 Founding Carpenter Workshop">
-              </div>
-              <h3 class="timeline-title">The Oslo Woodworking Atelier</h3>
-              <p class="timeline-text">LIGNUM began as a single-bench joinery shop in the Oslo harbor docks, dedicated to hand-carving organic birch chests and dining sets.</p>
-            </div>
-          </div>
-
-          <!-- Milestone 2 -->
-          <div class="timeline-item right">
-            <span class="timeline-year">2008</span>
-            <div class="timeline-card">
-              <div class="timeline-img-frame">
-                <img src="images/about_story_2008.jpg" alt="2008 Oslo Boutique Facade">
-              </div>
-              <h3 class="timeline-title">First Concept Showroom</h3>
-              <p class="timeline-text">We launched our Oslo concept gallery, introducing clean Scandinavian minimalism, natural woven paper cords, and custom linen-finish upholstery.</p>
-            </div>
-          </div>
-
-          <!-- Milestone 3 -->
-          <div class="timeline-item left">
-            <span class="timeline-year">2018</span>
-            <div class="timeline-card">
-              <div class="timeline-img-frame">
-                <img src="images/about_story_2018.jpg" alt="2018 Carbon-neutral Factory Facade">
-              </div>
-              <h3 class="timeline-title">Carbon-Neutral Sourcing Facility</h3>
-              <p class="timeline-text">A massive eco-shift. We established a zero-emission facility powered by solar panels to dry, treat, and assemble timber using local pine sources.</p>
-            </div>
-          </div>
-
-          <!-- Milestone 4 -->
-          <div class="timeline-item right">
-            <span class="timeline-year">2026</span>
-            <div class="timeline-card">
-              <div class="timeline-img-frame">
-                <img src="images/about_story_2026.jpg" alt="2026 International Design Exhibition">
-              </div>
-              <h3 class="timeline-title">Global Flagship Galleries</h3>
-              <p class="timeline-text">Expanding our luxury reach with architectural showrooms in New York, London, and Tokyo, providing bespoke interior styling consultation.</p>
-            </div>
+            <a href="furniture.html" class="error-btn secondary-btn" id="btn-browse-collection">
+              <i data-lucide="sofa"></i>
+              <span>Browse Collection</span>
+            </a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-       SECTION 3: BRAND PHILOSOPHY (ASYSMMETRICAL COLLAGE)
-       ========================================== */ -->
-    <section class="section-padding" style="background-color: var(--bg-surface);">
-      <div class="container">
-        <div class="philosophy-grid">
-          <div class="philosophy-left">
-            <span class="section-tag">Manifesto</span>
-            <h2 class="section-title" style="margin-bottom: 0;">Philosophy of Quietude</h2>
-            <p class="philosophy-quote">"True luxury is not loud. It is found in the <span>honesty of the timber grain</span>, the precision of a joint, and the peace it brings to a room."</p>
-            <p class="philosophy-manifesto">We source only sustainable FSC-certified Swedish oak, birch, and walnut. Every plank is dried in solar kilns and shaped by master carvers to ensure LIGNUM furniture becomes a legacy heirloom, growing more beautiful as it patinas with age.</p>
-          </div>
-
-          <div class="philosophy-collage">
-            <div class="collage-item collage-item-1">
-              <img src="images/about_philosophy_forest.jpg" alt="Sustainable Birch Woods and Timber Selections">
-            </div>
-            <div class="collage-item collage-item-2">
-              <img src="images/about_philosophy_detail.jpg" alt="Detailed Oak Joint Joinery Work">
-            </div>
-            <div class="collage-item collage-item-3">
-              <img src="images/about_philosophy_materials.jpg" alt="Boucle Fabrics and Stone Material Swatches">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-       SECTION 4: MEET OUR DESIGNERS (CIRCULAR PROFILE CARDS)
-       ========================================== -->
-    <section class="section-padding">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Aesthetic Council</span>
-          <h2 class="section-title">Meet Our Designers</h2>
-          <p class="section-desc">The architects and creative visionaries who sketch, contour, and curate the organic layouts of the LIGNUM collection.</p>
-        </div>
-
-        <div class="designers-grid">
-          <!-- Designer 1 -->
-          <div class="designer-card">
-            <div class="designer-avatar-container">
-              <div class="designer-avatar-border"></div>
-              <img src="images/about_designer_1.jpg" alt="Astrid Lindqvist Headshot" class="designer-avatar">
-            </div>
-            <h3 class="designer-name">Astrid Lindqvist</h3>
-            <p class="designer-role">Head of Scandi Design</p>
-            <p class="designer-bio">Astrid blends clean Norwegian lines with cozy organic geometries, aiming to bring the calmness of northern forests into residential lounges.</p>
-            <div class="designer-socials">
-              <a href="#" class="designer-social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-              <a href="#" class="designer-social-icon" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-            </div>
-          </div>
-
-          <!-- Designer 2 -->
-          <div class="designer-card">
-            <div class="designer-avatar-container">
-              <div class="designer-avatar-border"></div>
-              <img src="images/about_designer_2.jpg" alt="Koji Tanaka Headshot" class="designer-avatar">
-            </div>
-            <h3 class="designer-name">Koji Tanaka</h3>
-            <p class="designer-role">Bespoke Furniture Carver</p>
-            <p class="designer-bio">Trained in Kyoto carpentry, Koji focuses on the 'Japandi' fusion, crafting interlocking timber joints that require zero metallic fasteners.</p>
-            <div class="designer-socials">
-              <a href="#" class="designer-social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-              <a href="#" class="designer-social-icon" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-            </div>
-          </div>
-
-          <!-- Designer 3 -->
-          <div class="designer-card">
-            <div class="designer-avatar-container">
-              <div class="designer-avatar-border"></div>
-              <img src="images/about_designer_3.jpg" alt="Sophia Rossi Headshot" class="designer-avatar">
-            </div>
-            <h3 class="designer-name">Sophia Rossi</h3>
-            <p class="designer-role">Senior Interior Architect</p>
-            <p class="designer-bio">Sophia curates the layout spacing and custom finishes, turning spacious raw apartments into refined, warm glassmorphic living spaces.</p>
-            <div class="designer-socials">
-              <a href="#" class="designer-social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-              <a href="#" class="designer-social-icon" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-       SECTION 5: CRAFTSMANSHIP PROCESS (HORIZONTAL TIMELINE)
-       ========================================== -->
-    <section class="section-padding" style="background-color: var(--bg-surface);">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Meticulous Steps</span>
-          <h2 class="section-title">The Craftsmanship Process</h2>
-          <p class="section-desc">From sustainable forest logs to high-precision finishing coats, this is how we craft each furniture work.</p>
-        </div>
-
-        <div class="process-timeline">
-          <!-- Step 1 -->
-          <div class="process-step">
-            <div class="process-icon-box">
-              <i data-lucide="leaf"></i>
-              <div class="process-step-num">01</div>
-            </div>
-            <h3 class="process-title">Timber Sourcing</h3>
-            <p class="process-desc">We select only slow-grown, FSC-certified Scandinavian timber trees for maximum core ring density.</p>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="process-step">
-            <div class="process-icon-box">
-              <i data-lucide="pencil"></i>
-              <div class="process-step-num">02</div>
-            </div>
-            <h3 class="process-title">Precision Milling</h3>
-            <p class="process-desc">Logs are cut and naturally seasoned in solar kilns to stabilize water content and prevent wood warping.</p>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="process-step">
-            <div class="process-icon-box">
-              <i data-lucide="wrench"></i>
-              <div class="process-step-num">03</div>
-            </div>
-            <h3 class="process-title">Cabinet Joinery</h3>
-            <p class="process-desc">Master carpenters hand-shape, carve, and wedge traditional wood joints with micrometric accuracy.</p>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="process-step">
-            <div class="process-icon-box">
-              <i data-lucide="sparkles"></i>
-              <div class="process-step-num">04</div>
-            </div>
-            <h3 class="process-title">Organic Oil Coat</h3>
-            <p class="process-desc">A double coating of natural beeswax and eco-oils seals the grain, highlighting the timber wood’s texture.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-       SECTION 6: AWARDS & ACHIEVEMENTS (FLOATING GLASS CARDS)
-       ========================================== -->
-    <section class="section-padding">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Praise</span>
-          <h2 class="section-title">Recognitions & Accolades</h2>
-          <p class="section-desc">LIGNUM's dedication to sustainable furniture construction and design aesthetics has earned international critical acclaim.</p>
-        </div>
-
-        <div class="awards-row">
-          <!-- Award 1 -->
-          <div class="award-card glass-card">
-            <div class="award-icon-container">
-              <i data-lucide="trophy"></i>
-            </div>
-            <span class="award-year">2021</span>
-            <h3 class="award-title">Oslo Eco-Design Gold</h3>
-            <p class="award-desc">Awarded for our commitment to carbon-neutral production, zero waste, and locally sourced sustainable pine trees.</p>
-          </div>
-
-          <!-- Award 2 -->
-          <div class="award-card glass-card">
-            <div class="award-icon-container">
-              <i data-lucide="award"></i>
-            </div>
-            <span class="award-year">2023</span>
-            <h3 class="award-title">Milan Design Week Winner</h3>
-            <p class="award-desc">Our flagship Interlocking Dining Set took the award for outstanding innovation in metal-free cabinet joinery.</p>
-          </div>
-
-          <!-- Award 3 -->
-          <div class="award-card glass-card">
-            <div class="award-icon-container">
-              <i data-lucide="medal"></i>
-            </div>
-            <span class="award-year">2025</span>
-            <h3 class="award-title">Tokyo Minimalist Atelier Choice</h3>
-            <p class="award-desc">Presented by the Tokyo Architectural Council for the finest integration of natural timber inside modern urban spaces.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-       SECTION 7: PREMIUM CTA BANNER
-       ========================================== -->
-    <section class="about-cta-section">
-      <div class="about-cta-bg">
-        <img src="images/about_cta_bg.jpg" alt="Cozy Warm Scandinavian Cottage Sunset Interior">
-      </div>
-      <div class="about-cta-content glass-card">
-        <h2 class="about-cta-title">Experience LIGNUM In Person</h2>
-        <p class="about-cta-desc">Come touch our timbers, feel the organic texture of our fabrics, and coordinate with an interior stylist at one of our private, museum-like showrooms.</p>
-        <a href="schedule.html" class="cta-btn">
-          <span>Book Private Consultation</span>
-          <i data-lucide="calendar"></i>
-        </a>
       </div>
     </section>
   </main>
 
-  <!-- ==========================================
-     PREMIUM MULTI-COLUMN FOOTER
-     ========================================== -->
-  <footer class="main-footer" id="contact">
-    <div class="container">
-      <div class="footer-grid">
-        
-        <!-- Column 1: Brand & Socials -->
-        <div class="footer-col">
-          <div class="footer-brand">
-            <i data-lucide="sofa" class="logo-icon"></i>
-            <span>LIGNUM</span>
-          </div>
-          <p class="footer-desc">Crafting premium Scandinavian and minimalist designer furniture. Elevate your living room, study, or bedroom spaces with tailored woodwork.</p>
-          <div class="footer-socials">
-            <a href="#" class="social-icon" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-            <a href="#" class="social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-            <a href="#" class="social-icon" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
-          </div>
-        </div>
-
-        <!-- Column 2: Quick Links -->
-        <div class="footer-col">
-          <h4 class="footer-title">Shop Collection</h4>
-          <ul class="footer-links">
-            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Living Room</span></a></li>
-            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Lounge Chairs</span></a></li>
-            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Dining Room</span></a></li>
-            <li><a href="furniture.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Custom Projects</span></a></li>
-          </ul>
-        </div>
-
-        <!-- Column 3: Company info -->
-        <div class="footer-col">
-          <h4 class="footer-title">Company</h4>
-          <ul class="footer-links">
-            <li><a href="about.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>About LIGNUM</span></a></li>
-            <li><a href="schedule.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Private Showrooms</span></a></li>
-            <li><a href="schedule.html"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Book Designer Consult</span></a></li>
-            <li><a href="#"><i data-lucide="chevron-right" class="footer-link-icon"></i><span>Sustainability</span></a></li>
-          </ul>
-        </div>
-
-        <!-- Column 4: Detailed Contact Info -->
-        <div class="footer-col">
-          <h4 class="footer-title">Contact Us</h4>
-          <div class="footer-links" style="gap: 16px;">
-            <div class="footer-contact-item">
-              <i data-lucide="map-pin"></i>
-              <span>5th Avenue, Design District,<br>New York, NY 10011</span>
-            </div>
-            <div class="footer-contact-item">
-              <i data-lucide="mail"></i>
-              <span>concierge@lignum.design</span>
-            </div>
-            <div class="footer-contact-item">
-              <i data-lucide="phone"></i>
-              <span>+1 (212) 555-0190</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Footer Bottom Row -->
-      <div class="footer-bottom">
-        <p>© 2026 LIGNUM Luxury Furniture Co. All rights reserved.</p>
-        <div class="footer-bottom-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Help Center</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
   <script>
     // Initialize Lucide Icons
-        lucide.createIcons();
+    lucide.createIcons();
 
-    // Highlight Active Navbar Link
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    
-    // Clean up any hardcoded active classes
-    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
-      link.classList.remove('active');
-    });
-    
-    let matched = false;
-    document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
-      const href = link.getAttribute('href');
-      if (href === currentPath) {
-        link.classList.add('active');
-        matched = true;
+    /* ==========================================
+       DARK MODE IMPLEMENTATION
+       ========================================== */
+    const initTheme = () => {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
       }
-    });
-    
-    if (!matched || currentPath === 'index.html' || currentPath === 'home2.html') {
-      document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === '#' || href === 'index.html' || href === 'home2.html') {
-          if (link.textContent.trim().startsWith('Home') || href === 'index.html' || href === 'home2.html') {
-            link.classList.add('active');
-          }
-        }
-      });
-    }
-    
-        // Elements Selectors
-        const header = document.getElementById('navbar-header');
-        
-        // Theme Toggles
-        const themeBtn = document.getElementById('darkModeToggle');
-        const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
-        
-        // RTL Toggles
-        const rtlBtn = document.getElementById('rtlToggleBtn');
-        const mobileRtlBtn = document.getElementById('mobile-rtl-toggle');
-        
-        // Mobile Drawer
-        const hamburgerBtn = document.getElementById('hamburger-menu-btn');
-        const mobileDrawer = document.getElementById('mobile-sidebar-drawer');
-        const drawerBackdrop = document.getElementById('drawer-backdrop');
-        const mobileCloseTriggers = document.querySelectorAll('.mobile-drawer-close-trigger');
-        const mobileHomeDropdown = document.getElementById('mobile-home-dropdown');
-        
-        // Login Modal
-        const navLoginBtn = document.getElementById('nav-login-btn');
-        const mobileLoginBtn = document.getElementById('mobile-login-btn');
-        const loginModalOverlay = document.getElementById('login-modal-overlay');
-        const loginModalCloseBtn = document.getElementById('login-modal-close-btn');
-    
-        /* ==========================================
-           SCROLL NAVBAR ANIMATION
-           ========================================== */
-        window.addEventListener('scroll', () => {
-          if (window.scrollY > 20) {
-            header.classList.add('scrolled');
-          } else {
-            header.classList.remove('scrolled');
-          }
-        });
-    
-        /* ==========================================
-           DARK MODE IMPLEMENTATION
-           ========================================== */
-        const initTheme = () => {
-          const savedTheme = localStorage.getItem('theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-            document.documentElement.classList.add('dark');
-          } else {
-            document.documentElement.classList.remove('dark');
-          }
-        };
-        initTheme();
-    
-        const toggleTheme = () => {
-          const isDark = document.documentElement.classList.toggle('dark');
-          localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        };
-    
-        themeBtn.addEventListener('click', toggleTheme);
-        mobileThemeBtn.addEventListener('click', () => {
-          toggleTheme();
-          toggleMobileDrawer();
-        });
-    
-        /* ==========================================
-           RTL (RIGHT-TO-LEFT) IMPLEMENTATION
-           ========================================== */
-        const applyRtl = (isRtl) => {
-          if (isRtl) {
-            document.documentElement.setAttribute('dir', 'rtl');
-            document.documentElement.setAttribute('lang', 'ar');
-            localStorage.setItem('rtl', 'true');
-            const badge = document.querySelector('.rtl-text');
-            if (badge) badge.textContent = 'LTR';
-          } else {
-            document.documentElement.setAttribute('dir', 'ltr');
-            document.documentElement.setAttribute('lang', 'en');
-            localStorage.setItem('rtl', 'false');
-            const badge = document.querySelector('.rtl-text');
-            if (badge) badge.textContent = 'RTL';
-          }
-          lucide.createIcons();
-        };
-    
-        const initRtl = () => {
-          const savedRtl = localStorage.getItem('rtl') === 'true';
-          applyRtl(savedRtl);
-        };
-        initRtl();
-    
-        rtlBtn.addEventListener('click', () => {
-          const currentRtl = document.documentElement.getAttribute('dir') === 'rtl';
-          applyRtl(!currentRtl);
-        });
-    
-        mobileRtlBtn.addEventListener('click', () => {
-          const currentRtl = document.documentElement.getAttribute('dir') === 'rtl';
-          applyRtl(!currentRtl);
-          toggleMobileDrawer();
-        });
-    
-        /* ==========================================
-           MOBILE DRAWER IMPLEMENTATION
-           ========================================== */
-        const toggleMobileDrawer = () => {
-          const isOpen = mobileDrawer.classList.toggle('open');
-          drawerBackdrop.classList.toggle('open');
-          hamburgerBtn.classList.toggle('active');
-          document.body.style.overflow = isOpen ? 'hidden' : '';
-        };
-    
-        hamburgerBtn.addEventListener('click', toggleMobileDrawer);
-        drawerBackdrop.addEventListener('click', toggleMobileDrawer);
-    
-        // Mobile home accordion click
-        mobileHomeDropdown.querySelector('.mobile-dropdown-header').addEventListener('click', () => {
-          mobileHomeDropdown.classList.toggle('active');
-        });
-    
-        // Close mobile drawer when clicking anchors
-        mobileCloseTriggers.forEach(trigger => {
-          trigger.addEventListener('click', () => {
-            if (mobileDrawer.classList.contains('open')) {
-              toggleMobileDrawer();
-            }
-          });
-        });
-    
-        /* ==========================================
-           LOGIN MODAL IMPLEMENTATION
-           ========================================== */
-        const openLogin = () => {
-          loginModalOverlay.classList.add('open');
-          document.body.style.overflow = 'hidden';
-        };
-    
-        const closeLogin = () => {
-          loginModalOverlay.classList.remove('open');
-          document.body.style.overflow = '';
-        };
-    
-        if (navLoginBtn) navLoginBtn.addEventListener('click', openLogin);
-        if (mobileLoginBtn) {
-          mobileLoginBtn.addEventListener('click', () => {
-            toggleMobileDrawer(); // Close mobile drawer
-            openLogin();
-          });
-        }
-        loginModalCloseBtn.addEventListener('click', closeLogin);
-    
-        loginModalOverlay.addEventListener('click', (e) => {
-          if (e.target === loginModalOverlay) {
-            closeLogin();
-          }
-        });
-    
-        // Close modal on ESC key
-        window.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') {
-            closeLogin();
-          }
-        });
+    };
+    initTheme();
+
+    /* ==========================================
+       RTL (RIGHT-TO-LEFT) IMPLEMENTATION
+       ========================================== */
+    const applyRtl = (isRtl) => {
+      if (isRtl) {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', 'en');
+      }
+      lucide.createIcons();
+    };
+
+    const initRtl = () => {
+      const savedRtl = localStorage.getItem('rtl') === 'true';
+      applyRtl(savedRtl);
+    };
+    initRtl();
   </script>
 </body>
 </html>
+
+

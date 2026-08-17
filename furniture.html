@@ -11,7 +11,7 @@
   <!-- Google Fonts: Outfit (English) & Tajawal (Arabic/RTL) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -65,14 +65,14 @@
       
       --text-main: #f5f5f4;      /* Stone 100 */
       --text-muted: #a8a29e;     /* Stone 400 */
-      --text-inverse: #12100f;
+      --text-inverse: #ffffff;
       
       --border: #292524;
       --border-focus: #44403c;
       
-      --primary: #f59e0b;        /* Amber Gold Glow */
-      --primary-hover: #d97706;
-      --primary-glow: rgba(245, 158, 11, 0.15);
+      --primary: #ab5c3c;        /* Amber Gold Glow */
+      --primary-hover: #944d30;
+      --primary-glow: rgba(171, 92, 60, 0.15);
       
       --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
       --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
@@ -1923,6 +1923,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="css/typography.css?v=1.10">
 </head>
 <body>
 
@@ -2075,6 +2076,27 @@
     </section>
 
     <!-- ==========================================
+       SECTION 1.5: SPECIAL OFFERS BANNER
+       ========================================== -->
+    <section class="offers-section">
+      <div class="container">
+        <div class="offers-banner">
+          <div class="offers-content">
+            <span class="offers-tag">Special Event</span>
+            <h2 class="offers-title">Signature Living Room & Workspace Sale</h2>
+            <p class="offers-desc">Transform your home sanctuaries and workspaces with 15% off all modular shelves, low-profile beds, and travertine coffee tables. Free architectural delivery included on orders over $1,500.</p>
+          </div>
+          <div class="offers-action">
+            <div class="offers-code-box">
+              <span>Use Code:</span>
+              <strong>LIGNUM15</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
        SECTION 2: FEATURED CATEGORIES (HEXAGON CARDS)
        ========================================== -->
     <section class="section-padding">
@@ -2087,7 +2109,7 @@
 
         <div class="hexagon-row">
           <!-- Hexagon 1 -->
-          <div class="hexagon-card" onclick="location.href='furniture.html#best-sellers'">
+          <div class="hexagon-card" onclick="filterByCategory('chairs-sofas')">
             <img src="images/furniture_cat_sofas.jpg" alt="Sofas Category" class="hexagon-bg">
             <div class="hexagon-overlay">
               <h3 class="hexagon-title">Sofas & Seating</h3>
@@ -2096,7 +2118,7 @@
           </div>
 
           <!-- Hexagon 2 -->
-          <div class="hexagon-card" onclick="location.href='furniture.html#best-sellers'">
+          <div class="hexagon-card" onclick="filterByCategory('tables')">
             <img src="images/furniture_cat_tables.jpg" alt="Tables Category" class="hexagon-bg">
             <div class="hexagon-overlay">
               <h3 class="hexagon-title">Tables & Dining</h3>
@@ -2105,7 +2127,7 @@
           </div>
 
           <!-- Hexagon 3 -->
-          <div class="hexagon-card" onclick="location.href='furniture.html#best-sellers'">
+          <div class="hexagon-card" onclick="filterByCategory('beds')">
             <img src="images/furniture_cat_beds.jpg" alt="Bedroom Category" class="hexagon-bg">
             <div class="hexagon-overlay">
               <h3 class="hexagon-title">Beds & Sleep</h3>
@@ -2114,7 +2136,7 @@
           </div>
 
           <!-- Hexagon 4 -->
-          <div class="hexagon-card" onclick="location.href='furniture.html#best-sellers'">
+          <div class="hexagon-card" onclick="filterByCategory('storage-desks')">
             <img src="images/furniture_cat_office.jpg" alt="Office Category" class="hexagon-bg">
             <div class="hexagon-overlay">
               <h3 class="hexagon-title">Storage & Desks</h3>
@@ -2156,7 +2178,7 @@
               <h3 class="product-name">ODIN Solid Oak Lounge Chair</h3>
               <div class="product-footer">
                 <span class="product-price">$640</span>
-                <button class="product-cart-btn" aria-label="Add to cart" onclick="alert('Added to cart!');">
+                <button class="product-cart-btn" aria-label="Add to cart" onclick="addToCart('odin-chair');">
                   <i data-lucide="shopping-bag"></i>
                 </button>
               </div>
@@ -2173,7 +2195,7 @@
               <h3 class="product-name">AURA Minimalist Travertine Table</h3>
               <div class="product-footer">
                 <span class="product-price">$1,850</span>
-                <button class="product-cart-btn" aria-label="Add to cart" onclick="alert('Added to cart!');">
+                <button class="product-cart-btn" aria-label="Add to cart" onclick="addToCart('aura-table');">
                   <i data-lucide="shopping-bag"></i>
                 </button>
               </div>
@@ -2190,7 +2212,7 @@
               <h3 class="product-name">SIGMA Low-Profile Walnut Bed</h3>
               <div class="product-footer">
                 <span class="product-price">$2,400</span>
-                <button class="product-cart-btn" aria-label="Add to cart" onclick="alert('Added to cart!');">
+                <button class="product-cart-btn" aria-label="Add to cart" onclick="addToCart('sigma-bed');">
                   <i data-lucide="shopping-bag"></i>
                 </button>
               </div>
@@ -2207,7 +2229,7 @@
               <h3 class="product-name">NORDIC Modular Wall Shelves</h3>
               <div class="product-footer">
                 <span class="product-price">$950</span>
-                <button class="product-cart-btn" aria-label="Add to cart" onclick="alert('Added to cart!');">
+                <button class="product-cart-btn" aria-label="Add to cart" onclick="addToCart('nordic-shelves');">
                   <i data-lucide="shopping-bag"></i>
                 </button>
               </div>
@@ -2255,6 +2277,67 @@
               <h3 class="bento-title">Japandi Library Collection</h3>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       SECTION 4.5: STORE CATALOG (DYNAMIC FILTER GRID)
+       ========================================== -->
+    <section class="catalog-section" id="product-catalog">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Explore Collection</span>
+          <h2 class="section-title">The Studio Collection Catalog</h2>
+          <p class="section-desc">Browse our full range of handcrafted luxury items, filtered by space and category to fit your custom spatial concept.</p>
+        </div>
+
+        <div class="catalog-controls">
+          <!-- Search & Sort Row -->
+          <div class="search-sort-row">
+            <div class="search-wrapper">
+              <input type="text" id="catalogSearch" class="search-input" placeholder="Search furniture items...">
+              <i data-lucide="search" class="search-icon-svg"></i>
+            </div>
+            <select id="catalogSort" class="sort-select">
+              <option value="popularity">Sort by Popularity</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </div>
+
+          <!-- Filters Row -->
+          <div class="filter-row">
+            <!-- Filter by Space -->
+            <div class="filter-group">
+              <span class="filter-label">Browse by Space:</span>
+              <div class="filter-pills" id="spaceFilters">
+                <button class="filter-pill active" data-space="all">All Spaces</button>
+                <button class="filter-pill" data-space="living-room">Living Room</button>
+                <button class="filter-pill" data-space="bedroom">Bedroom</button>
+                <button class="filter-pill" data-space="office">Office & Workspace</button>
+                <button class="filter-pill" data-space="dining">Dining Room</button>
+                <button class="filter-pill" data-space="outdoor">Outdoor</button>
+              </div>
+            </div>
+
+            <!-- Filter by Furniture Type -->
+            <div class="filter-group">
+              <span class="filter-label">Furniture Type:</span>
+              <div class="filter-pills" id="typeFilters">
+                <button class="filter-pill active" data-type="all">All Types</button>
+                <button class="filter-pill" data-type="chairs-sofas">Chairs & Sofas</button>
+                <button class="filter-pill" data-type="tables">Tables</button>
+                <button class="filter-pill" data-type="beds">Beds</button>
+                <button class="filter-pill" data-type="storage-desks">Storage & Desks</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Product Grid -->
+        <div class="catalog-grid" id="catalogProductGrid">
+          <!-- Products will be loaded dynamically via Javascript -->
         </div>
       </div>
     </section>
@@ -2403,6 +2486,9 @@
                 <span class="comparison-value">10 Years Structural</span>
               </div>
             </div>
+            <div style="padding: 20px; text-align: center; border-top: 1px solid var(--border);">
+              <button class="cart-checkout-btn" style="padding: 12px; font-size: 14px;" onclick="addToCart('odin-chair')">Add to Bag</button>
+            </div>
           </div>
 
           <!-- Card 2 -->
@@ -2439,6 +2525,9 @@
                 <span class="comparison-label">Warranty</span>
                 <span class="comparison-value">15 Years Structural</span>
               </div>
+            </div>
+            <div style="padding: 20px; text-align: center; border-top: 1px solid var(--border);">
+              <button class="cart-checkout-btn" style="padding: 12px; font-size: 14px;" onclick="addToCart('freya-chair')">Add to Bag</button>
             </div>
           </div>
         </div>
@@ -2510,7 +2599,7 @@
         
         <!-- Column 1: Brand & Socials -->
         <div class="footer-col">
-          <div class="footer-brand">
+          <a href="index.html" class="footer-brand" style="text-decoration: none;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="logo-icon" style="width: 24px; height: 24px;">
               <path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3" />
               <path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1h-8v-1a2 2 0 0 0-4 0z" />
@@ -2518,7 +2607,7 @@
               <path d="M20 20v-2" />
             </svg>
             <span>LIGNUM</span>
-          </div>
+          </a>
           <p class="footer-desc">Crafting premium Scandinavian and minimalist designer furniture. Elevate your living room, study, or bedroom spaces with tailored woodwork.</p>
           <div class="footer-socials">
             <a href="#" class="social-icon" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
@@ -2827,6 +2916,497 @@
 
     // Initialize Lucide Icons at the very end
     lucide.createIcons();
+
+    // ==========================================
+    // DYNAMIC CATALOG & SHOPPING CART LOGIC
+    // ==========================================
+    const PRODUCTS = [
+      {
+        id: 'odin-chair',
+        name: 'ODIN Solid Oak Lounge Chair',
+        price: 640,
+        originalPrice: 750,
+        rating: 4.8,
+        reviews: 124,
+        space: 'living-room',
+        type: 'chairs-sofas',
+        category: 'Lounge Chairs',
+        image: 'images/furniture_prod_chair.jpg',
+        badge: 'Sale'
+      },
+      {
+        id: 'freya-chair',
+        name: 'FREYA Lounge Chair',
+        price: 1450,
+        rating: 4.9,
+        reviews: 95,
+        space: 'living-room',
+        type: 'chairs-sofas',
+        category: 'Lounge Chairs',
+        image: 'images/furniture_comp_freya.jpg',
+        badge: 'Exclusive'
+      },
+      {
+        id: 'aura-table',
+        name: 'AURA Minimalist Travertine Table',
+        price: 1850,
+        rating: 4.9,
+        reviews: 42,
+        space: 'living-room',
+        type: 'tables',
+        category: 'Coffee Tables',
+        image: 'images/furniture_prod_table.jpg'
+      },
+      {
+        id: 'sigma-bed',
+        name: 'SIGMA Low-Profile Walnut Bed',
+        price: 2400,
+        rating: 4.7,
+        reviews: 68,
+        space: 'bedroom',
+        type: 'beds',
+        category: 'Beds',
+        image: 'images/furniture_prod_bed.jpg'
+      },
+      {
+        id: 'nordic-shelves',
+        name: 'NORDIC Modular Wall Shelves',
+        price: 950,
+        rating: 4.6,
+        reviews: 89,
+        space: 'office',
+        type: 'storage-desks',
+        category: 'Shelving Units',
+        image: 'images/furniture_prod_shelf.jpg',
+        badge: 'Popular'
+      },
+      {
+        id: 'elysian-chair',
+        name: 'Elysian Bouclé Accent Chair',
+        price: 850,
+        originalPrice: 980,
+        rating: 4.9,
+        reviews: 56,
+        space: 'living-room',
+        type: 'chairs-sofas',
+        category: 'Accent Chairs',
+        image: 'images/furniture_cat_sofas.jpg',
+        badge: '15% OFF'
+      },
+      {
+        id: 'scandi-sofa',
+        name: 'Scandi Olive 3-Seater Sofa',
+        price: 1950,
+        originalPrice: 2300,
+        rating: 4.8,
+        reviews: 73,
+        space: 'living-room',
+        type: 'chairs-sofas',
+        category: 'Sofas',
+        image: 'images/sofa.png',
+        badge: 'Sale'
+      },
+      {
+        id: 'executive-desk',
+        name: 'Executive Timber Oak Desk',
+        price: 1450,
+        rating: 4.7,
+        reviews: 31,
+        space: 'office',
+        type: 'storage-desks',
+        category: 'Desks',
+        image: 'images/furniture_cat_office.jpg'
+      },
+      {
+        id: 'baltic-dining-table',
+        name: 'Baltic Oak Dining Table',
+        price: 1600,
+        rating: 4.9,
+        reviews: 50,
+        space: 'dining',
+        type: 'tables',
+        category: 'Dining Tables',
+        image: 'images/furniture_coll_dining.jpg',
+        badge: 'Featured'
+      },
+      {
+        id: 'woven-dining-chair',
+        name: 'Woven Birch Dining Chair',
+        price: 380,
+        rating: 4.5,
+        reviews: 112,
+        space: 'dining',
+        type: 'chairs-sofas',
+        category: 'Dining Chairs',
+        image: 'images/dining.png'
+      },
+      {
+        id: 'travertine-side-table',
+        name: 'Travertine Accent Side Table',
+        price: 450,
+        rating: 4.6,
+        reviews: 28,
+        space: 'living-room',
+        type: 'tables',
+        category: 'Side Tables',
+        image: 'images/furniture_mat_travertine.jpg'
+      },
+      {
+        id: 'oslo-pine-wardrobe',
+        name: 'Oslo Pine Slat Wardrobe',
+        price: 2100,
+        rating: 4.8,
+        reviews: 19,
+        space: 'bedroom',
+        type: 'storage-desks',
+        category: 'Storage',
+        image: 'images/furniture_cat_beds.jpg'
+      },
+      {
+        id: 'coastal-daybed',
+        name: 'Coastal Pine Sunroom Daybed',
+        price: 1250,
+        rating: 4.7,
+        reviews: 35,
+        space: 'outdoor',
+        type: 'beds',
+        category: 'Daybeds',
+        image: 'images/coastal_dining.png'
+      }
+    ];
+
+    // Filter states
+    let activeSpace = 'all';
+    let activeType = 'all';
+    let searchQuery = '';
+    let sortOption = 'popularity';
+
+    // UI elements
+    const gridContainer = document.getElementById('catalogProductGrid');
+    const searchInput = document.getElementById('catalogSearch');
+    const sortSelect = document.getElementById('catalogSort');
+    const spacePills = document.querySelectorAll('#spaceFilters .filter-pill');
+    const typePills = document.querySelectorAll('#typeFilters .filter-pill');
+
+    // Cart State
+    let cart = JSON.parse(localStorage.getItem('lignum_cart')) || [];
+
+    const saveCart = () => {
+      localStorage.setItem('lignum_cart', JSON.stringify(cart));
+    };
+
+    const updateCartUI = () => {
+      const badge = document.getElementById('cartBadgeCount');
+      const itemsContainer = document.getElementById('cartDrawerItems');
+      const subtotalElement = document.getElementById('cartSubtotal');
+      
+      // Total count
+      const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      if (badge) {
+        badge.textContent = totalCount;
+        badge.style.display = totalCount > 0 ? 'flex' : 'none';
+      }
+
+      if (!itemsContainer) return;
+      itemsContainer.innerHTML = '';
+
+      if (cart.length === 0) {
+        itemsContainer.innerHTML = '<div class="cart-empty-message">Your bag is currently empty.</div>';
+        if (subtotalElement) subtotalElement.textContent = '$0.00';
+        return;
+      }
+
+      let subtotal = 0;
+      cart.forEach(item => {
+        subtotal += item.price * item.quantity;
+        const itemEl = document.createElement('div');
+        itemEl.className = 'cart-item';
+        itemEl.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+          <div class="cart-item-details">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">$${item.price.toLocaleString()}</div>
+            <div class="cart-item-quantity">Qty: ${item.quantity}</div>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">Remove</button>
+        `;
+        itemsContainer.appendChild(itemEl);
+      });
+
+      if (subtotalElement) {
+        subtotalElement.textContent = `$${subtotal.toLocaleString()}`;
+      }
+    };
+
+    window.addToCart = (productId) => {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1
+        });
+      }
+
+      saveCart();
+      updateCartUI();
+      openCartDrawer();
+    };
+
+    window.removeFromCart = (productId) => {
+      cart = cart.filter(item => item.id !== productId);
+      saveCart();
+      updateCartUI();
+    };
+
+    // Cart Drawer Toggle
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartBackdrop = document.getElementById('cartDrawerBackdrop');
+    const cartCloseBtn = document.getElementById('cartDrawerCloseBtn');
+    const cartToggleBtn = document.getElementById('cartToggleBtn');
+
+    const openCartDrawer = () => {
+      if (cartDrawer && cartBackdrop) {
+        cartDrawer.classList.add('open');
+        cartBackdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    const closeCartDrawer = () => {
+      if (cartDrawer && cartBackdrop) {
+        cartDrawer.classList.remove('open');
+        cartBackdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    };
+
+    if (cartToggleBtn) cartToggleBtn.addEventListener('click', openCartDrawer);
+    if (cartCloseBtn) cartCloseBtn.addEventListener('click', closeCartDrawer);
+    if (cartBackdrop) cartBackdrop.addEventListener('click', closeCartDrawer);
+
+    const checkoutBtn = document.getElementById('cartCheckoutBtn');
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', () => {
+        alert('Thank you for choosing LIGNUM! Your premium furniture order is simulation-completed.');
+        cart = [];
+        saveCart();
+        updateCartUI();
+        closeCartDrawer();
+      });
+    }
+
+    // Render Product Catalog
+    const renderCatalog = () => {
+      if (!gridContainer) return;
+      gridContainer.innerHTML = '';
+
+      // Filter products
+      const filtered = PRODUCTS.filter(p => {
+        const matchesSpace = activeSpace === 'all' || p.space === activeSpace;
+        const matchesType = activeType === 'all' || p.type === activeType;
+        const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              p.category.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesSpace && matchesType && matchesSearch;
+      });
+
+      // Sort products
+      filtered.sort((a, b) => {
+        if (sortOption === 'price-asc') {
+          return a.price - b.price;
+        } else if (sortOption === 'price-desc') {
+          return b.price - a.price;
+        } else {
+          // Default: Popularity (simulated by reviews count)
+          return b.reviews - a.reviews;
+        }
+      });
+
+      if (filtered.length === 0) {
+        gridContainer.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--text-muted);">
+            <i data-lucide="package-search" style="width: 48px; height: 48px; margin-bottom: 16px; color: var(--border-focus);"></i>
+            <h3>No Products Found</h3>
+            <p style="margin-top: 8px;">Try adjusting your filters or search query.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      // Generate HTML for each product
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        
+        let badgeHtml = '';
+        if (p.badge) {
+          const isSale = p.badge.toLowerCase().includes('sale') || p.badge.toLowerCase().includes('%');
+          badgeHtml = `<span class="product-badge ${isSale ? 'sale-badge' : ''}">${p.badge}</span>`;
+        }
+
+        let priceHtml = `<span class="product-price">$${p.price.toLocaleString()}</span>`;
+        if (p.originalPrice) {
+          priceHtml = `
+            <div class="price-container">
+              <span class="product-price">$${p.price.toLocaleString()}</span>
+              <span class="original-price">$${p.originalPrice.toLocaleString()}</span>
+            </div>
+          `;
+        }
+
+        // Ratings stars
+        let starsHtml = '';
+        const fullStars = Math.floor(p.rating);
+        for (let i = 0; i < 5; i++) {
+          starsHtml += `
+            <svg class="product-rating-star" viewBox="0 0 24 24" style="fill: ${i < fullStars ? 'currentColor' : 'none'};">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="product-img-frame">
+            ${badgeHtml}
+            <img src="${p.image}" alt="${p.name}">
+          </div>
+          <div class="product-info">
+            <span class="product-cat">${p.category}</span>
+            <h3 class="product-name">${p.name}</h3>
+            <div class="product-rating">
+              ${starsHtml}
+              <span class="product-rating-val">${p.rating} (${p.reviews})</span>
+            </div>
+            <div class="product-footer">
+              ${priceHtml}
+              <button class="product-cart-btn" aria-label="Add to cart" onclick="addToCart('${p.id}')">
+                <i data-lucide="shopping-bag"></i>
+              </button>
+            </div>
+          </div>
+        `;
+        gridContainer.appendChild(card);
+      });
+
+      lucide.createIcons();
+    };
+
+    // Wire up events
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderCatalog();
+      });
+    }
+
+    if (sortSelect) {
+      sortSelect.addEventListener('change', (e) => {
+        sortOption = e.target.value;
+        renderCatalog();
+      });
+    }
+
+    spacePills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        spacePills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeSpace = pill.getAttribute('data-space');
+        renderCatalog();
+      });
+    });
+
+    typePills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        typePills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeType = pill.getAttribute('data-type');
+        renderCatalog();
+      });
+    });
+
+    window.filterByCategory = (type, space = 'all') => {
+      activeType = type;
+      activeSpace = space;
+
+      const typePills = document.querySelectorAll('#typeFilters .filter-pill');
+      typePills.forEach(p => {
+        if (p.getAttribute('data-type') === type) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+
+      const spacePills = document.querySelectorAll('#spaceFilters .filter-pill');
+      spacePills.forEach(p => {
+        if (p.getAttribute('data-space') === space) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+
+      renderCatalog();
+
+      const catalogSection = document.getElementById('product-catalog');
+      if (catalogSection) {
+        catalogSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    // Read URL query parameters to set initial filter states dynamically
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('space')) {
+      activeSpace = urlParams.get('space');
+      spacePills.forEach(p => {
+        if (p.getAttribute('data-space') === activeSpace) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+    }
+    if (urlParams.has('type')) {
+      activeType = urlParams.get('type');
+      typePills.forEach(p => {
+        if (p.getAttribute('data-type') === activeType) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+    }
+
+    // Initialize Catalog and Cart UI
+    renderCatalog();
+    updateCartUI();
   </script>
+
+  <!-- Shopping Cart Drawer -->
+  <div class="cart-drawer-backdrop" id="cartDrawerBackdrop"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3>Your Shopping Bag</h3>
+      <button class="cart-drawer-close" id="cartDrawerCloseBtn">&times;</button>
+    </div>
+    <div class="cart-drawer-items" id="cartDrawerItems">
+      <div class="cart-empty-message">Your bag is currently empty.</div>
+    </div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <button class="cart-checkout-btn" id="cartCheckoutBtn">Proceed to Checkout</button>
+    </div>
+  </div>
 </body>
 </html>

@@ -1501,11 +1501,12 @@
     }
 
     .calendar-day.disabled {
-      color: var(--border-focus);
+      color: #78716c;
       cursor: not-allowed;
-      font-weight: 300;
+      font-weight: 500;
       text-decoration: line-through;
-      opacity: 0.4;
+      opacity: 0.75;
+      background-color: rgba(0, 0, 0, 0.02);
     }
 
     .calendar-day.active {
@@ -1548,10 +1549,10 @@
 
     .slot-period-title {
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
+      letter-spacing: 1.2px;
+      color: var(--primary);
       margin-bottom: 12px;
       display: block;
     }
@@ -1562,27 +1563,28 @@
 
     .slots-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
       gap: 12px;
     }
 
     .slot-capsule {
       background-color: var(--bg-card);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--primary);
       border-radius: var(--radius-md);
-      padding: 10px;
+      padding: 11px 12px;
       text-align: center;
       font-size: 13.5px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: var(--transition);
       color: var(--text-main);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
     }
 
     .slot-capsule:hover:not(.disabled):not(.active) {
       border-color: var(--primary);
-      color: var(--primary);
-      background-color: var(--bg-hover);
+      color: var(--text-inverse);
+      background-color: var(--primary);
     }
 
     .slot-capsule.disabled {
@@ -1590,14 +1592,14 @@
       cursor: not-allowed;
       background-color: transparent;
       color: var(--text-muted);
-      border-style: dashed;
+      border: 1px dashed var(--border);
     }
 
     .slot-capsule.active {
       background-color: var(--primary);
       color: var(--text-inverse);
       border-color: var(--primary);
-      box-shadow: 0 4px 10px var(--primary-glow);
+      box-shadow: 0 4px 12px var(--primary-glow);
     }
 
     /* Summary display in slots side */

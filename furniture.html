@@ -1117,26 +1117,36 @@
     }
 
     .bento-cell:hover .bento-overlay {
-      background: linear-gradient(to top, rgba(171, 92, 60, 0.9) 0%, rgba(18, 16, 15, 0.2) 70%);
+      background: linear-gradient(to top, rgba(18, 16, 15, 0.92) 0%, rgba(18, 16, 15, 0.5) 60%, rgba(18, 16, 15, 0.15) 100%);
     }
 
     .dark .bento-cell:hover .bento-overlay {
-      background: linear-gradient(to top, rgba(245, 158, 11, 0.9) 0%, rgba(18, 16, 15, 0.2) 70%);
+      background: linear-gradient(to top, rgba(18, 16, 15, 0.95) 0%, rgba(18, 16, 15, 0.55) 60%, rgba(18, 16, 15, 0.2) 100%);
     }
 
     .bento-tag {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      color: #ffffff;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       margin-bottom: 8px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+      display: block;
+      transition: var(--transition);
+    }
+
+    .bento-cell:hover .bento-tag {
+      color: #fef08a;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
     }
 
     .bento-title {
       font-size: 22px;
       font-weight: 800;
       line-height: 1.2;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     }
 
     /* ==========================================
@@ -2292,48 +2302,7 @@
           <p class="section-desc">Browse our full range of handcrafted luxury items, filtered by space and category to fit your custom spatial concept.</p>
         </div>
 
-        <div class="catalog-controls">
-          <!-- Search & Sort Row -->
-          <div class="search-sort-row">
-            <div class="search-wrapper">
-              <input type="text" id="catalogSearch" class="search-input" placeholder="Search furniture items...">
-              <i data-lucide="search" class="search-icon-svg"></i>
-            </div>
-            <select id="catalogSort" class="sort-select">
-              <option value="popularity">Sort by Popularity</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-            </select>
-          </div>
 
-          <!-- Filters Row -->
-          <div class="filter-row">
-            <!-- Filter by Space -->
-            <div class="filter-group">
-              <span class="filter-label">Browse by Space:</span>
-              <div class="filter-pills" id="spaceFilters">
-                <button class="filter-pill active" data-space="all">All Spaces</button>
-                <button class="filter-pill" data-space="living-room">Living Room</button>
-                <button class="filter-pill" data-space="bedroom">Bedroom</button>
-                <button class="filter-pill" data-space="office">Office & Workspace</button>
-                <button class="filter-pill" data-space="dining">Dining Room</button>
-                <button class="filter-pill" data-space="outdoor">Outdoor</button>
-              </div>
-            </div>
-
-            <!-- Filter by Furniture Type -->
-            <div class="filter-group">
-              <span class="filter-label">Furniture Type:</span>
-              <div class="filter-pills" id="typeFilters">
-                <button class="filter-pill active" data-type="all">All Types</button>
-                <button class="filter-pill" data-type="chairs-sofas">Chairs & Sofas</button>
-                <button class="filter-pill" data-type="tables">Tables</button>
-                <button class="filter-pill" data-type="beds">Beds</button>
-                <button class="filter-pill" data-type="storage-desks">Storage & Desks</button>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <!-- Dynamic Product Grid -->
         <div class="catalog-grid" id="catalogProductGrid">
@@ -2486,8 +2455,9 @@
                 <span class="comparison-value">10 Years Structural</span>
               </div>
             </div>
-            <div style="padding: 20px; text-align: center; border-top: 1px solid var(--border);">
-              <button class="cart-checkout-btn" style="padding: 12px; font-size: 14px;" onclick="addToCart('odin-chair')">Add to Bag</button>
+            <div style="padding: 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; justify-content: center;">
+              <button class="cart-checkout-btn" style="flex: 1; padding: 12px; font-size: 13.5px; font-weight: 700; background-color: var(--primary); color: var(--text-inverse); border: none; border-radius: var(--radius-md); cursor: pointer;" onclick="buyNow('odin-chair')">Buy Now - $640</button>
+              <button class="cart-checkout-btn" style="flex: 1; padding: 12px; font-size: 13.5px; font-weight: 700; background-color: transparent; border: 1px solid var(--border); color: var(--text-main); border-radius: var(--radius-md); cursor: pointer;" onclick="addToCart('odin-chair')">Shop / Add to Bag</button>
             </div>
           </div>
 
@@ -2526,8 +2496,9 @@
                 <span class="comparison-value">15 Years Structural</span>
               </div>
             </div>
-            <div style="padding: 20px; text-align: center; border-top: 1px solid var(--border);">
-              <button class="cart-checkout-btn" style="padding: 12px; font-size: 14px;" onclick="addToCart('freya-chair')">Add to Bag</button>
+            <div style="padding: 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; justify-content: center;">
+              <button class="cart-checkout-btn" style="flex: 1; padding: 12px; font-size: 13.5px; font-weight: 700; background-color: var(--primary); color: var(--text-inverse); border: none; border-radius: var(--radius-md); cursor: pointer;" onclick="buyNow('freya-chair')">Buy Now - $1,450</button>
+              <button class="cart-checkout-btn" style="flex: 1; padding: 12px; font-size: 13.5px; font-weight: 700; background-color: transparent; border: 1px solid var(--border); color: var(--text-main); border-radius: var(--radius-md); cursor: pointer;" onclick="addToCart('freya-chair')">Shop / Add to Bag</button>
             </div>
           </div>
         </div>
@@ -2925,7 +2896,6 @@
         id: 'odin-chair',
         name: 'ODIN Solid Oak Lounge Chair',
         price: 640,
-        originalPrice: 750,
         rating: 4.8,
         reviews: 124,
         space: 'living-room',
@@ -2984,7 +2954,6 @@
         id: 'elysian-chair',
         name: 'Elysian Bouclé Accent Chair',
         price: 850,
-        originalPrice: 980,
         rating: 4.9,
         reviews: 56,
         space: 'living-room',
@@ -2997,7 +2966,6 @@
         id: 'scandi-sofa',
         name: 'Scandi Olive 3-Seater Sofa',
         price: 1950,
-        originalPrice: 2300,
         rating: 4.8,
         reviews: 73,
         space: 'living-room',
@@ -3051,17 +3019,7 @@
         category: 'Side Tables',
         image: 'images/furniture_mat_travertine.jpg'
       },
-      {
-        id: 'oslo-pine-wardrobe',
-        name: 'Oslo Pine Slat Wardrobe',
-        price: 2100,
-        rating: 4.8,
-        reviews: 19,
-        space: 'bedroom',
-        type: 'storage-desks',
-        category: 'Storage',
-        image: 'images/furniture_cat_beds.jpg'
-      },
+
       {
         id: 'coastal-daybed',
         name: 'Coastal Pine Sunroom Daybed',
@@ -3160,6 +3118,10 @@
       openCartDrawer();
     };
 
+    window.buyNow = (productId) => {
+      window.addToCart(productId);
+    };
+
     window.removeFromCart = (productId) => {
       cart = cart.filter(item => item.id !== productId);
       saveCart();
@@ -3253,14 +3215,6 @@
         }
 
         let priceHtml = `<span class="product-price">$${p.price.toLocaleString()}</span>`;
-        if (p.originalPrice) {
-          priceHtml = `
-            <div class="price-container">
-              <span class="product-price">$${p.price.toLocaleString()}</span>
-              <span class="original-price">$${p.originalPrice.toLocaleString()}</span>
-            </div>
-          `;
-        }
 
         // Ratings stars
         let starsHtml = '';

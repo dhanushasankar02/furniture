@@ -534,9 +534,7 @@ p,
   color: var(--primary);
 }
 .original-price {
-  font-size: 13px;
-  text-decoration: line-through;
-  color: var(--text-muted);
+  display: none !important;
 }
 .product-cart-btn {
   width: 40px;
@@ -620,13 +618,28 @@ p,
 .horizontal-scroll-container .seasonal-card {
   display: flex !important;
   flex-direction: column !important;
-  height: 440px !important;
+  width: 380px !important;
+  min-width: 380px !important;
+  max-width: 380px !important;
+  flex: 0 0 380px !important;
+  height: 480px !important;
+  box-sizing: border-box !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  margin: 0 !important;
 }
 .horizontal-scroll-container .seasonal-img {
-  height: 250px !important;
+  height: 240px !important;
+  min-height: 240px !important;
+  max-height: 240px !important;
   position: relative !important;
   width: 100% !important;
   overflow: hidden !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 .horizontal-scroll-container .seasonal-img img {
   position: absolute !important;
@@ -635,23 +648,50 @@ p,
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
+  display: block !important;
+  border: none !important;
+  margin: 0 !important;
 }
 .horizontal-scroll-container .seasonal-info {
   display: flex !important;
   flex-direction: column !important;
   flex-grow: 1 !important;
-  padding: 20px !important;
+  justify-content: space-between !important;
+  padding: 24px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
 }
 
 /* Fix Schedule Visit contrast issues for accessibility */
+.slot-period-title {
+  color: var(--primary, #d4a373) !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.2px !important;
+  text-transform: uppercase !important;
+}
+.slot-capsule {
+  background-color: var(--bg-card) !important;
+  border: 1.5px solid var(--primary) !important;
+  color: var(--text-main) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06) !important;
+}
 .slot-capsule:hover:not(.disabled):not(.active) {
   background-color: var(--primary) !important;
-  color: var(--text-inverse) !important;
+  color: var(--text-inverse, #ffffff) !important;
   border-color: var(--primary) !important;
 }
+.slot-capsule.active {
+  background-color: var(--primary) !important;
+  color: var(--text-inverse, #ffffff) !important;
+  font-weight: 800 !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 4px 14px var(--primary-glow) !important;
+}
 .calendar-day.today {
-  border: 1px solid var(--primary) !important;
+  border: 2px solid var(--primary) !important;
   color: var(--text-main) !important;
+  font-weight: 800 !important;
 }
 
 /* Fix Contact page hover action label text contrast */
@@ -678,6 +718,23 @@ p,
 }
 
 /* Fix Home 2 hero CTA buttons alignment and height consistency */
+.hero-content {
+  text-align: start !important;
+}
+.hero-desc {
+  margin-inline: 0 !important;
+  text-align: start !important;
+}
+.hero-actions-btns {
+  display: flex !important;
+  gap: 16px !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+[dir="rtl"] .hero-actions-btns {
+  justify-content: flex-start !important;
+}
 .hero-btn-primary, .hero-btn-secondary {
   display: inline-flex !important;
   align-items: center !important;
@@ -688,8 +745,29 @@ p,
   border: 1px solid transparent !important;
 }
 
-/* Fix calendar disabled days text contrast so they remain legible but look inactive */
-.calendar-day.disabled {
-  color: var(--text-muted) !important;
-  opacity: 0.3 !important;
+/* Fix Furniture Aesthetic Bento overlay & tag contrast on hover */
+.bento-cell:hover .bento-overlay,
+.dark .bento-cell:hover .bento-overlay {
+  background: linear-gradient(to top, rgba(18, 16, 15, 0.92) 0%, rgba(18, 16, 15, 0.5) 60%, rgba(18, 16, 15, 0.15) 100%) !important;
+}
+.bento-tag {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+.bento-cell:hover .bento-tag {
+  color: #fef08a !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+}
+.bento-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix calendar disabled days text contrast so they remain clear and legible while indicating past dates */
+.calendar-day.disabled, .calendar-day-btn.disabled {
+  color: #78716c !important;
+  opacity: 0.75 !important;
+  font-weight: 500 !important;
+  text-decoration: line-through !important;
 }
